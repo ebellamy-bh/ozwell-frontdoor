@@ -1,8 +1,9 @@
 import { createMetadata } from '@/lib/metadata'
 import Hero from '@/components/sections/Hero'
 import LogoCloud from '@/components/sections/LogoCloud'
+import FeatureVideo from '@/components/sections/FeatureVideo'
 import CertificationBand from '@/components/sections/CertificationBand'
-import ValuePropVideos from '@/components/sections/ValuePropVideos'
+import FeatureRows from '@/components/sections/FeatureRows'
 import Testimonials from '@/components/sections/Testimonials'
 import WorkSmarter from '@/components/sections/WorkSmarter'
 import Showcase from '@/components/sections/Showcase'
@@ -12,8 +13,9 @@ import siteConfig from '@/data/site.json'
 import {
   hero,
   logoCloud,
+  featureVideo,
   certification,
-  valueProps,
+  featureRows,
   testimonials,
   workSmarter,
   showcase,
@@ -42,13 +44,19 @@ export default function Page() {
         secondaryCta={siteConfig.ctas.watchDemo}
       />
       <LogoCloud title={logoCloud.title} logos={logoCloud.logos} />
-      <CertificationBand title={certification.title} image={certification.image} />
-      <ValuePropVideos items={valueProps} />
+      <FeatureVideo youtubeId={featureVideo.youtubeId} title={featureVideo.title} />
+      <CertificationBand
+        eyebrow={certification.eyebrow}
+        title={certification.title}
+        description={certification.description}
+        badges={certification.badges}
+        image={certification.image}
+      />
+      <FeatureRows items={featureRows} />
       <Testimonials
         title={testimonials.title}
         description={testimonials.description}
         image={testimonials.image}
-        youtubeId={testimonials.youtubeId}
       />
       <WorkSmarter
         title={workSmarter.title}

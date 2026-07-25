@@ -26,16 +26,25 @@ export const hero = {
 export const logoCloud = {
   title: 'Enhancing Workflows for Leading Healthcare Companies',
   logos: [
-    { src: '/images/company-logos-1.png', alt: 'Healthcare partner logo' },
-    { src: '/images/company-logos-2.png', alt: 'Healthcare partner logo' },
-    { src: '/images/company-logos-3.png', alt: 'Healthcare partner logo' },
-    { src: '/images/company-logos-4.png', alt: 'Healthcare partner logo' },
-    { src: '/images/company-logos-6.png', alt: 'Healthcare partner logo' },
+    { src: '/images/company-logos-2.png', alt: 'Enterprise Health' },
+    { src: '/images/company-logos-4.png', alt: 'Michigan Healthcare Professionals' },
+    { src: '/images/company-logos-1.png', alt: 'BlueHive' },
+    { src: '/images/company-logos-6.png', alt: 'Maui Medical Group' },
+    { src: '/images/company-logos-3.png', alt: 'WebChart' },
   ],
 }
 
+export const featureVideo = {
+  youtubeId: 'eCj_7FXArmg',
+  title: 'Ozwell: Your AI-Powered Clinical Assistant Inside your EHR',
+}
+
 export const certification = {
+  eyebrow: 'Security',
   title: "Ozwell is the market's first and only Drummond pDSI-Risk certified AI-powered Health IT solution.",
+  description:
+    "The certification confirms that Ozwell's AI platform meets key benchmarks related to intervention risk assessment and mitigation, which is a critical step in supporting the responsible use of AI in clinical care.",
+  badges: ['HIPAA Compliant', 'Mobile friendly', 'Drummond certified'],
   image: {
     src: '/images/thumb-Drummond-Certified-pDSI-RISK-2025.png',
     alt: 'Drummond Certified pDSI-RISK 2025 certification badge',
@@ -44,14 +53,26 @@ export const certification = {
   },
 }
 
-export const valueProps = [
+export const featureRows = [
   {
+    eyebrow: 'Smart Scribing & Accurate Charting',
     title: 'Reclaim Your Time, Refocus on Patient Care',
+    description:
+      'Ozwell leverages AI to streamline documentation, transforming how healthcare providers manage patient records. With automated transcription of visits, seamless chart population, and accurate data capture, providers can now dedicate more time to patient care rather than paperwork. Enhance efficiency while deepening patient interactions.',
+    bullets: ['Transcribe patient visits', 'Automate chart population'],
+    cta: { label: 'Get Started', href: 'https://ai.bluehive.com/?utm_source=ozwell.ai' },
     video: '/videos/Copy-of-Featured-Section-ImagesVideos.mp4',
+    mediaSide: 'left' as const,
   },
   {
+    eyebrow: 'Smart Call Handling',
     title: 'Optimize Your Lines, Elevate Your Service',
+    description:
+      'Ozwell leverages AI to transform call handling for healthcare providers and beyond. Organizations can configure personalized voice prompts, automate routine interactions, and optimize tasks such as prescription management and appointment reminders, enhancing both efficiency and user experience.',
+    bullets: ['Automate routine calls', 'Personalize caller experience'],
+    cta: { label: 'Get Started', href: 'https://ai.bluehive.com/?utm_source=ozwell.ai' },
     video: '/videos/Copy-of-bluehive-IRV-now-Ozwell-call-dashboard-graphic.mp4',
+    mediaSide: 'right' as const,
   },
 ]
 
@@ -64,7 +85,6 @@ export const testimonials = {
     width: 1024,
     height: 576,
   },
-  youtubeId: 'eCj_7FXArmg',
 }
 
 export const workSmarter = {

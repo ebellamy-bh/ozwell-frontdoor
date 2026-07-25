@@ -19,7 +19,7 @@ export default function LogoCloud({ title, logos }: LogoCloudProps) {
               alt={logo.alt}
               width={180}
               height={60}
-              className="h-12 w-auto object-contain opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"
+              className="h-12 w-auto object-contain"
             />
           ))}
         </div>
