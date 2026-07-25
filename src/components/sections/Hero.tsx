@@ -13,7 +13,16 @@ interface HeroProps {
   secondaryCta: { label: string; href: string }
 }
 
-export default function Hero({ eyebrowLines, subheading, description, image, chips, chipHref, primaryCta, secondaryCta }: HeroProps) {
+export default function Hero({
+  eyebrowLines,
+  subheading,
+  description,
+  image,
+  chips,
+  chipHref,
+  primaryCta,
+  secondaryCta,
+}: HeroProps) {
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(150deg,#24c1fc_0%,#0890ed_100%)] text-white">
       {/* Network / bubble pattern overlay (same asset as the live site) */}
@@ -51,9 +60,15 @@ export default function Hero({ eyebrowLines, subheading, description, image, chi
           {/* Copy + CTAs — RIGHT column (matches live layout) */}
           <div className="order-1 lg:order-2">
             <h1 className="leading-none">
-              <span className="block text-5xl font-medium sm:text-6xl lg:text-[81px]">{eyebrowLines[0]}</span>
-              <span className="block text-7xl font-medium sm:text-8xl lg:text-[144px]">{eyebrowLines[1]}</span>
-              <span className="mt-2 block text-2xl font-light sm:text-3xl lg:text-[40px]">{subheading}</span>
+              <span className="block text-5xl font-medium sm:text-6xl lg:text-[81px]">
+                {eyebrowLines[0]}
+              </span>
+              <span className="block text-7xl font-medium sm:text-8xl lg:text-[144px]">
+                {eyebrowLines[1]}
+              </span>
+              <span className="mt-2 block text-2xl font-light sm:text-3xl lg:text-[40px]">
+                {subheading}
+              </span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/95">{description}</p>
             <div className="mt-8 flex max-w-md flex-col gap-4">

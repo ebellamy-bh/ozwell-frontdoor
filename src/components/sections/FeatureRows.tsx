@@ -24,16 +24,34 @@ export default function FeatureRows({ items }: FeatureRowsProps) {
           {items.map((item) => (
             <div key={item.title} className="grid items-center gap-12 lg:grid-cols-2">
               <div className={item.mediaSide === 'right' ? 'lg:order-2' : ''}>
-                <video className="w-full rounded-2xl" src={item.video} autoPlay loop muted playsInline aria-label={item.title} />
+                <video
+                  className="w-full rounded-2xl"
+                  src={item.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  aria-label={item.title}
+                />
               </div>
               <div className={item.mediaSide === 'right' ? 'lg:order-1' : ''}>
                 <p className="text-lg font-bold text-primary-600">{item.eyebrow}</p>
-                <h3 className="mt-2 text-3xl font-bold leading-tight text-ozwell-ink sm:text-5xl">{item.title}</h3>
+                <h3 className="mt-2 text-3xl font-bold leading-tight text-ozwell-ink sm:text-5xl">
+                  {item.title}
+                </h3>
                 <p className="mt-5 text-lg leading-relaxed text-ozwell-slate">{item.description}</p>
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                   {item.bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-center gap-2 font-semibold text-ozwell-ink">
-                      <Check size={20} strokeWidth={2.5} className="text-primary-500" aria-hidden="true" />
+                    <li
+                      key={bullet}
+                      className="flex items-center gap-2 font-semibold text-ozwell-ink"
+                    >
+                      <Check
+                        size={20}
+                        strokeWidth={2.5}
+                        className="text-primary-500"
+                        aria-hidden="true"
+                      />
                       {bullet}
                     </li>
                   ))}

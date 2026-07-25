@@ -43,13 +43,18 @@ export default async function Page({ params }: Props) {
             {category ? (
               <>
                 {' / '}
-                <Link href={`/docs-category/${category.slug}/`} className="text-primary-600 underline-offset-2 hover:underline">
+                <Link
+                  href={`/docs-category/${category.slug}/`}
+                  className="text-primary-600 underline-offset-2 hover:underline"
+                >
                   {category.name}
                 </Link>
               </>
             ) : null}
           </nav>
-          <h1 className="mt-3 text-3xl font-bold leading-tight text-ozwell-ink sm:text-4xl">{doc.title}</h1>
+          <h1 className="mt-3 text-3xl font-bold leading-tight text-ozwell-ink sm:text-4xl">
+            {doc.title}
+          </h1>
         </Container>
       </section>
       <ArticleBody html={doc.content} />

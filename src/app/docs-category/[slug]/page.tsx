@@ -19,7 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!category) return {}
   return createMetadata({
     title: `${category.name} — Help Center`,
-    description: category.description || `Ozwell Help Center articles in the ${category.name} category.`,
+    description:
+      category.description || `Ozwell Help Center articles in the ${category.name} category.`,
     path: `/docs-category/${category.slug}/`,
   })
 }

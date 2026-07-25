@@ -17,10 +17,22 @@ export default function AppDownloadCTA({ title, subtitle, banner }: AppDownloadC
         <p className="mt-4 text-center text-xl text-white/90">{subtitle}</p>
         <div className="mt-8 flex justify-center gap-4">
           <a href={siteConfig.apps.appStore} rel="noopener noreferrer" target="_blank">
-            <Image src="/images/white-app-store-buttons-6-1.png" alt="Download on the App Store" width={180} height={54} className="h-14 w-auto" />
+            <Image
+              src="/images/white-app-store-buttons-6-1.png"
+              alt="Download on the App Store"
+              width={180}
+              height={54}
+              className="h-14 w-auto"
+            />
           </a>
           <a href={siteConfig.apps.googlePlay} rel="noopener noreferrer" target="_blank">
-            <Image src="/images/white-app-store-buttons-7-1.png" alt="Get it on Google Play" width={180} height={54} className="h-14 w-auto" />
+            <Image
+              src="/images/white-app-store-buttons-7-1.png"
+              alt="Get it on Google Play"
+              width={180}
+              height={54}
+              className="h-14 w-auto"
+            />
           </a>
         </div>
       </Container>

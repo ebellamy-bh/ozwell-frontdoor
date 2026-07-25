@@ -14,7 +14,10 @@ export function Footer() {
 
           <div>
             <h3 className="mb-3 text-lg font-bold">Contact Info</h3>
-            <a href={`mailto:${siteConfig.email}`} className="text-sm text-white/85 underline-offset-2 hover:underline">
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="text-sm text-white/85 underline-offset-2 hover:underline"
+            >
               {siteConfig.email}
             </a>
           </div>
@@ -24,7 +27,12 @@ export function Footer() {
             <ul className="space-y-2">
               {siteConfig.social.map((s) => (
                 <li key={s.href}>
-                  <a href={s.href} className="text-sm text-white/85 underline-offset-2 hover:underline" rel="noopener noreferrer" target="_blank">
+                  <a
+                    href={s.href}
+                    className="text-sm text-white/85 underline-offset-2 hover:underline"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
                     {s.label}
                   </a>
                 </li>
@@ -38,13 +46,19 @@ export function Footer() {
               {siteConfig.footerLinks.map((l) =>
                 l.href.startsWith('/') ? (
                   <li key={l.href}>
-                    <Link href={l.href} className="text-sm text-white/85 underline-offset-2 hover:underline">
+                    <Link
+                      href={l.href}
+                      className="text-sm text-white/85 underline-offset-2 hover:underline"
+                    >
                       {l.label}
                     </Link>
                   </li>
                 ) : (
                   <li key={l.href}>
-                    <a href={l.href} className="text-sm text-white/85 underline-offset-2 hover:underline">
+                    <a
+                      href={l.href}
+                      className="text-sm text-white/85 underline-offset-2 hover:underline"
+                    >
                       {l.label}
                     </a>
                   </li>
@@ -65,10 +79,22 @@ export function Footer() {
           </p>
           <div className="mt-6 flex gap-4">
             <a href={siteConfig.apps.appStore} rel="noopener noreferrer" target="_blank">
-              <Image src="/images/white-app-store-buttons-6-1.png" alt="Download on the App Store" width={160} height={48} className="h-12 w-auto" />
+              <Image
+                src="/images/white-app-store-buttons-6-1.png"
+                alt="Download on the App Store"
+                width={160}
+                height={48}
+                className="h-12 w-auto"
+              />
             </a>
             <a href={siteConfig.apps.googlePlay} rel="noopener noreferrer" target="_blank">
-              <Image src="/images/white-app-store-buttons-7-1.png" alt="Get it on Google Play" width={160} height={48} className="h-12 w-auto" />
+              <Image
+                src="/images/white-app-store-buttons-7-1.png"
+                alt="Get it on Google Play"
+                width={160}
+                height={48}
+                className="h-12 w-auto"
+              />
             </a>
           </div>
         </div>

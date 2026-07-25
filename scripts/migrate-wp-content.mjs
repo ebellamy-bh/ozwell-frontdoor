@@ -35,7 +35,9 @@ async function fetchJson(url) {
 async function fetchAll(path, params = '') {
   const out = []
   for (let page = 1; ; page++) {
-    const batch = await fetchJson(`${WP}/${path}?per_page=100&page=${page}${params}`).catch(() => [])
+    const batch = await fetchJson(`${WP}/${path}?per_page=100&page=${page}${params}`).catch(
+      () => []
+    )
     if (!Array.isArray(batch) || batch.length === 0) break
     out.push(...batch)
     if (batch.length < 100) break
@@ -48,12 +50,14 @@ function download(url, dest) {
     if (existsSync(dest)) return resolve('cached')
     // Encode any raw Unicode characters (e.g. U+202F) left in the URL path
     const safe = encodeURI(url)
-    https.get(safe, (res) => {
-      if (res.statusCode !== 200) return reject(new Error(`${res.statusCode} ${safe}`))
-      const f = createWriteStream(dest)
-      res.pipe(f)
-      f.on('finish', () => f.close(resolve))
-    }).on('error', reject)
+    https
+      .get(safe, (res) => {
+        if (res.statusCode !== 200) return reject(new Error(`${res.statusCode} ${safe}`))
+        const f = createWriteStream(dest)
+        res.pipe(f)
+        f.on('finish', () => f.close(resolve))
+      })
+      .on('error', reject)
   })
 }
 
@@ -63,12 +67,17 @@ function localizeImages(html) {
   if (!html) return html
   // Note: filenames may contain U+202F (narrow no-break space) from macOS
   // screenshots — only treat ASCII whitespace and delimiters as terminators.
-  return html.replace(/https:\/\/ozwell\.ai\/wp-content\/uploads\/([^ \t\n\r"'<>)]+)/g, (m, rel) => {
-    const clean = rel.split('?')[0]
-    const name = decodeURIComponent(clean).replace(/\//g, '-').replace(/[\u202F\u00A0]/g, '_')
-    imageQueue.set(m.split('?')[0], name)
-    return `/images/wp/${name}`
-  })
+  return html.replace(
+    /https:\/\/ozwell\.ai\/wp-content\/uploads\/([^ \t\n\r"'<>)]+)/g,
+    (m, rel) => {
+      const clean = rel.split('?')[0]
+      const name = decodeURIComponent(clean)
+        .replace(/\//g, '-')
+        .replace(/[\u202F\u00A0]/g, '_')
+      imageQueue.set(m.split('?')[0], name)
+      return `/images/wp/${name}`
+    }
+  )
 }
 
 /** Modernize internal links: date-based post URLs → /blog/slug/, strip domain. */
@@ -117,7 +126,12 @@ const postsOut = posts.map((p) => ({
   date: p.date,
   modified: p.modified,
   title: decodeEntities(p.title.rendered),
-  excerpt: decodeEntities(p.excerpt.rendered.replace(/<[^>]+>/g, '').replace(/&hellip;.*$/s, '…').trim()),
+  excerpt: decodeEntities(
+    p.excerpt.rendered
+      .replace(/<[^>]+>/g, '')
+      .replace(/&hellip;.*$/s, '…')
+      .trim()
+  ),
   content: clean(p.content.rendered),
   author: p._embedded?.author?.[0]?.slug ?? null,
   authorName: p._embedded?.author?.[0]?.name ?? null,
@@ -137,14 +151,34 @@ const docsOut = docs.map((d) => ({
   modified: d.modified,
   title: decodeEntities(d.title.rendered),
   content: clean(d.content.rendered),
-  categories: (d.doc_category ?? []).map((id) => docCats.find((c) => c.id === id)?.slug).filter(Boolean),
+  categories: (d.doc_category ?? [])
+    .map((id) => docCats.find((c) => c.id === id)?.slug)
+    .filter(Boolean),
   wpUrl: d.link,
 }))
 
-const docCatsOut = docCats.map((c) => ({ id: c.id, slug: c.slug, name: c.name, description: c.description, count: c.count }))
-const catsOut = cats.map((c) => ({ id: c.id, slug: c.slug, name: c.name, description: c.description, count: c.count }))
+const docCatsOut = docCats.map((c) => ({
+  id: c.id,
+  slug: c.slug,
+  name: c.name,
+  description: c.description,
+  count: c.count,
+}))
+const catsOut = cats.map((c) => ({
+  id: c.id,
+  slug: c.slug,
+  name: c.name,
+  description: c.description,
+  count: c.count,
+}))
 const tagsOut = tags.map((t) => ({ id: t.id, slug: t.slug, name: t.name, count: t.count }))
-const usersOut = users.map((u) => ({ id: u.id, slug: u.slug, name: u.name, description: u.description, avatar: u.avatar_urls?.['96'] ?? null }))
+const usersOut = users.map((u) => ({
+  id: u.id,
+  slug: u.slug,
+  name: u.name,
+  description: u.description,
+  avatar: u.avatar_urls?.['96'] ?? null,
+}))
 
 writeFileSync(join(OUT_DATA, 'posts.json'), JSON.stringify(postsOut, null, 2))
 writeFileSync(join(OUT_DATA, 'docs.json'), JSON.stringify(docsOut, null, 2))
@@ -153,9 +187,12 @@ writeFileSync(join(OUT_DATA, 'categories.json'), JSON.stringify(catsOut, null, 2
 writeFileSync(join(OUT_DATA, 'tags.json'), JSON.stringify(tagsOut, null, 2))
 writeFileSync(join(OUT_DATA, 'authors.json'), JSON.stringify(usersOut, null, 2))
 
-console.log(`posts: ${postsOut.length}, docs: ${docsOut.length}, docCats: ${docCatsOut.length}, cats: ${catsOut.length}, tags: ${tagsOut.length}, authors: ${usersOut.length}`)
+console.log(
+  `posts: ${postsOut.length}, docs: ${docsOut.length}, docCats: ${docCatsOut.length}, cats: ${catsOut.length}, tags: ${tagsOut.length}, authors: ${usersOut.length}`
+)
 
-let ok = 0, fail = 0
+let ok = 0,
+  fail = 0
 for (const [url, name] of imageQueue) {
   try {
     await download(url, join(OUT_IMG, name))

@@ -26,7 +26,10 @@ export default function BlogGrid({ title, posts }: BlogGridProps) {
         <h2 className="sr-only">{title}</h2>
         <div className="grid gap-10 md:grid-cols-2">
           {posts.map((post) => (
-            <article key={post.slug} className="group overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100 transition-shadow hover:shadow-lg">
+            <article
+              key={post.slug}
+              className="group overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100 transition-shadow hover:shadow-lg"
+            >
               <Link href={`/blog/${post.slug}/`}>
                 {post.featuredImage ? (
                   <Image
@@ -41,7 +44,10 @@ export default function BlogGrid({ title, posts }: BlogGridProps) {
                   {post.categories && post.categories.length > 0 ? (
                     <div className="mb-3 flex flex-wrap gap-2">
                       {post.categories.map((cat) => (
-                        <span key={cat} className="rounded-full bg-primary-500/10 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-primary-700">
+                        <span
+                          key={cat}
+                          className="rounded-full bg-primary-500/10 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-primary-700"
+                        >
                           {cat.replace(/-/g, ' ')}
                         </span>
                       ))}
@@ -51,8 +57,12 @@ export default function BlogGrid({ title, posts }: BlogGridProps) {
                     {post.dateFormatted}
                     {post.authorName ? ` · ${post.authorName}` : ''}
                   </p>
-                  <h3 className="mt-2 text-xl font-bold text-ozwell-ink transition-colors group-hover:text-primary-600">{post.title}</h3>
-                  <p className="mt-3 line-clamp-3 leading-relaxed text-ozwell-slate">{post.excerpt}</p>
+                  <h3 className="mt-2 text-xl font-bold text-ozwell-ink transition-colors group-hover:text-primary-600">
+                    {post.title}
+                  </h3>
+                  <p className="mt-3 line-clamp-3 leading-relaxed text-ozwell-slate">
+                    {post.excerpt}
+                  </p>
                   <p className="mt-4 font-semibold text-primary-600">Read more →</p>
                 </div>
               </Link>

@@ -10,9 +10,15 @@
     { "label": "Blog", "href": "/blog/" }
   ],
   "ctas": {
-    "demo": { "label": "Request a Demo", "href": "https://share.hsforms.com/1ZK8aetZ8Qg2KUsZydI8y4Ar3xja" },
+    "demo": {
+      "label": "Request a Demo",
+      "href": "https://share.hsforms.com/1ZK8aetZ8Qg2KUsZydI8y4Ar3xja"
+    },
     "login": { "label": "Login", "href": "https://app.ozwell.ai/" },
-    "trial": { "label": "Start Free Trial", "href": "https://ai.bluehive.com/?utm_source=ozwell.ai" },
+    "trial": {
+      "label": "Start Free Trial",
+      "href": "https://ai.bluehive.com/?utm_source=ozwell.ai"
+    },
     "watchDemo": { "label": "Watch the Demo", "href": "https://www.youtube.com/shorts/gQl1yRLzWGw" }
   },
   "apps": {

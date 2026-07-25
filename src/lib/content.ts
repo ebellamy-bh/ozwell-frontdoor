@@ -49,10 +49,14 @@ export interface Author {
 }
 
 /** All posts, newest first. */
-export const posts: Post[] = (postsJson as Post[]).slice().sort((a, b) => b.date.localeCompare(a.date))
+export const posts: Post[] = (postsJson as Post[])
+  .slice()
+  .sort((a, b) => b.date.localeCompare(a.date))
 
 /** All help-center docs, alphabetical. */
-export const docs: Doc[] = (docsJson as Doc[]).slice().sort((a, b) => a.title.localeCompare(b.title))
+export const docs: Doc[] = (docsJson as Doc[])
+  .slice()
+  .sort((a, b) => a.title.localeCompare(b.title))
 
 /** Doc categories that actually contain published docs. */
 export const docCategories: Term[] = (docCategoriesJson as Term[])
@@ -111,7 +115,10 @@ export function readingTime(html: string): number {
 
 /** Strip HTML tags for plain-text needs (descriptions). */
 export function stripHtml(html: string): string {
-  return html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
+  return html
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
 /** First ~155 chars of a post/doc body for meta descriptions. */
@@ -121,5 +128,9 @@ export function metaDescription(html: string): string {
 }
 
 export function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  return new Date(iso).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 }

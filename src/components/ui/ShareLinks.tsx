@@ -23,7 +23,8 @@ interface ShareLinksProps {
 export default function ShareLinks({ title, slug }: ShareLinksProps) {
   const [copied, setCopied] = useState(false)
 
-  const pageUrl = typeof window !== 'undefined' ? window.location.href : `https://ozwell.ai/blog/${slug}/`
+  const pageUrl =
+    typeof window !== 'undefined' ? window.location.href : `https://ozwell.ai/blog/${slug}/`
   const encodedUrl = encodeURIComponent(pageUrl)
   const encodedTitle = encodeURIComponent(title)
 
@@ -57,17 +58,25 @@ export default function ShareLinks({ title, slug }: ShareLinksProps) {
 
   return (
     <div className="flex items-center gap-2" aria-label="Share this post">
-      <span className="text-xs font-semibold uppercase tracking-wider text-ozwell-slate">Share</span>
+      <span className="text-xs font-semibold uppercase tracking-wider text-ozwell-slate">
+        Share
+      </span>
       <button
         type="button"
         onClick={copyLink}
         aria-label={copied ? 'Link copied' : 'Copy link'}
         className={clsx(
           'inline-flex h-8 w-8 items-center justify-center rounded-lg transition-colors',
-          copied ? 'bg-ozwell-green/15 text-ozwell-green' : 'text-ozwell-slate hover:bg-primary-50 hover:text-primary-600'
+          copied
+            ? 'bg-ozwell-green/15 text-ozwell-green'
+            : 'text-ozwell-slate hover:bg-primary-50 hover:text-primary-600'
         )}
       >
-        {copied ? <Check size={16} strokeWidth={2} aria-hidden="true" /> : <Link2 size={16} strokeWidth={2} aria-hidden="true" />}
+        {copied ? (
+          <Check size={16} strokeWidth={2} aria-hidden="true" />
+        ) : (
+          <Link2 size={16} strokeWidth={2} aria-hidden="true" />
+        )}
       </button>
       {links.map((link) => (
         <a

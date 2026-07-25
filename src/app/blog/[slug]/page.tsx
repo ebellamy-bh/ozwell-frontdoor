@@ -40,7 +40,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: 'article',
       images: post.featuredImage
-        ? [{ url: post.featuredImage, width: 915, height: 515, alt: post.featuredImageAlt || post.title }]
+        ? [
+            {
+              url: post.featuredImage,
+              width: 915,
+              height: 515,
+              alt: post.featuredImageAlt || post.title,
+            },
+          ]
         : undefined,
     },
   })
@@ -109,7 +116,12 @@ export default async function Page({ params }: Props) {
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
       { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog/` },
-      { '@type': 'ListItem', position: 3, name: post.title, item: `${SITE_URL}/blog/${post.slug}/` },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: `${SITE_URL}/blog/${post.slug}/`,
+      },
     ],
   }
 
@@ -147,14 +159,22 @@ export default async function Page({ params }: Props) {
             </div>
           ) : null}
 
-          <h1 className="text-3xl font-bold leading-tight text-ozwell-ink sm:text-4xl">{post.title}</h1>
+          <h1 className="text-3xl font-bold leading-tight text-ozwell-ink sm:text-4xl">
+            {post.title}
+          </h1>
 
           {/* Byline: author avatar, dates, reading time */}
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-ozwell-slate">
             {post.authorName ? (
               <span className="flex items-center gap-2">
                 {author?.avatar ? (
-                  <Image src={author.avatar} alt="" width={32} height={32} className="h-8 w-8 rounded-full object-cover" />
+                  <Image
+                    src={author.avatar}
+                    alt=""
+                    width={32}
+                    height={32}
+                    className="h-8 w-8 rounded-full object-cover"
+                  />
                 ) : null}
                 <span className="font-medium text-ozwell-ink">{post.authorName}</span>
               </span>
@@ -208,7 +228,9 @@ export default async function Page({ params }: Props) {
                   <ArrowLeft size={14} strokeWidth={2} aria-hidden="true" />
                   Previous
                 </span>
-                <span className="mt-2 block font-semibold text-ozwell-ink group-hover:text-primary-600">{previous.title}</span>
+                <span className="mt-2 block font-semibold text-ozwell-ink group-hover:text-primary-600">
+                  {previous.title}
+                </span>
               </Link>
             ) : (
               <span aria-hidden="true" />
@@ -222,7 +244,9 @@ export default async function Page({ params }: Props) {
                   Next
                   <ArrowRight size={14} strokeWidth={2} aria-hidden="true" />
                 </span>
-                <span className="mt-2 block font-semibold text-ozwell-ink group-hover:text-primary-600">{next.title}</span>
+                <span className="mt-2 block font-semibold text-ozwell-ink group-hover:text-primary-600">
+                  {next.title}
+                </span>
               </Link>
             ) : null}
           </div>

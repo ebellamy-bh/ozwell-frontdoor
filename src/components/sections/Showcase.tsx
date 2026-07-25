@@ -12,7 +12,9 @@ export default function Showcase({ title, description, screenshots }: ShowcasePr
     <section className="bg-gradient-to-br from-[#24c1fc] to-[#0b78de] py-16 text-white lg:py-20">
       <Container>
         <h2 className="text-center text-3xl font-bold sm:text-[40px]">{title}</h2>
-        <p className="mx-auto mt-4 max-w-3xl text-center text-lg leading-relaxed text-white/90">{description}</p>
+        <p className="mx-auto mt-4 max-w-3xl text-center text-lg leading-relaxed text-white/90">
+          {description}
+        </p>
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {screenshots.map((shot) => (
             <Image

@@ -41,7 +41,8 @@ export const featureVideo = {
 
 export const certification = {
   eyebrow: 'Security',
-  title: "Ozwell is the market's first and only Drummond pDSI-Risk certified AI-powered Health IT solution.",
+  title:
+    "Ozwell is the market's first and only Drummond pDSI-Risk certified AI-powered Health IT solution.",
   description:
     "The certification confirms that Ozwell's AI platform meets key benchmarks related to intervention risk assessment and mitigation, which is a critical step in supporting the responsible use of AI in clinical care.",
   badges: ['HIPAA Compliant', 'Mobile friendly', 'Drummond certified'],
@@ -92,7 +93,12 @@ export const workSmarter = {
   description:
     'BlueHive offers a range of features designed to boost your productivity and streamline your processes. Explore customizable workflows, real-time insights, and intuitive design that work together to make your workday more effective and your life easier.',
   images: [
-    { src: '/images/4-1-1024x1024.png', alt: 'Ozwell feature highlight', width: 1024, height: 1024 },
+    {
+      src: '/images/4-1-1024x1024.png',
+      alt: 'Ozwell feature highlight',
+      width: 1024,
+      height: 1024,
+    },
     { src: '/images/6-1024x1024.png', alt: 'Ozwell feature highlight', width: 1024, height: 1024 },
   ],
   video: '/videos/Copy-of-Ozwell-AI-Workflow-Flowchart.mp4',
@@ -109,18 +115,44 @@ export const showcase = {
   description:
     "Here's a closer look at how Ozwell simplifies patient encounters and streamlines daily operations for clinicians.",
   screenshots: [
-    { src: '/images/1-scaled.png', alt: 'Ozwell product screenshot — patient encounter view', width: 2560, height: 1440 },
-    { src: '/images/2-scaled.png', alt: 'Ozwell product screenshot — documentation workflow', width: 2560, height: 1440 },
-    { src: '/images/3-scaled.png', alt: 'Ozwell product screenshot — SOAP note generation', width: 2560, height: 1440 },
-    { src: '/images/4-scaled.png', alt: 'Ozwell product screenshot — chart summary', width: 2560, height: 1440 },
-    { src: '/images/5-scaled.png', alt: 'Ozwell product screenshot — clinical operations dashboard', width: 2560, height: 1440 },
+    {
+      src: '/images/1-scaled.png',
+      alt: 'Ozwell product screenshot — patient encounter view',
+      width: 2560,
+      height: 1440,
+    },
+    {
+      src: '/images/2-scaled.png',
+      alt: 'Ozwell product screenshot — documentation workflow',
+      width: 2560,
+      height: 1440,
+    },
+    {
+      src: '/images/3-scaled.png',
+      alt: 'Ozwell product screenshot — SOAP note generation',
+      width: 2560,
+      height: 1440,
+    },
+    {
+      src: '/images/4-scaled.png',
+      alt: 'Ozwell product screenshot — chart summary',
+      width: 2560,
+      height: 1440,
+    },
+    {
+      src: '/images/5-scaled.png',
+      alt: 'Ozwell product screenshot — clinical operations dashboard',
+      width: 2560,
+      height: 1440,
+    },
   ],
 }
 
 export const faqs = {
   eyebrow: 'Get answers',
   title: 'Frequently Asked Questions',
-  description: 'Discover how Ozwell can simplify your healthcare management and elevate overall efficiency.',
+  description:
+    'Discover how Ozwell can simplify your healthcare management and elevate overall efficiency.',
   items: [
     {
       question: 'What is Ozwell?',

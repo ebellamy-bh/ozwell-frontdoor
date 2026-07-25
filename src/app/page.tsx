@@ -65,13 +65,18 @@ export default function Page() {
         video={workSmarter.video}
         phoneImage={workSmarter.phoneImage}
       />
-      <Showcase title={showcase.title} description={showcase.description} screenshots={showcase.screenshots} />
-      <FAQSection eyebrow={faqs.eyebrow} title={faqs.title} description={faqs.description} items={faqs.items} />
-      <AppDownloadCTA
-        title={appCta.title}
-        subtitle={appCta.subtitle}
-        banner={appCta.banner}
+      <Showcase
+        title={showcase.title}
+        description={showcase.description}
+        screenshots={showcase.screenshots}
       />
+      <FAQSection
+        eyebrow={faqs.eyebrow}
+        title={faqs.title}
+        description={faqs.description}
+        items={faqs.items}
+      />
+      <AppDownloadCTA title={appCta.title} subtitle={appCta.subtitle} banner={appCta.banner} />
     </>
   )
 }

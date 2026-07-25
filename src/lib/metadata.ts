@@ -40,7 +40,12 @@ export function createMetadata(options: CreateMetadataOptions): Metadata {
       siteName: SITE_NAME,
       type: openGraph?.type ?? 'website',
       images: openGraph?.images ?? [
-        { url: '/images/Ozwell-Branding-Whiteboard-2.png', width: 1200, height: 630, alt: 'Ozwell — Your AI medical assistant' },
+        {
+          url: '/images/Ozwell-Branding-Whiteboard-2.png',
+          width: 1200,
+          height: 630,
+          alt: 'Ozwell — Your AI medical assistant',
+        },
       ],
     },
     twitter: {
