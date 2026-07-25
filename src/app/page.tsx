@@ -1,4 +1,5 @@
-import { createMetadata } from '@/lib/metadata'
+import { createMetadata, SITE_NAME, SITE_URL } from '@/lib/metadata'
+import JsonLd from '@/components/sections/JsonLd'
 import Hero from '@/components/sections/Hero'
 import LogoCloud from '@/components/sections/LogoCloud'
 import FeatureVideo from '@/components/sections/FeatureVideo'
@@ -7,10 +8,11 @@ import FeatureRows from '@/components/sections/FeatureRows'
 import Testimonials from '@/components/sections/Testimonials'
 import WorkSmarter from '@/components/sections/WorkSmarter'
 import FeatureCardsPhone from '@/components/sections/FeatureCardsPhone'
-import FlowchartVideo from '@/components/sections/FlowchartVideo'
+import HowItWorks from '@/components/sections/HowItWorks'
 import Showcase from '@/components/sections/Showcase'
 import FAQSection from '@/components/sections/FAQSection'
 import AppDownloadCTA from '@/components/sections/AppDownloadCTA'
+import CTABand from '@/components/sections/CTABand'
 import siteConfig from '@/data/site.json'
 import {
   hero,
@@ -21,7 +23,7 @@ import {
   testimonials,
   workSmarter,
   featureCards,
-  flowchartVideo,
+  howItWorks,
   showcase,
   faqs,
   appCta,
@@ -34,9 +36,49 @@ export const metadata = createMetadata({
   path: '/',
 })
 
+/** Structured data — the site previously emitted JSON-LD on blog posts only. */
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/images/Ozwell-logo.png`,
+  email: siteConfig.email,
+  description: siteConfig.aboutBlurb,
+  parentOrganization: { '@type': 'Organization', name: 'BlueHive Health, LLC' },
+  sameAs: siteConfig.social.map((s) => s.href),
+}
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Ozwell',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'iOS, Android, Web',
+  url: SITE_URL,
+  description:
+    'AI medical assistant that transcribes patient visits, writes structured clinical notes, and handles inbound calls for healthcare practices.',
+  publisher: { '@type': 'Organization', name: 'BlueHive Health, LLC' },
+  offers: { '@type': 'Offer', category: 'free trial', url: siteConfig.ctas.trial.href },
+}
+
+/** Mirrors the on-page accordion, so the Q&As are eligible as rich results. */
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+}
+
 export default function Page() {
   return (
     <>
+      <JsonLd data={organizationSchema} />
+      <JsonLd data={softwareSchema} />
+      <JsonLd data={faqSchema} />
       <Hero
         eyebrowLines={hero.eyebrowLines}
         subheading={hero.subheading}
@@ -60,7 +102,7 @@ export default function Page() {
       <Testimonials
         title={testimonials.title}
         description={testimonials.description}
-        image={testimonials.image}
+        items={testimonials.items}
       />
       <WorkSmarter title={workSmarter.title} description={workSmarter.description} />
       <FeatureCardsPhone
@@ -68,12 +110,20 @@ export default function Page() {
         right={featureCards.right}
         phoneImage={featureCards.phoneImage}
       />
-      <FlowchartVideo video={flowchartVideo.video} title={flowchartVideo.title} />
+      <HowItWorks
+        eyebrow={howItWorks.eyebrow}
+        title={howItWorks.title}
+        description={howItWorks.description}
+        steps={howItWorks.steps}
+      />
       <Showcase
         title={showcase.title}
         description={showcase.description}
         screenshots={showcase.screenshots}
       />
+      {/* Mid-page conversion point: /about-us had one, the homepage didn't — the only CTAs were
+          the hero and the app-store band 9,000px down. */}
+      <CTABand title="Ready to get your evenings back?" cta={siteConfig.ctas.trial} />
       <FAQSection
         eyebrow={faqs.eyebrow}
         title={faqs.title}

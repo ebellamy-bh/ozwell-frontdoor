@@ -1,7 +1,8 @@
 import { createMetadata } from '@/lib/metadata'
 import DocsHero from '@/components/sections/DocsHero'
 import DocsHub from '@/components/sections/DocsHub'
-import { docsHub, featuredDocsCategory } from '@/data/docs'
+import DocsSearch from '@/components/sections/DocsSearch'
+import { docsHub, docsSearchIndex, featuredDocsCategory } from '@/data/docs'
 
 export const metadata = createMetadata({
   title: 'Help Center',
@@ -14,7 +15,10 @@ export default function Page() {
   return (
     <>
       <DocsHero eyebrow="Help Center" title="How can we help?" />
-      <DocsHub featured={featuredDocsCategory} categories={docsHub} />
+      {/* The hub is the empty-query state: typing swaps it for results. */}
+      <DocsSearch index={docsSearchIndex}>
+        <DocsHub featured={featuredDocsCategory} categories={docsHub} />
+      </DocsSearch>
     </>
   )
 }

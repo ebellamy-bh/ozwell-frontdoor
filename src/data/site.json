@@ -34,8 +34,11 @@
   ],
   "footerLinks": [
     { "label": "About Us", "href": "/about-us/" },
+    { "label": "Help Center", "href": "/docs/" },
+    { "label": "Blog", "href": "/blog/" },
+    { "label": "FAQ", "href": "/#faq" },
     { "label": "Careers - We're Hiring!", "href": "https://mieweb.org/join-our-team/" },
-    { "label": "Support - Help - FAQ", "href": "/docs/" }
+    { "label": "Request a Demo", "href": "https://share.hsforms.com/1ZK8aetZ8Qg2KUsZydI8y4Ar3xja" }
   ],
   "aboutBlurb": "Ozwell is your extra set of hands in healthcare. By managing paperwork, compliance, and administrative workflows, Ozwell frees you to do what you do best – care for patients.",
   "storyBlurb": "Using Ozwell? Let's highlight your company! Submit your logo for our homepage or express interest in being featured in a video testimonial or case study."

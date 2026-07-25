@@ -64,7 +64,8 @@ export const featureRows = [
       { label: 'Automate chart population', icon: 'gear' },
     ],
     cta: { label: 'Get Started', href: 'https://ai.bluehive.com/?utm_source=ozwell.ai' },
-    video: '/videos/Copy-of-Featured-Section-ImagesVideos.mp4',
+    video: '/videos/ozwell-smart-scribing.mp4',
+    poster: '/videos/ozwell-smart-scribing.jpg',
     mediaSide: 'left' as const,
   },
   {
@@ -77,26 +78,45 @@ export const featureRows = [
       { label: 'Personalize caller experience', icon: 'user' },
     ],
     cta: { label: 'Get Started', href: 'https://ai.bluehive.com/?utm_source=ozwell.ai' },
-    video: '/videos/Copy-of-bluehive-IRV-now-Ozwell-call-dashboard-graphic.mp4',
+    video: '/videos/ozwell-call-dashboard.mp4',
+    poster: '/videos/ozwell-call-dashboard.jpg',
     mediaSide: 'right' as const,
   },
 ]
 
+/**
+ * Testimonials — transcribed from the legacy `testimonials-1024x576.png` composite, which
+ * rendered these quotes as a flat image (illegible on mobile, invisible to search).
+ *
+ * The quotes are verbatim. They predate the BlueHive AI → Ozwell rename, so the product name
+ * is bracketed on the same convention the migrated blog posts already use
+ * ("BlueHive AI [Ozwell]"). Replace with refreshed quotes when we can get them.
+ */
 export const testimonials = {
   title: "Don't just take our word for it.",
   description: 'Discover what users have to say about their experiences with our platform.',
-  image: {
-    src: '/images/testimonials-1024x576.png',
-    alt: 'Ozwell user testimonials',
-    width: 1024,
-    height: 576,
-  },
+  items: [
+    {
+      quote:
+        'BlueHive AI [Ozwell] has been an absolute game changer for me. I’ve been using it for just two weeks, but it already feels like a major step forward compared to when we transitioned from paper charts to EMRs. With EMRs, I often found myself focusing more on the screen than on the patient, which really took away from the personal interaction. BlueHive [Ozwell] has given me the freedom to go back to being a doctor—looking my patients in the eye and focusing on them, while the AI handles the documentation. It’s liberating. Most of us in the practice have gained back an hour or two each day, and the improvement in patient care is remarkable.',
+      name: 'Jeffrey Margolis, M.D.',
+      title: 'President of Michigan Health Professionals',
+      avatar: '/images/testimonials/jeffrey-margolis.png',
+    },
+    {
+      quote:
+        'One of the biggest challenges in medicine is time. We spend a lot of hours on administrative tasks like charting—up to one to two hours daily. This time is taking away from patient care and even our personal lives. BlueHive AI [Ozwell] has already helped cut down that time. It allows me to focus more on patient care without the stress of additional paperwork at the end of the day. For example, I saw 35 patients today, and all my notes and referrals were completed by the end of the clinic day.',
+      name: 'Richard Zekman, D.O.',
+      title: 'Division of Clinical Hematology & Medical Oncology',
+      avatar: '/images/testimonials/richard-zekman.png',
+    },
+  ],
 }
 
 export const workSmarter = {
   title: 'Work Smarter, Not Harder',
   description:
-    'BlueHive offers a range of features designed to boost your productivity and streamline your processes. Explore customizable workflows, real-time insights, and intuitive design that work together to make your workday more effective and your life easier.',
+    'Ozwell offers a range of features designed to boost your productivity and streamline your processes. Explore customizable workflows, real-time insights, and intuitive design that work together to make your workday more effective and your life easier.',
 }
 
 /** Six feature cards flanking the phone image (3 left, 3 right) — matches live layout. */
@@ -143,10 +163,42 @@ export const featureCards = {
   },
 }
 
-/** Full-width workflow flowchart video section. */
-export const flowchartVideo = {
-  video: '/videos/Copy-of-Ozwell-AI-Workflow-Flowchart.mp4',
-  title: 'Ozwell AI workflow flowchart animation',
+/**
+ * How Ozwell works — replaces the legacy 22 MB autoplaying MP4 of a nine-box flowchart, whose
+ * text was unreadable at every viewport and invisible to screen readers and search engines.
+ * The nine original stages collapse into the four the reader actually needs.
+ */
+export const howItWorks = {
+  eyebrow: 'How it works',
+  title: 'From conversation to completed chart',
+  description:
+    'Ozwell listens to the visit, understands the clinical detail, and does the documentation — then gets better at your terminology every time you use it.',
+  steps: [
+    {
+      icon: 'mic',
+      title: 'Listen',
+      description:
+        'Start from phone or chat, on desktop or mobile. Ozwell transcribes the encounter in real time and handles specialized clinical terminology, not just everyday speech.',
+    },
+    {
+      icon: 'brain',
+      title: 'Understand',
+      description:
+        'It reads the full context of the conversation rather than matching keywords — pulling out conditions, medications, allergies, vitals, and referrals as discrete clinical facts.',
+    },
+    {
+      icon: 'clipboard',
+      title: 'Act',
+      description:
+        'A structured SOAP note is written for you, with orders, referrals, and follow-ups queued as reviewable actions. Nothing is filed until you approve it.',
+    },
+    {
+      icon: 'refresh',
+      title: 'Learn',
+      description:
+        'Your corrections feed back in, so accuracy improves against your own vocabulary and documentation style. Results sync to EHR, HRIS, and the rest of your stack.',
+    },
+  ],
 }
 
 export const showcase = {

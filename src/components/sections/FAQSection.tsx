@@ -11,7 +11,9 @@ export default function FAQSection({ eyebrow, title, description, items }: FAQSe
   return (
     <section id="faq" className="bg-white py-16 lg:py-20">
       <Container>
-        <p className="text-center text-base font-bold uppercase tracking-wide text-ozwell-gold">
+        {/* Not ozwell-gold: #fada00 on white is ~1.3:1, well under the 4.5:1 AA floor.
+            The gold token only carries enough contrast on dark surfaces. */}
+        <p className="text-center text-base font-bold uppercase tracking-wide text-primary-600">
           {eyebrow}
         </p>
         <h2 className="mt-2 text-center text-3xl font-normal text-ozwell-ink-muted sm:text-[35px]">

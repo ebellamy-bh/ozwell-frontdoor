@@ -61,13 +61,16 @@ export default function Hero({
 
           {/* Copy + CTAs — RIGHT column (matches live layout) */}
           <div className="order-1 lg:order-2">
+            {/* The {' '} separators matter: without them the block spans concatenate and the
+                accessible name / indexed text reads "Say hi toOzwell.Your AI medical assistant".
+                Whitespace between block-level children doesn't render, so this is text-only. */}
             <h1 className="leading-none">
               <span className="block text-5xl font-medium sm:text-6xl lg:text-[81px]">
                 {eyebrowLines[0]}
-              </span>
+              </span>{' '}
               <span className="block text-7xl font-medium sm:text-8xl lg:text-[144px]">
                 {eyebrowLines[1]}
-              </span>
+              </span>{' '}
               <span className="mt-2 block text-2xl font-light sm:text-3xl lg:text-[40px]">
                 {subheading}
               </span>

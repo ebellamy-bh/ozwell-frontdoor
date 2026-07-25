@@ -9,6 +9,8 @@ import ShareLinks from '@/components/ui/ShareLinks'
 import JsonLd from '@/components/sections/JsonLd'
 import ArticleBody from '@/components/sections/ArticleBody'
 import BlogGrid from '@/components/sections/BlogGrid'
+import CTABand from '@/components/sections/CTABand'
+import siteConfig from '@/data/site.json'
 import {
   posts,
   getPost,
@@ -131,7 +133,7 @@ export default async function Page({ params }: Props) {
       <JsonLd data={breadcrumbSchema} />
 
       <section className="bg-ozwell-mist pb-8 pt-14">
-        <Container className="max-w-3xl">
+        <Container width="prose">
           {/* Breadcrumb / back link */}
           <nav aria-label="Breadcrumb" className="mb-6">
             <Link
@@ -199,24 +201,24 @@ export default async function Page({ params }: Props) {
             <ShareLinks title={post.title} slug={post.slug} />
           </div>
 
-          {post.featuredImage ? (
-            <Image
-              src={post.featuredImage}
-              alt={post.featuredImageAlt || post.title}
-              width={915}
-              height={515}
-              priority
-              className="mt-8 w-full rounded-2xl shadow-md"
-            />
-          ) : null}
+          {/* The featured image is intentionally not rendered here. Our header art has the post
+              title, category label, and a decorative "learn more" button baked into the artwork, so
+              inlining it directly under the real H1 and category chip stuttered all three — and cost
+              ~600 KB to do it. The image is still used for Open Graph cards and the index grid,
+              where it's the only place the title appears. Restore this once we have header art
+              without type burned in. */}
         </Container>
       </section>
 
       <ArticleBody html={post.content} />
 
+      {/* Readers who finish a 9-minute article had nowhere to go — no conversion point existed
+          between the header and the footer. */}
+      <CTABand title="See what Ozwell can do for your practice" cta={siteConfig.ctas.trial} />
+
       {/* Prev / next navigation */}
       <section className="border-t border-gray-100 bg-white py-10">
-        <Container className="max-w-3xl">
+        <Container width="prose">
           <h2 className="sr-only">More posts</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {previous ? (

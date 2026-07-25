@@ -1,5 +1,6 @@
 import { Mic, Settings, PhoneCall, UserRound, type LucideIcon } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
+import AutoPlayVideo from '@/components/ui/AutoPlayVideo'
 
 const BULLET_ICONS: Record<string, LucideIcon> = {
   mic: Mic,
@@ -15,6 +16,7 @@ interface FeatureRow {
   bullets: Array<{ label: string; icon: string }>
   cta: { label: string; href: string }
   video: string
+  poster: string
   mediaSide: 'left' | 'right'
 }
 
@@ -31,14 +33,11 @@ export default function FeatureRows({ items }: FeatureRowsProps) {
           {items.map((item) => (
             <div key={item.title} className="grid items-center gap-12 lg:grid-cols-2">
               <div className={item.mediaSide === 'right' ? 'lg:order-2' : ''}>
-                <video
-                  className="w-full rounded-2xl"
+                <AutoPlayVideo
                   src={item.video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  aria-label={item.title}
+                  poster={item.poster}
+                  label={item.title}
+                  className="rounded-2xl"
                 />
               </div>
               <div className={item.mediaSide === 'right' ? 'lg:order-1' : ''}>

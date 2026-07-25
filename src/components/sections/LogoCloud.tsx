@@ -10,7 +10,9 @@ export default function LogoCloud({ title, logos }: LogoCloudProps) {
   return (
     <section className="bg-white py-14">
       <Container>
-        <h2 className="text-center text-3xl font-normal text-ozwell-ink-muted sm:text-[35px]">{title}</h2>
+        <h2 className="text-center text-3xl font-normal text-ozwell-ink-muted sm:text-[35px]">
+          {title}
+        </h2>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
           {logos.map((logo) => (
             <Image

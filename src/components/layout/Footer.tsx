@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import clsx from 'clsx'
 import { Linkedin, Facebook, Instagram, Youtube, Twitter, Mail } from 'lucide-react'
 import siteConfig from '@/data/site.json'
@@ -106,16 +107,33 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Centered bottom tagline */}
-        <p className="mt-14 text-center text-[15px] text-ozwell-slate">
-          Ozwell – More time for care, less time on paperwork. AI designed for physicians, by{' '}
-          <a
-            href="https://bluehive.com/about"
-            className="text-primary-600 underline-offset-2 hover:underline"
-          >
-            BlueHive Health.
-          </a>
-        </p>
+        {/* Bottom bar: logo, tagline, copyright. */}
+        <div className="mt-14 border-t border-gray-200 pt-8">
+          <div className="flex flex-col items-center gap-5 text-center">
+            <Link href="/" aria-label="Ozwell home">
+              <Image
+                src="/images/Ozwell-logo.png"
+                alt="Ozwell"
+                width={150}
+                height={40}
+                className="h-9 w-auto"
+              />
+            </Link>
+            <p className="text-[15px] text-ozwell-slate">
+              Ozwell – More time for care, less time on paperwork. AI designed for physicians, by{' '}
+              <a
+                href="https://bluehive.com/about"
+                className="text-primary-600 underline-offset-2 hover:underline"
+              >
+                BlueHive Health.
+              </a>
+            </p>
+            {/* Rendered at build time; this is a static export, so the year is the build year. */}
+            <p className="text-sm text-ozwell-slate">
+              © {new Date().getFullYear()} BlueHive Health, LLC. All rights reserved.
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
   )

@@ -68,6 +68,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* The typography plugin generates open-quote/close-quote around blockquote paragraphs, but the
+   migrated WordPress content already contains literal curly quotes — so every pull quote rendered
+   as ""like this"". The authored punctuation wins. */
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+  content: none;
+}
+
 /* Auto-scrolling screenshot marquee (Showcase section) — mirrors the live
    Elementor loop carousel. The strip is rendered twice, so -50% = one full set. */
 @keyframes marquee-scroll {
