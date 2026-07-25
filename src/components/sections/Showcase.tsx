@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Container } from '@/components/ui/Container'
+import ShapeDivider from '@/components/ui/ShapeDivider'
 
 interface ShowcaseProps {
   title: string
@@ -13,14 +14,17 @@ export default function Showcase({ title, description, screenshots }: ShowcasePr
   const strip = [...screenshots, ...screenshots]
 
   return (
-    <section className="overflow-hidden bg-gradient-to-br from-[#24c1fc] to-[#0b78de] py-16 text-white lg:py-20">
-      <Container>
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#24c1fc] to-[#0b78de] pb-40 pt-40 text-white lg:pb-64 lg:pt-72">
+      {/* Live: smooth curve top (275px, flipped) and bottom (275px) */}
+      <ShapeDivider shape="curve" position="top" flipped heightClass="h-24 lg:h-[275px]" />
+      <ShapeDivider shape="curve" position="bottom" heightClass="h-24 lg:h-[275px]" />
+      <Container className="relative">
         <h2 className="text-center text-3xl font-bold sm:text-[40px]">{title}</h2>
         <p className="mx-auto mt-4 max-w-3xl text-center text-lg leading-relaxed text-white/90">
           {description}
         </p>
       </Container>
-      <div className="mt-12">
+      <div className="relative mt-12">
         <div className="marquee flex w-max gap-6" aria-label="Ozwell product screenshots">
           {strip.map((shot, i) => (
             <Image
