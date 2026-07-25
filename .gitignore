@@ -1,0 +1,18 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# misc
+.DS_Store
+*.pem
+.env*.local
+
+# migration working files (baseline screenshots, url inventories)
+/.migration/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

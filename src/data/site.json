@@ -1,0 +1,36 @@
+{
+  "name": "Ozwell AI",
+  "url": "https://ozwell.ai",
+  "tagline": "More time for care, less time on paperwork. AI designed for physicians, by BlueHive Health.",
+  "email": "info@ozwell.ai",
+  "nav": [
+    { "label": "Home", "href": "/" },
+    { "label": "About Us", "href": "/about-us/" },
+    { "label": "Help Center", "href": "/docs/" },
+    { "label": "Blog", "href": "/blog/" }
+  ],
+  "ctas": {
+    "demo": { "label": "Request a Demo", "href": "https://share.hsforms.com/1ZK8aetZ8Qg2KUsZydI8y4Ar3xja" },
+    "login": { "label": "Login", "href": "https://app.ozwell.ai/" },
+    "trial": { "label": "Start Free Trial", "href": "https://ai.bluehive.com/?utm_source=ozwell.ai" },
+    "watchDemo": { "label": "Watch the Demo", "href": "https://www.youtube.com/shorts/gQl1yRLzWGw" }
+  },
+  "apps": {
+    "appStore": "https://apps.apple.com/us/app/bluehive-ai/id6717586635",
+    "googlePlay": "https://play.google.com/store/apps/details?id=com.bluehive.mobile&hl=en_US"
+  },
+  "social": [
+    { "label": "Linkedin", "href": "https://www.linkedin.com/company/ozwellai" },
+    { "label": "Facebook", "href": "https://www.facebook.com/ozwellai" },
+    { "label": "Instagram", "href": "https://www.instagram.com/ozwellai/" },
+    { "label": "Youtube", "href": "https://www.youtube.com/@ozwellai" },
+    { "label": "Twitter", "href": "https://x.com/ozwell_ai" }
+  ],
+  "footerLinks": [
+    { "label": "About Us", "href": "/about-us/" },
+    { "label": "Careers - We're Hiring!", "href": "https://mieweb.org/join-our-team/" },
+    { "label": "Support - Help - FAQ", "href": "/docs/" }
+  ],
+  "aboutBlurb": "Ozwell is your extra set of hands in healthcare. By managing paperwork, compliance, and administrative workflows, Ozwell frees you to do what you do best – care for patients.",
+  "storyBlurb": "Using Ozwell? Let's highlight your company! Submit your logo for our homepage or express interest in being featured in a video testimonial or case study."
+}

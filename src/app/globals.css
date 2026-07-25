@@ -1,0 +1,49 @@
+@import 'tailwindcss' source(none);
+
+/* Class-based dark mode only — this is a light-mode site */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* All app code lives under src/ */
+@source '../../src';
+
+/* Ozwell Brand Colors — extracted from ozwell.ai (Elementor / WordPress build)
+   Primary blue is shared with BlueHive (#27aae1); dark authority blue #045089;
+   accent green #00b682 used for stat/highlight bands. */
+@theme {
+  /* Primary Blue */
+  --color-primary: #27aae1;
+  --color-primary-50: #e6f7fc;
+  --color-primary-100: #b3e6f7;
+  --color-primary-200: #80d4f1;
+  --color-primary-300: #4dc3ec;
+  --color-primary-400: #27aae1;
+  --color-primary-500: #27aae1;
+  --color-primary-600: #0b9de7;
+  --color-primary-700: #0675b0;
+  --color-primary-800: #045a88;
+  --color-primary-900: #045089;
+
+  /* Ozwell brand tokens */
+  --color-ozwell-blue: #27aae1;
+  --color-ozwell-blue-dark: #045089;
+  --color-ozwell-green: #00b682;
+  --color-ozwell-ink: #333333;
+  --color-ozwell-slate: #545f5f;
+  --color-ozwell-mist: #fcfeff;
+
+  /* Typography — Lato body, Roboto secondary (matches live site) */
+  --font-sans: var(--font-lato), 'Lato', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-lato), 'Lato', ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ozwell-ink);
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Smooth scrolling for in-page anchors (FAQ, etc.) */
+html {
+  scroll-behavior: smooth;
+}
