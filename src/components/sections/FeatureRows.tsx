@@ -1,11 +1,18 @@
-import { Check } from 'lucide-react'
+import { Mic, Settings, PhoneCall, UserRound, type LucideIcon } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
+
+const BULLET_ICONS: Record<string, LucideIcon> = {
+  mic: Mic,
+  gear: Settings,
+  phone: PhoneCall,
+  user: UserRound,
+}
 
 interface FeatureRow {
   eyebrow: string
   title: string
   description: string
-  bullets: string[]
+  bullets: Array<{ label: string; icon: string }>
   cta: { label: string; href: string }
   video: string
   mediaSide: 'left' | 'right'
@@ -41,24 +48,24 @@ export default function FeatureRows({ items }: FeatureRowsProps) {
                 </h3>
                 <p className="mt-5 text-lg leading-relaxed text-ozwell-slate">{item.description}</p>
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {item.bullets.map((bullet) => (
-                    <li
-                      key={bullet}
-                      className="flex items-center gap-2 font-semibold text-ozwell-ink"
-                    >
-                      <Check
-                        size={20}
-                        strokeWidth={2.5}
-                        className="text-primary-500"
-                        aria-hidden="true"
-                      />
-                      {bullet}
-                    </li>
-                  ))}
+                  {item.bullets.map((bullet) => {
+                    const Icon = BULLET_ICONS[bullet.icon]
+                    return (
+                      <li
+                        key={bullet.label}
+                        className="flex items-center gap-3 font-medium text-ozwell-ink"
+                      >
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-500/10 text-primary-600">
+                          {Icon ? <Icon size={16} strokeWidth={2} aria-hidden="true" /> : null}
+                        </span>
+                        {bullet.label}
+                      </li>
+                    )
+                  })}
                 </ul>
                 <a
                   href={item.cta.href}
-                  className="mt-8 inline-block rounded-full bg-primary-500 px-8 py-3.5 font-semibold text-white transition hover:bg-primary-700"
+                  className="mt-8 inline-block rounded-full border-2 border-primary-500 px-8 py-4 text-xs font-bold uppercase tracking-wide text-[#444444] transition hover:bg-primary-50"
                 >
                   {item.cta.label}
                 </a>

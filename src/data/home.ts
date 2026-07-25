@@ -28,12 +28,11 @@ export const logoCloud = {
   logos: [
     { src: '/images/company-logos-2.png', alt: 'Enterprise Health' },
     { src: '/images/company-logos-4.png', alt: 'Michigan Healthcare Professionals' },
-    { src: '/images/company-logos-1.png', alt: 'BlueHive' },
-    { src: '/images/company-logos-6.png', alt: 'Maui Medical Group' },
-    { src: '/images/company-logos-3.png', alt: 'WebChart' },
+    { src: '/images/company-logos-6.png', alt: 'BlueHive' },
+    { src: '/images/company-logos-3.png', alt: 'Maui Medical Group' },
+    { src: '/images/company-logos-1.png', alt: 'WebChart' },
   ],
 }
-
 export const featureVideo = {
   youtubeId: 'eCj_7FXArmg',
   title: 'Ozwell: Your AI-Powered Clinical Assistant Inside your EHR',
@@ -60,7 +59,10 @@ export const featureRows = [
     title: 'Reclaim Your Time, Refocus on Patient Care',
     description:
       'Ozwell leverages AI to streamline documentation, transforming how healthcare providers manage patient records. With automated transcription of visits, seamless chart population, and accurate data capture, providers can now dedicate more time to patient care rather than paperwork. Enhance efficiency while deepening patient interactions.',
-    bullets: ['Transcribe patient visits', 'Automate chart population'],
+    bullets: [
+      { label: 'Transcribe patient visits', icon: 'mic' },
+      { label: 'Automate chart population', icon: 'gear' },
+    ],
     cta: { label: 'Get Started', href: 'https://ai.bluehive.com/?utm_source=ozwell.ai' },
     video: '/videos/Copy-of-Featured-Section-ImagesVideos.mp4',
     mediaSide: 'left' as const,
@@ -70,7 +72,10 @@ export const featureRows = [
     title: 'Optimize Your Lines, Elevate Your Service',
     description:
       'Ozwell leverages AI to transform call handling for healthcare providers and beyond. Organizations can configure personalized voice prompts, automate routine interactions, and optimize tasks such as prescription management and appointment reminders, enhancing both efficiency and user experience.',
-    bullets: ['Automate routine calls', 'Personalize caller experience'],
+    bullets: [
+      { label: 'Automate routine calls', icon: 'phone' },
+      { label: 'Personalize caller experience', icon: 'user' },
+    ],
     cta: { label: 'Get Started', href: 'https://ai.bluehive.com/?utm_source=ozwell.ai' },
     video: '/videos/Copy-of-bluehive-IRV-now-Ozwell-call-dashboard-graphic.mp4',
     mediaSide: 'right' as const,

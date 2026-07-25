@@ -8,7 +8,7 @@ interface LogoCloudProps {
 
 export default function LogoCloud({ title, logos }: LogoCloudProps) {
   return (
-    <section className="border-y border-gray-100 bg-white py-14">
+    <section className="bg-white py-14">
       <Container>
         <h2 className="text-center text-3xl font-normal text-[#515151] sm:text-[35px]">{title}</h2>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
