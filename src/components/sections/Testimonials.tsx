@@ -31,7 +31,9 @@ export default function Testimonials({ title, description, items }: Testimonials
         <ul className="mt-14 grid gap-16 lg:grid-cols-2 lg:gap-8">
           {items.map((item) => (
             <li key={item.name} className="flex">
-              <figure className="flex flex-1 flex-col rounded-3xl bg-white p-8 pt-0 shadow-lg sm:p-10 sm:pt-0">
+              {/* rounded-2xl to match the Card primitive. Not using Card itself: the overhanging
+                  avatar needs `pt-0`, which fights Card's padding scale. */}
+              <figure className="flex flex-1 flex-col rounded-2xl bg-white p-8 pt-0 shadow-lg sm:p-10 sm:pt-0">
                 {/* Avatar straddles the card's top edge, as on the legacy design. */}
                 <Image
                   src={item.avatar}

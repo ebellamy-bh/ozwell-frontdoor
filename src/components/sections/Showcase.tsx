@@ -40,6 +40,14 @@ export default function Showcase({ title, description, screenshots }: ShowcasePr
       <div className="relative mt-14">
         <div className="marquee flex w-max gap-6" aria-label="Ozwell product screenshots">
           {strip.map((shot, i) => (
+            /*
+              No `shadow-*` or `rounded-*` here on purpose. These are phone renders on a fully
+              transparent canvas, so a box-shadow draws around the image's rectangle rather than the
+              phone silhouette — which is what put a hard grey panel behind each screenshot — and a
+              border radius rounds corners nobody can see. The artwork already carries its own
+              bezel and shadow. If depth is ever wanted here it has to be `drop-shadow-*`, which
+              follows the alpha channel.
+            */
             <Image
               key={`${shot.src}-${i}`}
               src={shot.src}
@@ -47,7 +55,7 @@ export default function Showcase({ title, description, screenshots }: ShowcasePr
               aria-hidden={i >= screenshots.length}
               width={shot.width}
               height={shot.height}
-              className="w-[260px] rounded-xl shadow-lg sm:w-[320px]"
+              className="w-[260px] sm:w-[320px]"
             />
           ))}
         </div>
