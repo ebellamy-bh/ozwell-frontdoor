@@ -1,4 +1,5 @@
 import { Container } from '@/components/ui/Container'
+import { Section } from '@/components/ui/Section'
 
 interface FAQSectionProps {
   eyebrow: string
@@ -9,7 +10,7 @@ interface FAQSectionProps {
 
 export default function FAQSection({ eyebrow, title, description, items }: FAQSectionProps) {
   return (
-    <section id="faq" className="bg-white py-16 lg:py-20">
+    <Section id="faq">
       <Container reveal>
         {/* Not ozwell-gold: #fada00 on white is ~1.3:1, well under the 4.5:1 AA floor.
             The gold token only carries enough contrast on dark surfaces. */}
@@ -43,6 +44,6 @@ export default function FAQSection({ eyebrow, title, description, items }: FAQSe
           ))}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

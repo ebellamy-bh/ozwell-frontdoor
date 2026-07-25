@@ -1,5 +1,6 @@
 import { BrainCircuit, ClipboardCheck, Mic, RefreshCw, type LucideIcon } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
+import { Section } from '@/components/ui/Section'
 
 const STEP_ICONS: Record<string, LucideIcon> = {
   mic: Mic,
@@ -26,8 +27,9 @@ interface HowItWorksProps {
  * connecting rail on desktop and a vertical rail on mobile — real text at every breakpoint.
  */
 export default function HowItWorks({ eyebrow, title, description, steps }: HowItWorksProps) {
+  // Tinted to break up the run of consecutive white sections above it.
   return (
-    <section className="bg-white py-16 lg:py-20">
+    <Section tone="mist">
       <Container reveal>
         <p className="text-center text-sm font-bold uppercase tracking-widest text-primary-600">
           {eyebrow}
@@ -63,6 +65,6 @@ export default function HowItWorks({ eyebrow, title, description, steps }: HowIt
           })}
         </ol>
       </Container>
-    </section>
+    </Section>
   )
 }

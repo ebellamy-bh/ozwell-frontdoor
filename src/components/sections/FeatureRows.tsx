@@ -1,5 +1,6 @@
 import { Mic, Settings, PhoneCall, UserRound, type LucideIcon } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
+import { Section } from '@/components/ui/Section'
 import AutoPlayVideo from '@/components/ui/AutoPlayVideo'
 
 const BULLET_ICONS: Record<string, LucideIcon> = {
@@ -26,7 +27,7 @@ interface FeatureRowsProps {
 
 export default function FeatureRows({ items }: FeatureRowsProps) {
   return (
-    <section className="bg-white py-16 lg:py-20">
+    <Section>
       <Container reveal>
         <h2 className="sr-only">How Ozwell helps your practice</h2>
         <div className="space-y-20">
@@ -73,6 +74,6 @@ export default function FeatureRows({ items }: FeatureRowsProps) {
           ))}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

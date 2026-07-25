@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Quote } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
+import { Section } from '@/components/ui/Section'
 import ShapeDivider from '@/components/ui/ShapeDivider'
 
 interface Testimonial {
@@ -18,7 +19,7 @@ interface TestimonialsProps {
 
 export default function Testimonials({ title, description, items }: TestimonialsProps) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-ozwell-sky to-ozwell-sky-deep pb-24 pt-28 text-white lg:pb-28 lg:pt-32">
+    <Section tone="gradient" spacing="loose" overflowHidden>
       {/* Live: waves-inverse top (69px, flipped) and bottom (45px) */}
       <ShapeDivider shape="wavesInverse" position="top" flipped heightClass="h-10 lg:h-[69px]" />
       <ShapeDivider shape="wavesInverse" position="bottom" heightClass="h-7 lg:h-[45px]" />
@@ -57,6 +58,6 @@ export default function Testimonials({ title, description, items }: Testimonials
           ))}
         </ul>
       </Container>
-    </section>
+    </Section>
   )
 }
