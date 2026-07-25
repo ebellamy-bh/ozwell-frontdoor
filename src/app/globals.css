@@ -35,9 +35,21 @@
   --color-ozwell-blue: #27aae1;
   --color-ozwell-blue-dark: #045089;
   --color-ozwell-green: #00b682;
-  --color-ozwell-ink: #333333;
-  --color-ozwell-slate: #545f5f;
+  --color-ozwell-gold: #fada00;
   --color-ozwell-mist: #fcfeff;
+
+  /* Brand gradient stops — the single blue ramp used by every gradient band
+     (Testimonials, Showcase, CertificationBand, CTABand). */
+  --color-ozwell-sky: #24c1fc;
+  --color-ozwell-sky-deep: #0b78de;
+
+  /* Neutral text ramp — strong (footer headings) → ink (body) → muted
+     (section headings) → slate (secondary copy). */
+  --color-ozwell-ink-strong: #1a1a1a;
+  --color-ozwell-ink: #333333;
+  --color-ozwell-ink-muted: #515151;
+  --color-ozwell-slate: #545f5f;
+  --color-ozwell-border: #d5d8dc;
 
   /* Typography — Lato body, Roboto secondary (matches live site) */
   --font-sans: var(--font-lato), 'Lato', ui-sans-serif, system-ui, sans-serif;

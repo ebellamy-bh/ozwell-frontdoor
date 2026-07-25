@@ -31,7 +31,7 @@ export default function ValuesGrid({ title, items }: ValuesGridProps) {
                 className="bg-white px-10 pb-10 pt-12 shadow-[0_0_40px_10px_rgba(0,0,0,0.05)]"
               >
                 <Icon size={40} strokeWidth={1.5} className="text-fuchsia-400" aria-hidden="true" />
-                <h3 className="mt-5 text-[25px] font-normal text-[#515151]">{item.title}</h3>
+                <h3 className="mt-5 text-[25px] font-normal text-ozwell-ink-muted">{item.title}</h3>
                 <p className="mt-3 leading-relaxed text-ozwell-slate">{item.description}</p>
               </div>
             )

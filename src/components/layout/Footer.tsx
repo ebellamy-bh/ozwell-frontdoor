@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import clsx from 'clsx'
 import { Linkedin, Facebook, Instagram, Youtube, Twitter, Mail } from 'lucide-react'
 import siteConfig from '@/data/site.json'
 
@@ -10,6 +11,20 @@ const SOCIAL_ICONS = {
   Twitter,
 } as const
 
+/** Footer column heading — dark label over a thin rule. */
+function FooterHeading({ children, className }: { children: string; className?: string }) {
+  return (
+    <h3
+      className={clsx(
+        'border-b border-gray-200 pb-3 text-[19px] font-medium text-ozwell-ink-strong',
+        className
+      )}
+    >
+      {children}
+    </h3>
+  )
+}
+
 /** Light footer — dark headings with thin rules, icon social links, Get Started pill (matches live). */
 export function Footer() {
   return (
@@ -17,18 +32,14 @@ export function Footer() {
       <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-4">
           <div>
-            <h3 className="border-b border-gray-200 pb-3 text-[19px] font-medium text-[#1a1a1a]">
-              About Us
-            </h3>
+            <FooterHeading>About Us</FooterHeading>
             <p className="mt-5 text-[15px] leading-relaxed text-ozwell-slate">
               {siteConfig.aboutBlurb}
             </p>
           </div>
 
           <div>
-            <h3 className="border-b border-gray-200 pb-3 text-[19px] font-medium text-[#1a1a1a]">
-              Contact Info
-            </h3>
+            <FooterHeading>Contact Info</FooterHeading>
             <a
               href={`mailto:${siteConfig.email}`}
               className="mt-5 flex items-center gap-2 text-[15px] text-ozwell-slate transition-colors hover:text-primary-600"
@@ -36,9 +47,7 @@ export function Footer() {
               <Mail size={16} strokeWidth={1.75} aria-hidden="true" />
               {siteConfig.email}
             </a>
-            <h3 className="mt-9 border-b border-gray-200 pb-3 text-[19px] font-medium text-[#1a1a1a]">
-              Socialize
-            </h3>
+            <FooterHeading className="mt-9">Socialize</FooterHeading>
             <div className="mt-5 flex items-center gap-4">
               {siteConfig.social.map((s) => {
                 const Icon = SOCIAL_ICONS[s.label as keyof typeof SOCIAL_ICONS]
@@ -49,7 +58,7 @@ export function Footer() {
                     aria-label={s.label}
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="text-[#1a1a1a] transition-colors hover:text-primary-600"
+                    className="text-ozwell-ink-strong transition-colors hover:text-primary-600"
                   >
                     {Icon ? <Icon size={22} strokeWidth={1.75} aria-hidden="true" /> : s.label}
                   </a>
@@ -59,9 +68,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="border-b border-gray-200 pb-3 text-[19px] font-medium text-[#1a1a1a]">
-              Links
-            </h3>
+            <FooterHeading>Links</FooterHeading>
             <ul className="mt-5 space-y-3">
               {siteConfig.footerLinks.map((l) => (
                 <li key={l.href}>
@@ -86,9 +93,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="border-b border-gray-200 pb-3 text-[19px] font-medium text-[#1a1a1a]">
-              Be a Part of Ozwell&apos;s Story
-            </h3>
+            <FooterHeading>Be a Part of Ozwell&apos;s Story</FooterHeading>
             <p className="mt-5 text-[15px] leading-relaxed text-ozwell-slate">
               {siteConfig.storyBlurb}
             </p>

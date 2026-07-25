@@ -65,7 +65,7 @@ export default function FeatureRows({ items }: FeatureRowsProps) {
                 </ul>
                 <a
                   href={item.cta.href}
-                  className="mt-8 inline-block rounded-full border-2 border-primary-500 px-8 py-4 text-xs font-bold uppercase tracking-wide text-[#444444] transition hover:bg-primary-50"
+                  className="mt-8 inline-block rounded-full border-2 border-primary-500 px-8 py-4 text-xs font-bold uppercase tracking-wide text-ozwell-ink transition hover:bg-primary-50"
                 >
                   {item.cta.label}
                 </a>

@@ -48,7 +48,7 @@ export function Header() {
         <div className="hidden items-center gap-3 pl-8 md:flex">
           <a
             href={siteConfig.ctas.login.href}
-            className="rounded-full border border-[#323232] px-6 py-2 text-sm font-medium text-[#323232] transition-colors hover:bg-gray-50"
+            className="rounded-full border border-ozwell-ink px-6 py-2 text-sm font-medium text-ozwell-ink transition-colors hover:bg-gray-50"
           >
             {siteConfig.ctas.login.label}
           </a>
@@ -92,7 +92,7 @@ export function Header() {
             </a>
             <a
               href={siteConfig.ctas.login.href}
-              className="rounded-full border border-[#323232] px-5 py-2.5 text-center text-sm font-medium text-[#323232]"
+              className="rounded-full border border-ozwell-ink px-5 py-2.5 text-center text-sm font-medium text-ozwell-ink"
             >
               {siteConfig.ctas.login.label}
             </a>

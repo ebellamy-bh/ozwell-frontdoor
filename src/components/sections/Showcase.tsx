@@ -14,7 +14,7 @@ export default function Showcase({ title, description, screenshots }: ShowcasePr
   const strip = [...screenshots, ...screenshots]
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#24c1fc] to-[#0b78de] pb-40 pt-40 text-white lg:pb-64 lg:pt-72">
+    <section className="relative overflow-hidden bg-gradient-to-br from-ozwell-sky to-ozwell-sky-deep pb-40 pt-40 text-white lg:pb-64 lg:pt-72">
       {/* Live: smooth curve top (275px, flipped) and bottom (275px) */}
       <ShapeDivider shape="curve" position="top" flipped heightClass="h-24 lg:h-[275px]" />
       <ShapeDivider shape="curve" position="bottom" heightClass="h-24 lg:h-[275px]" />

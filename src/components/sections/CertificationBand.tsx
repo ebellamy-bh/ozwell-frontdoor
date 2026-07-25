@@ -20,7 +20,7 @@ export default function CertificationBand({
   return (
     <section className="bg-white py-10">
       <Container>
-        <div className="rounded-3xl bg-gradient-to-br from-[#24c1fc] to-[#0890ed] px-8 py-12 text-white sm:px-12">
+        <div className="rounded-3xl bg-gradient-to-br from-ozwell-sky to-ozwell-sky-deep px-8 py-12 text-white sm:px-12">
           <div className="grid items-center gap-10 md:grid-cols-2">
             <div className="flex justify-center">
               <Image

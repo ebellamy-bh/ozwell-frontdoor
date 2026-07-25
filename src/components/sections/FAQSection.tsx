@@ -11,10 +11,10 @@ export default function FAQSection({ eyebrow, title, description, items }: FAQSe
   return (
     <section id="faq" className="bg-white py-16 lg:py-20">
       <Container>
-        <p className="text-center text-base font-bold uppercase tracking-wide text-[#fada00]">
+        <p className="text-center text-base font-bold uppercase tracking-wide text-ozwell-gold">
           {eyebrow}
         </p>
-        <h2 className="mt-2 text-center text-3xl font-normal text-[#515151] sm:text-[35px]">
+        <h2 className="mt-2 text-center text-3xl font-normal text-ozwell-ink-muted sm:text-[35px]">
           {title}
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-ozwell-slate">
@@ -25,7 +25,7 @@ export default function FAQSection({ eyebrow, title, description, items }: FAQSe
           {items.map((item) => (
             <details
               key={item.question}
-              className="group rounded-md border border-[#d5d8dc] px-4 py-[15px]"
+              className="group rounded-md border border-ozwell-border px-4 py-[15px]"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between text-base font-bold text-ozwell-ink">
                 {item.question}

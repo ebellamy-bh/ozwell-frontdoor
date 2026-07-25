@@ -7,7 +7,7 @@ interface CTABandProps {
 
 export default function CTABand({ title, cta }: CTABandProps) {
   return (
-    <section className="bg-gradient-to-r from-[#0f77cf] to-[#23d0fb] py-16 text-white">
+    <section className="bg-gradient-to-r from-ozwell-sky-deep to-ozwell-sky py-16 text-white">
       <Container>
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <h2 className="text-center text-3xl font-bold md:text-left sm:text-4xl">{title}</h2>
