@@ -27,7 +27,7 @@ interface FeatureRowsProps {
 export default function FeatureRows({ items }: FeatureRowsProps) {
   return (
     <section className="bg-white py-16 lg:py-20">
-      <Container>
+      <Container reveal>
         <h2 className="sr-only">How Ozwell helps your practice</h2>
         <div className="space-y-20">
           {items.map((item) => (

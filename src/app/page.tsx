@@ -6,8 +6,8 @@ import FeatureVideo from '@/components/sections/FeatureVideo'
 import CertificationBand from '@/components/sections/CertificationBand'
 import FeatureRows from '@/components/sections/FeatureRows'
 import Testimonials from '@/components/sections/Testimonials'
-import WorkSmarter from '@/components/sections/WorkSmarter'
-import FeatureCardsPhone from '@/components/sections/FeatureCardsPhone'
+import ProblemStats from '@/components/sections/ProblemStats'
+import ProductHighlights from '@/components/sections/ProductHighlights'
 import HowItWorks from '@/components/sections/HowItWorks'
 import Showcase from '@/components/sections/Showcase'
 import FAQSection from '@/components/sections/FAQSection'
@@ -21,8 +21,8 @@ import {
   certification,
   featureRows,
   testimonials,
-  workSmarter,
-  featureCards,
+  problem,
+  productHighlights,
   howItWorks,
   showcase,
   faqs,
@@ -90,25 +90,25 @@ export default function Page() {
         secondaryCta={siteConfig.ctas.watchDemo}
       />
       <LogoCloud title={logoCloud.title} logos={logoCloud.logos} />
+
+      {/* Narrative order: state the problem, show the product, explain how it works, then prove it.
+          Previously the page went hero → logos → product video, so a reader met the solution before
+          the problem and the proof (certification, testimonials) trailed the feature list. */}
+      <ProblemStats
+        eyebrow={problem.eyebrow}
+        title={problem.title}
+        description={problem.description}
+        stats={problem.stats}
+        link={problem.link}
+      />
       <FeatureVideo youtubeId={featureVideo.youtubeId} title={featureVideo.title} />
-      <CertificationBand
-        eyebrow={certification.eyebrow}
-        title={certification.title}
-        description={certification.description}
-        badges={certification.badges}
-        image={certification.image}
-      />
       <FeatureRows items={featureRows} />
-      <Testimonials
-        title={testimonials.title}
-        description={testimonials.description}
-        items={testimonials.items}
-      />
-      <WorkSmarter title={workSmarter.title} description={workSmarter.description} />
-      <FeatureCardsPhone
-        left={featureCards.left}
-        right={featureCards.right}
-        phoneImage={featureCards.phoneImage}
+      <ProductHighlights
+        eyebrow={productHighlights.eyebrow}
+        title={productHighlights.title}
+        description={productHighlights.description}
+        cards={productHighlights.cards}
+        phoneImage={productHighlights.phoneImage}
       />
       <HowItWorks
         eyebrow={howItWorks.eyebrow}
@@ -116,13 +116,23 @@ export default function Page() {
         description={howItWorks.description}
         steps={howItWorks.steps}
       />
+      <CertificationBand
+        eyebrow={certification.eyebrow}
+        title={certification.title}
+        description={certification.description}
+        badges={certification.badges}
+        image={certification.image}
+      />
+      <Testimonials
+        title={testimonials.title}
+        description={testimonials.description}
+        items={testimonials.items}
+      />
       <Showcase
         title={showcase.title}
         description={showcase.description}
         screenshots={showcase.screenshots}
       />
-      {/* Mid-page conversion point: /about-us had one, the homepage didn't — the only CTAs were
-          the hero and the app-store band 9,000px down. */}
       <CTABand title="Ready to get your evenings back?" cta={siteConfig.ctas.trial} />
       <FAQSection
         eyebrow={faqs.eyebrow}

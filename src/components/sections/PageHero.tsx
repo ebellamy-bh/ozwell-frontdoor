@@ -14,7 +14,7 @@ export default function PageHero({ title, image, description }: PageHeroProps) {
     <section className="relative overflow-hidden bg-[linear-gradient(150deg,#24c1fc_0%,#0890ed_100%)] text-white">
       <div
         className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-60"
-        style={{ backgroundImage: "url('/images/bluehive-site-headers-25.png')" }}
+        style={{ backgroundImage: "url('/images/hero-pattern.webp')" }}
         aria-hidden="true"
       />
       <Container className="relative pb-20 pt-14 lg:pt-16">

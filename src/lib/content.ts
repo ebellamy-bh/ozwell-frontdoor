@@ -1,3 +1,4 @@
+import imageMapJson from '@/data/generated/image-map.json'
 import postsJson from '@/data/generated/posts.json'
 import docsJson from '@/data/generated/docs.json'
 import docCategoriesJson from '@/data/generated/doc-categories.json'
@@ -49,6 +50,33 @@ export interface Author {
 }
 
 /**
+ * Original image path → WebP replacement, produced by `pnpm optimize:images`.
+ *
+ * Applied here rather than in the generated JSON so `pnpm migrate:wp` stays re-runnable: the
+ * migration writes whatever WordPress holds, and this layer swaps in the optimized file when one
+ * exists. An unconverted image simply passes through unchanged.
+ */
+const imageMap: Record<string, string> = imageMapJson
+
+function optimizeImage(src: string | null): string | null {
+  return src ? (imageMap[src] ?? src) : null
+}
+
+/**
+ * Rewrite <img src> and srcset inside migrated HTML bodies. Longest paths first, so a shorter key
+ * can never partially match inside a longer sibling (`foo.png` vs `foo-99x100.png`).
+ */
+const IMAGE_MAP_ENTRIES = Object.entries(imageMap).sort(([a], [b]) => b.length - a.length)
+
+function optimizeHtmlImages(html: string): string {
+  let out = html
+  for (const [from, to] of IMAGE_MAP_ENTRIES) {
+    out = out.split(from).join(to)
+  }
+  return out
+}
+
+/**
  * Display names for authors whose WordPress profile never had one set, so the migration carried the
  * login through to the byline. The durable fix is setting the display name in WordPress and
  * re-running `pnpm migrate:wp`; until then these keep usernames off the site.
@@ -66,12 +94,18 @@ function displayName(slug: string | null, name: string | null): string | null {
 export const posts: Post[] = (postsJson as Post[])
   .slice()
   .sort((a, b) => b.date.localeCompare(a.date))
-  .map((p) => ({ ...p, authorName: displayName(p.author, p.authorName) }))
+  .map((p) => ({
+    ...p,
+    authorName: displayName(p.author, p.authorName),
+    featuredImage: optimizeImage(p.featuredImage),
+    content: optimizeHtmlImages(p.content),
+  }))
 
 /** All help-center docs, alphabetical. */
 export const docs: Doc[] = (docsJson as Doc[])
   .slice()
   .sort((a, b) => a.title.localeCompare(b.title))
+  .map((d) => ({ ...d, content: optimizeHtmlImages(d.content) }))
 
 /** Doc categories that actually contain published docs. */
 export const docCategories: Term[] = (docCategoriesJson as Term[])

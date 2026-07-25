@@ -22,7 +22,7 @@ export default function Testimonials({ title, description, items }: Testimonials
       {/* Live: waves-inverse top (69px, flipped) and bottom (45px) */}
       <ShapeDivider shape="wavesInverse" position="top" flipped heightClass="h-10 lg:h-[69px]" />
       <ShapeDivider shape="wavesInverse" position="bottom" heightClass="h-7 lg:h-[45px]" />
-      <Container className="relative">
+      <Container reveal className="relative">
         <h2 className="text-center text-3xl font-bold sm:text-[38px]">{title}</h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-white/90">{description}</p>
 

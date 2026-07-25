@@ -19,7 +19,7 @@ export default function AppDownloadCTA({ title, subtitle, banner }: AppDownloadC
       {/* Network / bubble pattern overlay (same asset as the hero) */}
       <div
         className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-60"
-        style={{ backgroundImage: "url('/images/bluehive-site-headers-25.png')" }}
+        style={{ backgroundImage: "url('/images/hero-pattern.webp')" }}
         aria-hidden="true"
       />
 

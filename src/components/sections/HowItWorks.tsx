@@ -28,7 +28,7 @@ interface HowItWorksProps {
 export default function HowItWorks({ eyebrow, title, description, steps }: HowItWorksProps) {
   return (
     <section className="bg-white py-16 lg:py-20">
-      <Container>
+      <Container reveal>
         <p className="text-center text-sm font-bold uppercase tracking-widest text-primary-600">
           {eyebrow}
         </p>

@@ -9,10 +9,10 @@ export const hero = {
   description:
     '& say goodbye to endless charting—Ozwell automates documentation so you can focus on what truly matters.',
   image: {
-    src: '/images/Ozwell-Branding-Whiteboard-2.png',
+    src: '/images/ozwell-hero.webp',
     alt: 'Ozwell AI assistant illustration with SOAP note workflow actions',
-    width: 1200,
-    height: 900,
+    width: 1100,
+    height: 947,
   },
   chips: [
     { label: 'Create a SOAP Note' },
@@ -27,7 +27,7 @@ export const logoCloud = {
   title: 'Enhancing Workflows for Leading Healthcare Companies',
   logos: [
     { src: '/images/company-logos-2.png', alt: 'Enterprise Health' },
-    { src: '/images/company-logos-4.png', alt: 'Michigan Healthcare Professionals' },
+    { src: '/images/company-logos-4.webp', alt: 'Michigan Healthcare Professionals' },
     { src: '/images/company-logos-6.png', alt: 'BlueHive' },
     { src: '/images/company-logos-3.png', alt: 'Maui Medical Group' },
     { src: '/images/company-logos-1.png', alt: 'WebChart' },
@@ -113,46 +113,70 @@ export const testimonials = {
   ],
 }
 
-export const workSmarter = {
-  title: 'Work Smarter, Not Harder',
+/**
+ * The problem, stated before the product is.
+ *
+ * Figures and citations are lifted from our own post, "The Healthcare Documentation Crisis" —
+ * they're already sourced there, and the section links to it rather than asserting numbers with no
+ * provenance. Update both together if the research is refreshed.
+ */
+export const problem = {
+  eyebrow: 'The problem',
+  title: 'Medicine is losing its evenings to paperwork',
   description:
-    'Ozwell offers a range of features designed to boost your productivity and streamline your processes. Explore customizable workflows, real-time insights, and intuitive design that work together to make your workday more effective and your life easier.',
-}
-
-/** Six feature cards flanking the phone image (3 left, 3 right) — matches live layout. */
-export const featureCards = {
-  left: [
+    'Documentation was supposed to be a byproduct of care. For most practices it has become the job — and the cost shows up in burnout, in turnover, and in the hours that never make it home.',
+  stats: [
     {
-      title: 'Customizable Workflows',
-      description:
-        'Utilize Ozwell to fit your specific processes and preferences, ensuring optimal efficiency and alignment with your organizational needs.',
+      value: '2 hrs',
+      label: 'of documentation for every hour of patient care',
+      source: 'Sinsky et al., 2016',
     },
     {
-      title: 'Personalized Assistance',
-      description:
-        'Receive support and recommendations based on your unique requirements and preferences, enhancing user experience.',
+      value: '63%',
+      label: 'of physicians report symptoms of burnout',
+      source: 'Shanafelt et al., 2022',
     },
     {
-      title: 'Real-Time Data Analytics',
-      description:
-        'Access actionable insights with real-time analytics, empowering informed decision-making and improved operational efficiency.',
+      value: '$286B',
+      label: 'spent annually on US administrative complexity',
+      source: 'Shrank et al., 2019',
     },
   ],
-  right: [
+  link: {
+    label: 'Read the research behind these numbers',
+    href: '/blog/the-healthcare-documentation-crisis-why-ai-isnt-a-luxury-its-a-necessity/',
+  },
+}
+
+/**
+ * Product highlights, replacing the previous "Work Smarter, Not Harder" heading and the six cards
+ * that flanked the phone image. That copy — "Communication Tools", "User-Centric Design",
+ * "Seamless Integration" — described no product in particular; a competitor could have run it
+ * unchanged. These three are drawn from what the Help Center documents Ozwell actually doing.
+ */
+export const productHighlights = {
+  eyebrow: 'Built for clinicians',
+  title: 'It works the way your day already works',
+  description:
+    'No new tab to live in, no template to learn, and nothing written to a chart that you have not read first.',
+  cards: [
     {
-      title: 'Communication Tools',
+      icon: 'workflow',
+      title: 'Inside your chart, not beside it',
       description:
-        'Improve team collaboration with integrated communication features, including real-time messaging and notifications.',
+        'Ozwell writes into WebChart directly — vitals, conditions, allergies, medications, and referrals land as structured data in the patient record instead of text you re-key.',
     },
     {
-      title: 'User-Centric Design',
+      icon: 'stethoscope',
+      title: 'Speaks clinical, not just English',
       description:
-        'Benefit from a design that prioritizes user needs and preferences, offering an intuitive experience that enhances efficiency and reduces learning curves.',
+        'Dictate the way you talk to a colleague. Drug names, dosages, and specialty terminology are transcribed as the clinical facts they are, not phonetic guesses.',
     },
     {
-      title: 'Seamless Integration',
+      icon: 'shield',
+      title: 'Nothing files without your review',
       description:
-        'Integrate effortlessly with existing systems and tools, enhancing functionality without disrupting your current setup.',
+        'Every generated action is surfaced for you to check before it is committed. Ozwell drafts the documentation; you stay the one who signs it.',
     },
   ],
   phoneImage: {
@@ -207,34 +231,34 @@ export const showcase = {
     "Here's a closer look at how Ozwell simplifies patient encounters and streamlines daily operations for clinicians.",
   screenshots: [
     {
-      src: '/images/1-scaled.png',
+      src: '/images/showcase-1.webp',
       alt: 'Ozwell product screenshot — patient encounter view',
-      width: 2560,
-      height: 1440,
+      width: 700,
+      height: 1244,
     },
     {
-      src: '/images/2-scaled.png',
+      src: '/images/showcase-2.webp',
       alt: 'Ozwell product screenshot — documentation workflow',
-      width: 2560,
-      height: 1440,
+      width: 700,
+      height: 1244,
     },
     {
-      src: '/images/3-scaled.png',
+      src: '/images/showcase-3.webp',
       alt: 'Ozwell product screenshot — SOAP note generation',
-      width: 2560,
-      height: 1440,
+      width: 700,
+      height: 1244,
     },
     {
-      src: '/images/4-scaled.png',
+      src: '/images/showcase-4.webp',
       alt: 'Ozwell product screenshot — chart summary',
-      width: 2560,
-      height: 1440,
+      width: 700,
+      height: 1244,
     },
     {
-      src: '/images/5-scaled.png',
+      src: '/images/showcase-5.webp',
       alt: 'Ozwell product screenshot — clinical operations dashboard',
-      width: 2560,
-      height: 1440,
+      width: 700,
+      height: 1244,
     },
   ],
 }
