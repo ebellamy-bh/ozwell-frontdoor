@@ -11,6 +11,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "preview": "next build && wrangler dev",
+    "deploy": "next build && wrangler deploy",
     "migrate:wp": "node scripts/migrate-wp-content.mjs",
     "lint": "eslint src/",
     "lint:fix": "eslint --fix src/",
@@ -35,6 +37,7 @@
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.4.2",
     "tailwindcss": "^4.2.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.114.0"
   }
 }

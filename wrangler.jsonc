@@ -1,0 +1,19 @@
+{
+  // The site is a fully static Next.js export (`output: 'export'` in next.config.js),
+  // so it is deployed as a Workers Static Assets project — no OpenNext/SSR adapter.
+  // Without this file, `wrangler deploy` auto-detects "Next.js" and tries to migrate
+  // the project to @opennextjs/cloudflare, which fails because there is no
+  // `.next/standalone` server build.
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ozwell-frontdoor",
+  "compatibility_date": "2026-07-25",
+  "assets": {
+    "directory": "./out",
+    // next.config.js sets `trailingSlash: true`, so keep URLs consistent.
+    "html_handling": "force-trailing-slash",
+    "not_found_handling": "404-page",
+  },
+  "observability": {
+    "enabled": true,
+  },
+}
