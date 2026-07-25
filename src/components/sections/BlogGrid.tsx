@@ -24,7 +24,7 @@ export default function BlogGrid({ title, posts }: BlogGridProps) {
     <section className="bg-white py-16">
       <Container>
         <h2 className="sr-only">{title}</h2>
-        <div className="grid gap-10 md:grid-cols-2">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <article
               key={post.slug}

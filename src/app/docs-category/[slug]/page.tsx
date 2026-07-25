@@ -30,19 +30,17 @@ export default async function Page({ params }: Props) {
   const category = getDocCategory(slug)
   if (!category) notFound()
 
-  const hub = [
-    {
-      slug: category.slug,
-      name: category.name,
-      description: category.description,
-      docs: getDocsInCategory(category.slug).map((d) => ({ slug: d.slug, title: d.title })),
-    },
-  ]
+  const hubCategory = {
+    slug: category.slug,
+    name: category.name,
+    description: category.description,
+    docs: getDocsInCategory(category.slug).map((d) => ({ slug: d.slug, title: d.title })),
+  }
 
   return (
     <>
       <PageHero title={category.name} description={category.description || undefined} />
-      <DocsHub categories={hub} />
+      <DocsHub featured={hubCategory} categories={[]} />
     </>
   )
 }

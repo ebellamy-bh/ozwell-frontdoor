@@ -1,7 +1,12 @@
 import Link from 'next/link'
+import { FolderOpen, FileText } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 
 interface DocsHubProps {
+  featured: {
+    name: string
+    docs: Array<{ slug: string; title: string }>
+  }
   categories: Array<{
     slug: string
     name: string
@@ -10,43 +15,79 @@ interface DocsHubProps {
   }>
 }
 
-export default function DocsHub({ categories }: DocsHubProps) {
+/** Help Center hub — featured category list plus topic cards with folder icons and count badges. */
+export default function DocsHub({ featured, categories }: DocsHubProps) {
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white py-14">
       <Container>
-        <h2 className="sr-only">Help Center categories</h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {categories.map((cat) => (
-            <div
-              key={cat.slug}
-              className="rounded-2xl bg-ozwell-mist p-7 shadow-sm ring-1 ring-gray-100"
-            >
-              <h3 className="text-lg font-bold text-ozwell-ink">
-                <Link
-                  href={`/docs-category/${cat.slug}/`}
-                  className="transition-colors hover:text-primary-600"
-                >
-                  {cat.name}
-                </Link>
-              </h3>
-              {cat.description ? (
-                <p className="mt-2 text-sm text-ozwell-slate">{cat.description}</p>
-              ) : null}
-              <ul className="mt-4 space-y-2">
-                {cat.docs.map((doc) => (
-                  <li key={doc.slug}>
-                    <Link
-                      href={`/docs/${doc.slug}/`}
-                      className="text-sm font-medium text-primary-600 underline-offset-2 hover:underline"
-                    >
-                      {doc.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <h2 className="text-3xl font-bold text-ozwell-ink sm:text-4xl">Browse by Topic</h2>
+
+        {/* Featured category — flat article list */}
+        <h3 className="mt-10 text-2xl font-bold text-ozwell-ink">{featured.name}</h3>
+        <ul className="mt-5 space-y-4">
+          {featured.docs.map((doc) => (
+            <li key={doc.slug}>
+              <Link
+                href={`/docs/${doc.slug}/`}
+                className="inline-flex items-center gap-2 text-primary-700 underline-offset-2 hover:underline"
+              >
+                <FileText size={16} strokeWidth={1.75} aria-hidden="true" />
+                {doc.title}
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
+
+        {/* All topics as cards */}
+        {categories.length > 0 ? (
+          <>
+            <h3 className="mt-14 text-2xl font-bold text-ozwell-ink">Topics</h3>
+            <div className="mt-6 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {categories.map((cat) => (
+                <div
+                  key={cat.slug}
+                  className="bg-white p-7 shadow-[0_0_40px_10px_rgba(0,0,0,0.05)]"
+                >
+                  <div className="flex items-center justify-between border-b-2 border-primary-500 pb-4">
+                    <Link
+                      href={`/docs-category/${cat.slug}/`}
+                      className="flex items-center gap-3 text-xl font-medium text-ozwell-ink transition-colors hover:text-primary-600"
+                    >
+                      <FolderOpen
+                        size={26}
+                        strokeWidth={1.5}
+                        className="text-ozwell-ink"
+                        aria-hidden="true"
+                      />
+                      {cat.name}
+                    </Link>
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-500/10 text-sm font-semibold text-primary-700">
+                      {cat.docs.length}
+                    </span>
+                  </div>
+                  <ul className="mt-4 space-y-3">
+                    {cat.docs.map((doc) => (
+                      <li key={doc.slug}>
+                        <Link
+                          href={`/docs/${doc.slug}/`}
+                          className="flex items-start gap-2 text-[15px] text-primary-700 underline-offset-2 hover:underline"
+                        >
+                          <FileText
+                            size={16}
+                            strokeWidth={1.75}
+                            className="mt-0.5 shrink-0"
+                            aria-hidden="true"
+                          />
+                          {doc.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : null}
       </Container>
     </section>
   )

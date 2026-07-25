@@ -1,6 +1,6 @@
 import { createMetadata } from '@/lib/metadata'
 import PageHero from '@/components/sections/PageHero'
-import LogoCloud from '@/components/sections/LogoCloud'
+import SupportingLogosBand from '@/components/sections/SupportingLogosBand'
 import MissionSection from '@/components/sections/MissionSection'
 import ValuesGrid from '@/components/sections/ValuesGrid'
 import CTABand from '@/components/sections/CTABand'
@@ -18,7 +18,7 @@ export default function Page() {
     <>
       <PageHero title={aboutHero.title} image={aboutHero.image} />
       <MissionSection title={mission.title} description={mission.description} pillars={pillars} />
-      <LogoCloud title={supportingLogos.title} logos={supportingLogos.logos} />
+      <SupportingLogosBand title={supportingLogos.title} logos={supportingLogos.logos} />
       <ValuesGrid title={values.title} items={values.items} />
       <CTABand title={aboutCta.title} cta={aboutCta.cta} />
     </>
