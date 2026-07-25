@@ -11,6 +11,7 @@ export interface PostCard {
   authorName: string | null
   featuredImage: string | null
   featuredImageAlt: string
+  categories?: string[]
 }
 
 interface BlogGridProps {
@@ -37,6 +38,15 @@ export default function BlogGrid({ title, posts }: BlogGridProps) {
                   />
                 ) : null}
                 <div className="p-6">
+                  {post.categories && post.categories.length > 0 ? (
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      {post.categories.map((cat) => (
+                        <span key={cat} className="rounded-full bg-primary-500/10 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-primary-700">
+                          {cat.replace(/-/g, ' ')}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
                   <p className="text-sm text-ozwell-slate">
                     {post.dateFormatted}
                     {post.authorName ? ` · ${post.authorName}` : ''}

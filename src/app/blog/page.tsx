@@ -1,6 +1,7 @@
 import { createMetadata } from '@/lib/metadata'
 import PageHero from '@/components/sections/PageHero'
 import BlogGrid from '@/components/sections/BlogGrid'
+import RssBand from '@/components/sections/RssBand'
 import { blogIndexPosts } from '@/data/blog'
 
 export const metadata = createMetadata({
@@ -14,6 +15,7 @@ export default function Page() {
     <>
       <PageHero title="Blog" description="Insights on AI in healthcare, medical documentation, and Ozwell product updates." />
       <BlogGrid title="All posts" posts={blogIndexPosts} />
+      <RssBand />
     </>
   )
 }

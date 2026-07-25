@@ -11,4 +11,5 @@ export const blogIndexPosts: PostCard[] = posts.map((p) => ({
   authorName: p.authorName,
   featuredImage: p.featuredImage,
   featuredImageAlt: p.featuredImageAlt,
+  categories: p.categories.filter((c) => c !== 'uncategorized'),
 }))

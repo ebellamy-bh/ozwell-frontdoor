@@ -16,6 +16,13 @@ const nextConfig = {
   // Image optimization must be disabled for static export
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'secure.gravatar.com',
+        pathname: '/avatar/**',
+      },
+    ],
   },
 }
 

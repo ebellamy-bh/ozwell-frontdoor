@@ -84,6 +84,31 @@ export function getRelatedPosts(slug: string, limit = 2): Post[] {
   return posts.filter((p) => p.slug !== slug).slice(0, limit)
 }
 
+export function getAuthor(slug: string | null): Author | undefined {
+  if (!slug) return undefined
+  return authors.find((a) => a.slug === slug)
+}
+
+/** Previous (older) and next (newer) posts for sequential navigation. */
+export function getAdjacentPosts(slug: string): { previous: Post | null; next: Post | null } {
+  const idx = posts.findIndex((p) => p.slug === slug)
+  if (idx === -1) return { previous: null, next: null }
+  return {
+    // posts are newest-first: next index = older post
+    previous: posts[idx + 1] ?? null,
+    next: posts[idx - 1] ?? null,
+  }
+}
+
+export function wordCount(html: string): number {
+  return stripHtml(html).split(/\s+/).filter(Boolean).length
+}
+
+/** Estimated reading time in minutes (225 wpm, matching bluehive.com). */
+export function readingTime(html: string): number {
+  return Math.max(1, Math.round(wordCount(html) / 225))
+}
+
 /** Strip HTML tags for plain-text needs (descriptions). */
 export function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
