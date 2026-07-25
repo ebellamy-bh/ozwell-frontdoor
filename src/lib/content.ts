@@ -48,10 +48,25 @@ export interface Author {
   avatar: string | null
 }
 
+/**
+ * Display names for authors whose WordPress profile never had one set, so the migration carried the
+ * login through to the byline. The durable fix is setting the display name in WordPress and
+ * re-running `pnpm migrate:wp`; until then these keep usernames off the site.
+ */
+const AUTHOR_DISPLAY_NAMES: Record<string, string> = {
+  wreiske: 'William Reiske',
+}
+
+function displayName(slug: string | null, name: string | null): string | null {
+  if (slug && AUTHOR_DISPLAY_NAMES[slug]) return AUTHOR_DISPLAY_NAMES[slug]
+  return name
+}
+
 /** All posts, newest first. */
 export const posts: Post[] = (postsJson as Post[])
   .slice()
   .sort((a, b) => b.date.localeCompare(a.date))
+  .map((p) => ({ ...p, authorName: displayName(p.author, p.authorName) }))
 
 /** All help-center docs, alphabetical. */
 export const docs: Doc[] = (docsJson as Doc[])
@@ -66,7 +81,10 @@ export const docCategories: Term[] = (docCategoriesJson as Term[])
 /** Blog categories with at least one post. */
 export const categories: Term[] = (categoriesJson as Term[]).filter((c) => c.count > 0)
 
-export const authors: Author[] = authorsJson as Author[]
+export const authors: Author[] = (authorsJson as Author[]).map((a) => ({
+  ...a,
+  name: displayName(a.slug, a.name) ?? a.name,
+}))
 
 export function getPost(slug: string): Post | undefined {
   return posts.find((p) => p.slug === slug)

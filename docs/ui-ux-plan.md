@@ -128,10 +128,20 @@ category grid with one-line descriptions.
 
 ### 9. Article line length is ~130 characters
 
-Both `blog/[slug]` and `docs/[slug]` use `prose prose-lg max-w-none`, giving a 1088px measure at
-18px type. Optimal is 65–75 characters.
+Both `blog/[slug]` and `docs/[slug]` rendered at a 1088px measure with 18px type. Optimal is 65–75
+characters.
 
-**Fix:** drop `max-w-none` (or `max-w-[68ch]`). Single highest-value typography change on the site.
+**Root cause was not `max-w-none`, as originally diagnosed.** The pages already asked for the right
+width — `<Container className="max-w-3xl">`. It silently never applied: `Container` hardcoded
+`max-w-6xl`, and two max-width utilities at equal specificity are resolved by their order in the
+generated stylesheet, where Tailwind emits the larger one last. So `max-w-6xl` won every time, on
+every page that tried to override it.
+
+This is the kind of bug that survives review indefinitely, because the calling code reads correctly.
+
+**Fix:** width is now a `Container` prop (`width="prose"`) rather than something passed through
+`className`, so it can't be defeated by class-order roulette. Measure is now 71 characters on blog
+posts and 68 in the Help Center.
 
 ### 10. The homepage has no narrative arc
 
