@@ -6,6 +6,8 @@ import CertificationBand from '@/components/sections/CertificationBand'
 import FeatureRows from '@/components/sections/FeatureRows'
 import Testimonials from '@/components/sections/Testimonials'
 import WorkSmarter from '@/components/sections/WorkSmarter'
+import FeatureCardsPhone from '@/components/sections/FeatureCardsPhone'
+import FlowchartVideo from '@/components/sections/FlowchartVideo'
 import Showcase from '@/components/sections/Showcase'
 import FAQSection from '@/components/sections/FAQSection'
 import AppDownloadCTA from '@/components/sections/AppDownloadCTA'
@@ -18,6 +20,8 @@ import {
   featureRows,
   testimonials,
   workSmarter,
+  featureCards,
+  flowchartVideo,
   showcase,
   faqs,
   appCta,
@@ -58,13 +62,13 @@ export default function Page() {
         description={testimonials.description}
         image={testimonials.image}
       />
-      <WorkSmarter
-        title={workSmarter.title}
-        description={workSmarter.description}
-        images={workSmarter.images}
-        video={workSmarter.video}
-        phoneImage={workSmarter.phoneImage}
+      <WorkSmarter title={workSmarter.title} description={workSmarter.description} />
+      <FeatureCardsPhone
+        left={featureCards.left}
+        right={featureCards.right}
+        phoneImage={featureCards.phoneImage}
       />
+      <FlowchartVideo video={flowchartVideo.video} title={flowchartVideo.title} />
       <Showcase
         title={showcase.title}
         description={showcase.description}

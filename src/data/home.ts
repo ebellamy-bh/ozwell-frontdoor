@@ -92,22 +92,56 @@ export const workSmarter = {
   title: 'Work Smarter, Not Harder',
   description:
     'BlueHive offers a range of features designed to boost your productivity and streamline your processes. Explore customizable workflows, real-time insights, and intuitive design that work together to make your workday more effective and your life easier.',
-  images: [
+}
+
+/** Six feature cards flanking the phone image (3 left, 3 right) — matches live layout. */
+export const featureCards = {
+  left: [
     {
-      src: '/images/4-1-1024x1024.png',
-      alt: 'Ozwell feature highlight',
-      width: 1024,
-      height: 1024,
+      title: 'Customizable Workflows',
+      description:
+        'Utilize Ozwell to fit your specific processes and preferences, ensuring optimal efficiency and alignment with your organizational needs.',
     },
-    { src: '/images/6-1024x1024.png', alt: 'Ozwell feature highlight', width: 1024, height: 1024 },
+    {
+      title: 'Personalized Assistance',
+      description:
+        'Receive support and recommendations based on your unique requirements and preferences, enhancing user experience.',
+    },
+    {
+      title: 'Real-Time Data Analytics',
+      description:
+        'Access actionable insights with real-time analytics, empowering informed decision-making and improved operational efficiency.',
+    },
   ],
-  video: '/videos/Copy-of-Ozwell-AI-Workflow-Flowchart.mp4',
+  right: [
+    {
+      title: 'Communication Tools',
+      description:
+        'Improve team collaboration with integrated communication features, including real-time messaging and notifications.',
+    },
+    {
+      title: 'User-Centric Design',
+      description:
+        'Benefit from a design that prioritizes user needs and preferences, offering an intuitive experience that enhances efficiency and reduces learning curves.',
+    },
+    {
+      title: 'Seamless Integration',
+      description:
+        'Integrate effortlessly with existing systems and tools, enhancing functionality without disrupting your current setup.',
+    },
+  ],
   phoneImage: {
     src: '/images/Ozwell-mobile-phones-for-website-608x1080.png',
     alt: 'Ozwell mobile app on two phones',
     width: 608,
     height: 1080,
   },
+}
+
+/** Full-width workflow flowchart video section. */
+export const flowchartVideo = {
+  video: '/videos/Copy-of-Ozwell-AI-Workflow-Flowchart.mp4',
+  title: 'Ozwell AI workflow flowchart animation',
 }
 
 export const showcase = {

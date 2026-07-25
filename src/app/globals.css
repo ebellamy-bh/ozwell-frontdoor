@@ -55,3 +55,28 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Auto-scrolling screenshot marquee (Showcase section) — mirrors the live
+   Elementor loop carousel. The strip is rendered twice, so -50% = one full set. */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee-scroll 40s linear infinite;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+}
