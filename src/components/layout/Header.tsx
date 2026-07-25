@@ -26,8 +26,8 @@ export function Header() {
           />
         </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden items-center gap-8 md:flex">
+        {/* Desktop nav — right-aligned next to Login */}
+        <div className="ml-auto hidden items-center gap-8 md:flex">
           {siteConfig.nav.map((item) => (
             <Link
               key={item.href}
@@ -45,7 +45,7 @@ export function Header() {
           </a>
         </div>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 pl-8 md:flex">
           <a
             href={siteConfig.ctas.login.href}
             className="rounded-full border border-[#323232] px-6 py-2 text-sm font-medium text-[#323232] transition-colors hover:bg-gray-50"
