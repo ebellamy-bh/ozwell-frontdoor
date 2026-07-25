@@ -13,7 +13,9 @@ export default function MissionSection({ title, description, pillars }: MissionS
   return (
     <section className="bg-white py-16 lg:py-20">
       <Container>
-        <h2 className="text-center text-3xl font-normal text-ozwell-ink-muted sm:text-4xl">{title}</h2>
+        <h2 className="text-center text-3xl font-normal text-ozwell-ink-muted sm:text-4xl">
+          {title}
+        </h2>
         <p className="mx-auto mt-5 max-w-3xl text-center text-lg leading-relaxed text-ozwell-slate">
           {description}
         </p>

@@ -1,0 +1,11 @@
+# Generated lockfile — prettier reflows the YAML into something pnpm never writes,
+# which makes every `pnpm format` produce a huge spurious diff.
+pnpm-lock.yaml
+
+# Machine-generated WordPress migration output.
+src/data/generated/
+
+# Build output
+.next/
+out/
+node_modules/

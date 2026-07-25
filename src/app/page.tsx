@@ -7,7 +7,7 @@ import FeatureRows from '@/components/sections/FeatureRows'
 import Testimonials from '@/components/sections/Testimonials'
 import WorkSmarter from '@/components/sections/WorkSmarter'
 import FeatureCardsPhone from '@/components/sections/FeatureCardsPhone'
-import FlowchartVideo from '@/components/sections/FlowchartVideo'
+import HowItWorks from '@/components/sections/HowItWorks'
 import Showcase from '@/components/sections/Showcase'
 import FAQSection from '@/components/sections/FAQSection'
 import AppDownloadCTA from '@/components/sections/AppDownloadCTA'
@@ -21,7 +21,7 @@ import {
   testimonials,
   workSmarter,
   featureCards,
-  flowchartVideo,
+  howItWorks,
   showcase,
   faqs,
   appCta,
@@ -60,7 +60,7 @@ export default function Page() {
       <Testimonials
         title={testimonials.title}
         description={testimonials.description}
-        image={testimonials.image}
+        items={testimonials.items}
       />
       <WorkSmarter title={workSmarter.title} description={workSmarter.description} />
       <FeatureCardsPhone
@@ -68,7 +68,12 @@ export default function Page() {
         right={featureCards.right}
         phoneImage={featureCards.phoneImage}
       />
-      <FlowchartVideo video={flowchartVideo.video} title={flowchartVideo.title} />
+      <HowItWorks
+        eyebrow={howItWorks.eyebrow}
+        title={howItWorks.title}
+        description={howItWorks.description}
+        steps={howItWorks.steps}
+      />
       <Showcase
         title={showcase.title}
         description={showcase.description}
