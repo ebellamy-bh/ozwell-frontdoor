@@ -1,0 +1,86 @@
+[
+  {
+    "id": 34,
+    "slug": "accounts",
+    "name": "Accounts",
+    "description": "",
+    "count": 3
+  },
+  {
+    "id": 53,
+    "slug": "api",
+    "name": "API",
+    "description": "Ozwell API Documentation",
+    "count": 1
+  },
+  {
+    "id": 35,
+    "slug": "billing",
+    "name": "Billing",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 39,
+    "slug": "bluehive-ivr",
+    "name": "BlueHive IVR",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 30,
+    "slug": "configurations",
+    "name": "Configurations",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 38,
+    "slug": "developers",
+    "name": "Developers",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 37,
+    "slug": "experiments",
+    "name": "Experiments",
+    "description": "",
+    "count": 2
+  },
+  {
+    "id": 29,
+    "slug": "getting-started",
+    "name": "Getting Started",
+    "description": "",
+    "count": 2
+  },
+  {
+    "id": 31,
+    "slug": "installation",
+    "name": "Installation",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 36,
+    "slug": "integrations",
+    "name": "Integrations",
+    "description": "",
+    "count": 1
+  },
+  {
+    "id": 41,
+    "slug": "partner-integrations",
+    "name": "Partner Integrations",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 32,
+    "slug": "setup-process",
+    "name": "Setup Process",
+    "description": "",
+    "count": 1
+  }
+]

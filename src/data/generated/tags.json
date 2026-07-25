@@ -1,0 +1,116 @@
+[
+  {
+    "id": 13,
+    "slug": "1000-icons",
+    "name": "1000+ Icons",
+    "count": 0
+  },
+  {
+    "id": 50,
+    "slug": "ai-for-doctors",
+    "name": "AI for doctors",
+    "count": 1
+  },
+  {
+    "id": 42,
+    "slug": "ai-in-healthcare",
+    "name": "AI in healthcare",
+    "count": 1
+  },
+  {
+    "id": 46,
+    "slug": "ai-powered-medical-scribe",
+    "name": "AI-powered medical scribe",
+    "count": 1
+  },
+  {
+    "id": 12,
+    "slug": "bootstrap",
+    "name": "Bootstrap",
+    "count": 0
+  },
+  {
+    "id": 45,
+    "slug": "electronic-health-records-ehr",
+    "name": "Electronic health records (EHR)",
+    "count": 1
+  },
+  {
+    "id": 47,
+    "slug": "healthcare-automation",
+    "name": "Healthcare automation",
+    "count": 1
+  },
+  {
+    "id": 43,
+    "slug": "healthcare-documentation",
+    "name": "Healthcare documentation",
+    "count": 1
+  },
+  {
+    "id": 49,
+    "slug": "healthcare-technology",
+    "name": "Healthcare technology",
+    "count": 1
+  },
+  {
+    "id": 9,
+    "slug": "localized",
+    "name": "Localized",
+    "count": 0
+  },
+  {
+    "id": 48,
+    "slug": "medical-documentation-ai",
+    "name": "Medical documentation AI",
+    "count": 1
+  },
+  {
+    "id": 10,
+    "slug": "page-builder",
+    "name": "Page Builder",
+    "count": 0
+  },
+  {
+    "id": 16,
+    "slug": "parallax",
+    "name": "Parallax",
+    "count": 0
+  },
+  {
+    "id": 44,
+    "slug": "physician-burnout",
+    "name": "Physician burnout",
+    "count": 1
+  },
+  {
+    "id": 3,
+    "slug": "responsive",
+    "name": "Responsive",
+    "count": 0
+  },
+  {
+    "id": 6,
+    "slug": "retina-ready",
+    "name": "Retina Ready",
+    "count": 0
+  },
+  {
+    "id": 8,
+    "slug": "shortcodes",
+    "name": "Shortcodes",
+    "count": 0
+  },
+  {
+    "id": 7,
+    "slug": "touch-enabled",
+    "name": "Touch Enabled",
+    "count": 0
+  },
+  {
+    "id": 15,
+    "slug": "wpml-compatible",
+    "name": "WPML Compatible",
+    "count": 0
+  }
+]

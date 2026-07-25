@@ -3,8 +3,16 @@
 /* Class-based dark mode only — this is a light-mode site */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Typography plugin for migrated article/doc HTML content */
+@plugin '@tailwindcss/typography';
+
 /* All app code lives under src/ */
 @source '../../src';
+
+/* Never scan machine-generated WP content for class candidates (same guard as
+   bluehive-marketing: escaped class-like strings in migrated HTML would be
+   emitted verbatim and break the build). */
+@source not '../data/generated';
 
 /* Ozwell Brand Colors — extracted from ozwell.ai (Elementor / WordPress build)
    Primary blue is shared with BlueHive (#27aae1); dark authority blue #045089;

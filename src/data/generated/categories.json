@@ -1,0 +1,37 @@
+[
+  {
+    "id": 27,
+    "slug": "get-started-with-ozwell",
+    "name": "Get started with Ozwell",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 51,
+    "slug": "healthcare-trends-research",
+    "name": "Healthcare Trends &amp; Research",
+    "description": "",
+    "count": 1
+  },
+  {
+    "id": 40,
+    "slug": "release-notes",
+    "name": "Release Notes",
+    "description": "",
+    "count": 1
+  },
+  {
+    "id": 2,
+    "slug": "stratus",
+    "name": "Stratus",
+    "description": "",
+    "count": 0
+  },
+  {
+    "id": 1,
+    "slug": "uncategorized",
+    "name": "Uncategorized",
+    "description": "",
+    "count": 2
+  }
+]

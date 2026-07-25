@@ -1,0 +1,17 @@
+# Legacy WordPress URL redirects — preserves SEO equity from the old sitemap
+# Date-based post permalinks → modern /blog/slug/
+/2025/02/05/release-notes-2025-01-2025-05/ /blog/release-notes-2025-01-2025-05/ 301
+/2025/01/30/introduction-to-bluehive-healths-irm-practices/ /blog/introduction-to-bluehive-healths-irm-practices/ 301
+/2025/02/11/the-healthcare-documentation-crisis-why-ai-isnt-a-luxury-its-a-necessity/ /blog/the-healthcare-documentation-crisis-why-ai-isnt-a-luxury-its-a-necessity/ 301
+/2025/05/27/ozwell-pdsi-source-attributes/ /blog/ozwell-pdsi-source-attributes/ 301
+
+# Catch-all for any other date-based permalink
+/2025/*/*/:slug/ /blog/:slug/ 301
+
+# Thin Yoast archives consolidated into the blog index
+/category/* /blog/ 301
+/tag/* /blog/ 301
+/author/* /blog/ 301
+
+# Date archives
+/2025/* /blog/ 301
