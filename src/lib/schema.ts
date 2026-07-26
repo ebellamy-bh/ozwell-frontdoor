@@ -98,6 +98,104 @@ export function softwareApplicationSchema({ description, audience }: SoftwareOpt
   }
 }
 
+interface VideoOptions {
+  name: string
+  description: string
+  /**
+   * ISO 8601 date. Google treats this as required for video rich results, so the
+   * builder demands it rather than letting a caller silently emit an ineligible
+   * `VideoObject`.
+   */
+  uploadDate: string
+  /** ISO 8601 duration, e.g. `PT2M27S`. */
+  duration?: string
+  thumbnailUrl: string
+  /** Player page URL, for embedded third-party video. */
+  embedUrl?: string
+  /** Direct media file, for the self-hosted MP4s. */
+  contentUrl?: string
+}
+
+/**
+ * Video markup.
+ *
+ * The homepage carries a YouTube explainer and two self-hosted product clips, and
+ * none of the three were described to a crawler — a video is opaque without this,
+ * so all that footage earned nothing. `thumbnailUrl` doubles as the poster frame
+ * the caller already has to supply for the `<video>` element.
+ */
+export function videoObjectSchema({
+  name,
+  description,
+  uploadDate,
+  duration,
+  thumbnailUrl,
+  embedUrl,
+  contentUrl,
+}: VideoOptions): Json {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name,
+    description,
+    uploadDate,
+    ...(duration && { duration }),
+    thumbnailUrl: abs(thumbnailUrl),
+    ...(embedUrl && { embedUrl }),
+    ...(contentUrl && { contentUrl: abs(contentUrl) }),
+    publisher: { '@id': ORG_ID },
+    isPartOf: { '@id': SITE_ID },
+    inLanguage: 'en-US',
+  }
+}
+
+interface HowToOptions {
+  name: string
+  description: string
+  steps: Array<{ title: string; description: string }>
+}
+
+/** The four-step "how it works" flow, which is a `HowTo` in all but markup. */
+export function howToSchema({ name, description, steps }: HowToOptions): Json {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name,
+    description,
+    step: steps.map((step, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: step.title,
+      text: step.description,
+    })),
+  }
+}
+
+interface PersonOptions {
+  name: string
+  description?: string
+  image?: string | null
+  path: string
+}
+
+/**
+ * Author entity. Bylines previously existed only as a `Person` nested inside each
+ * `BlogPosting`, so the same author appeared as an unrelated anonymous node on
+ * every post. This gives them one addressable URL to be the same entity at.
+ */
+export function personSchema({ name, description, image, path }: PersonOptions): Json {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${abs(path)}#person`,
+    name,
+    url: abs(path),
+    ...(description && { description }),
+    ...(image && { image: abs(image) }),
+    worksFor: { '@id': ORG_ID },
+  }
+}
+
 export function faqSchema(items: Array<{ question: string; answer: string }>): Json {
   return {
     '@context': 'https://schema.org',

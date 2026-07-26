@@ -5,6 +5,7 @@
   "email": "info@ozwell.ai",
   "nav": [
     { "label": "How it works", "href": "/#how-it-works" },
+    { "label": "Security", "href": "/security/" },
     { "label": "About Us", "href": "/about-us/" },
     { "label": "Help Center", "href": "/docs/" },
     { "label": "Blog", "href": "/blog/" }
@@ -37,7 +38,9 @@
       "heading": "Product",
       "links": [
         { "label": "How it works", "href": "/#how-it-works" },
-        { "label": "Security & certification", "href": "/#security" },
+        { "label": "Security & clinical control", "href": "/security/" },
+        { "label": "Drummond pDSI-Risk certification", "href": "/certification/" },
+        { "label": "Ozwell vs. general-purpose AI", "href": "/#comparison" },
         { "label": "FAQ", "href": "/#faq" },
         {
           "label": "Request a Demo",

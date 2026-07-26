@@ -24,8 +24,21 @@ const BULLET_ICONS: Record<string, LucideIcon> = {
 }
 
 /** Video loop or still image. The EHR row has no recording, only a screenshot. */
-type Media =
-  | { kind: 'video'; src: string; poster: string }
+export type Media =
+  | {
+      kind: 'video'
+      src: string
+      poster: string
+      /**
+       * Describes the clip to a crawler via `VideoObject`, emitted by the page
+       * rather than here — schema for a section belongs in the page's graph, not
+       * scattered through presentational components.
+       */
+      name: string
+      description: string
+      uploadDate: string
+      duration: string
+    }
   | { kind: 'image'; src: string; alt: string; width: number; height: number }
 
 export interface FeatureRow {

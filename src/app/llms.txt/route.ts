@@ -51,8 +51,24 @@ anything reaches the patient record.
 
 ${problem.stats.map((s) => `- ${s.value}: ${s.label} (${s.source}).`).join('\n')}
 
+## Certification and clinical safety
+
+Stated precisely here because this is the surface a model quotes when asked whether
+Ozwell is certified or safe to use clinically.
+
+- Certification: Drummond pDSI-Risk, issued by Drummond Group, an ONC-Authorized Certification Body.
+- Criterion: ASTP/ONC § 170.315(b)(11), the decision support interventions criterion.
+- What it covers: intervention risk assessment and mitigation benchmarks, transparency standards, and intervention risk management and source attribute disclosure requirements.
+- Announced: July 15, 2025. Ozwell was the first AI-powered health IT product to achieve it.
+- Intended decision-making role, as published: to inform and augment clinical decision-making, NOT to replace clinical management.
+- Not intended for: emergency or critical care settings requiring real-time clinical decision-making; as a substitute for professional medical judgment; highly specialized care such as advanced pain management or rare disease treatment.
+- All 31 ONC source attributes are published in full at ${SITE_URL}/blog/ozwell-pdsi-source-attributes/
+- Certification detail: ${SITE_URL}/certification/
+
 ${section('Key pages', [
   `- [Homepage](${SITE_URL}/): product overview, capabilities, certification, testimonials, and FAQ.`,
+  `- [Certification](${SITE_URL}/certification/): what Drummond pDSI-Risk certification covers, the FAVES principles, and the full ONC source attribute disclosure.`,
+  `- [Security and clinical control](${SITE_URL}/security/): the clinician approval gate, the disclosed augment-not-replace design role, and where Ozwell should not be used.`,
   `- [About Us](${SITE_URL}/about-us/): mission, values, and the relationship to BlueHive Health.`,
   `- [Help Center](${SITE_URL}/docs/): setup guides, account help, integrations, and API reference.`,
   `- [Blog](${SITE_URL}/blog/): release notes, research on documentation burden, and compliance disclosures.`,

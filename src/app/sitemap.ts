@@ -1,5 +1,16 @@
 import type { MetadataRoute } from 'next'
-import { posts, docs, docCategories } from '@/lib/content'
+import {
+  posts,
+  docs,
+  docCategories,
+  categories,
+  tags,
+  authorsWithPosts,
+  isIndexableArchive,
+  getPostsInCategory,
+  getPostsWithTag,
+  getPostsByAuthor,
+} from '@/lib/content'
 import { SITE_URL } from '@/lib/metadata'
 
 export const dynamic = 'force-static'
@@ -23,6 +34,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/`, lastModified: siteUpdated, changeFrequency: 'weekly', priority: 1 },
     {
       url: `${SITE_URL}/about-us/`,
+      lastModified: siteUpdated,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    /**
+     * Above About and level with the section indexes: the certification is the one
+     * thing this site can claim that no competitor can, and `/security/` answers the
+     * questions that decide a clinical-AI purchase.
+     */
+    {
+      url: `${SITE_URL}/certification/`,
+      lastModified: siteUpdated,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/security/`,
       lastModified: siteUpdated,
       changeFrequency: 'monthly',
       priority: 0.8,
@@ -62,5 +90,51 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }))
 
-  return [...staticRoutes, ...postRoutes, ...docRoutes, ...docCategoryRoutes]
+  /**
+   * Blog archives.
+   *
+   * `lastModified` is the newest post in the archive rather than the site-wide date,
+   * so a term nobody has filed against in a year doesn't keep claiming to be fresh —
+   * the one thing a crawler will notice and discount.
+   *
+   * Only archives past `MIN_INDEXABLE_ARCHIVE_POSTS` are listed. The thin ones ship
+   * `noindex, follow`, and submitting a URL you've asked not to be indexed is a
+   * contradiction a crawler resolves by trusting neither signal.
+   */
+  const newestIn = (list: Array<{ date: string; modified: string }>) =>
+    new Date(
+      list
+        .map((p) => p.modified || p.date)
+        .sort()
+        .at(-1) ?? siteUpdated
+    )
+
+  const archive = (
+    url: string,
+    list: Array<{ date: string; modified: string }>,
+    priority: number
+  ) =>
+    isIndexableArchive(list.length)
+      ? [
+          {
+            url: `${SITE_URL}${url}`,
+            lastModified: newestIn(list),
+            changeFrequency: 'monthly' as const,
+            priority,
+          },
+        ]
+      : []
+
+  const archiveRoutes: MetadataRoute.Sitemap = [
+    ...categories.flatMap((c) =>
+      archive(`/blog/category/${c.slug}/`, getPostsInCategory(c.slug), 0.5)
+    ),
+    // Below categories: tags are a finer, less deliberate grouping.
+    ...tags.flatMap((t) => archive(`/blog/tag/${t.slug}/`, getPostsWithTag(t.slug), 0.4)),
+    ...authorsWithPosts.flatMap((a) =>
+      archive(`/blog/author/${a.slug}/`, getPostsByAuthor(a.slug), 0.5)
+    ),
+  ]
+
+  return [...staticRoutes, ...postRoutes, ...docRoutes, ...docCategoryRoutes, ...archiveRoutes]
 }
