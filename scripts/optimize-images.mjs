@@ -70,6 +70,10 @@ const TARGETS = [
   // Testimonial portraits — rendered at 56px
   { file: 'testimonials/jeffrey-margolis.png', maxWidth: 240, quality: 85 },
   { file: 'testimonials/richard-zekman.png', maxWidth: 240, quality: 85 },
+
+  // Author headshots — rendered at 32px on posts, but also used as the JSON-LD
+  // author image, so keep enough resolution for a crawler-sized crop.
+  { file: 'authors/evelyna-bellamy.png', maxWidth: 240, quality: 85 },
 ]
 
 console.log('Marketing assets (assets/images → public/images)')
