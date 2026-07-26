@@ -14,6 +14,12 @@ interface ContainerProps {
   children: ReactNode
   className?: string
   width?: keyof typeof WIDTHS
+  /**
+   * Opt this container's content into reveal-on-scroll. Deliberately not the default: it's applied
+   * to section content rather than whole sections so gradient backgrounds and shape dividers stay
+   * put while the copy inside them animates.
+   */
+  reveal?: boolean
 }
 
 /**
@@ -24,9 +30,17 @@ interface ContainerProps {
  * specificity, and Tailwind emits the larger utility later, so the override silently lost. Every
  * article and doc body on the site was rendering at a ~130-character measure because of it.
  */
-export function Container({ children, className, width = 'default' }: ContainerProps) {
+export function Container({
+  children,
+  className,
+  width = 'default',
+  reveal = false,
+}: ContainerProps) {
   return (
-    <div className={clsx('mx-auto w-full px-4 sm:px-6 lg:px-8', WIDTHS[width], className)}>
+    <div
+      data-reveal={reveal ? '' : undefined}
+      className={clsx('mx-auto w-full px-4 sm:px-6 lg:px-8', WIDTHS[width], className)}
+    >
       {children}
     </div>
   )

@@ -2,9 +2,24 @@ import clsx from 'clsx'
 
 /**
  * Elementor shape-divider paths used on the live ozwell.ai (viewBox 0 0 1000 100).
- * - waves: the hero/app-CTA organic wave
- * - wavesInverse: the mirrored waves variant (testimonials band)
- * - curve: the smooth arc (showcase band)
+ *
+ * Each path fills one half of the viewBox; the other half is transparent. Since the shape is
+ * painted white over a coloured section, **the filled half is the side that must touch the
+ * neighbouring white section** — get it backwards and you get a white wave stranded inside the
+ * colour with a sliver of colour above it.
+ *
+ * | shape          | fills  | wavy edge |
+ * |----------------|--------|-----------|
+ * | `waves`        | top    | bottom    |
+ * | `wavesInverse` | bottom | top       |
+ * | `curve`        | bottom | top       |
+ *
+ * `flipped` rotates 180°, which swaps the filled half. So:
+ *
+ * - `position="top"` needs the shape to fill the **top**:
+ *   `waves` unflipped, or `wavesInverse`/`curve` flipped.
+ * - `position="bottom"` needs the shape to fill the **bottom**:
+ *   `wavesInverse`/`curve` unflipped, or `waves` flipped.
  */
 const SHAPE_PATHS = {
   waves:

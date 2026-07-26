@@ -1,4 +1,5 @@
 import { Container } from '@/components/ui/Container'
+import { Section } from '@/components/ui/Section'
 
 interface FeatureVideoProps {
   youtubeId: string
@@ -7,7 +8,7 @@ interface FeatureVideoProps {
 
 export default function FeatureVideo({ youtubeId, title }: FeatureVideoProps) {
   return (
-    <section className="bg-white pb-4 pt-10">
+    <Section spacing="tight">
       <Container>
         <h2 className="sr-only">{title}</h2>
         <div className="aspect-video w-full overflow-hidden rounded-2xl shadow-lg">
@@ -21,6 +22,6 @@ export default function FeatureVideo({ youtubeId, title }: FeatureVideoProps) {
           />
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

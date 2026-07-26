@@ -41,7 +41,7 @@ export function createMetadata(options: CreateMetadataOptions): Metadata {
       type: openGraph?.type ?? 'website',
       images: openGraph?.images ?? [
         {
-          url: '/images/Ozwell-Branding-Whiteboard-2.png',
+          url: '/images/og-default.webp',
           width: 1200,
           height: 630,
           alt: 'Ozwell — Your AI medical assistant',

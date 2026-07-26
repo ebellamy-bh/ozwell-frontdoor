@@ -38,12 +38,14 @@ export const pillars = [
 
 export const supportingLogos = {
   title: 'Supporting the Best in Healthcare',
+  // Four of these read "Healthcare partner logo", which tells a screen reader nothing and is the
+  // same string five times over. Named from the artwork.
   logos: [
-    { src: '/images/company-display-logos-1.png', alt: 'Healthcare partner logo' },
-    { src: '/images/company-display-logos-3.png', alt: 'Healthcare partner logo' },
-    { src: '/images/company-display-logos-4.png', alt: 'Healthcare partner logo' },
-    { src: '/images/company-display-logos-6.png', alt: 'Michigan Healthcare Professionals logo' },
-    { src: '/images/company-display-logos-7.png', alt: 'Healthcare partner logo' },
+    { src: '/images/company-display-logos-1.png', alt: 'Maui Medical Group' },
+    { src: '/images/company-display-logos-3.png', alt: 'BlueHive' },
+    { src: '/images/company-display-logos-4.png', alt: 'WebChart' },
+    { src: '/images/company-display-logos-6.png', alt: 'Michigan Healthcare Professionals' },
+    { src: '/images/company-display-logos-7.png', alt: 'Enterprise Health' },
   ],
 }
 
