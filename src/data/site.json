@@ -64,6 +64,8 @@
       "links": [
         { "label": "About Us", "href": "/about-us/" },
         { "label": "BlueHive Health", "href": "https://bluehive.com/about" },
+        { "label": "WebChart EHR", "href": "https://webchartnow.com" },
+        { "label": "Enterprise Health", "href": "https://enterprisehealth.com" },
         { "label": "Careers — We're Hiring!", "href": "https://mieweb.org/join-our-team/" },
         { "label": "Contact us", "href": "mailto:info@ozwell.ai" }
       ]

@@ -49,7 +49,8 @@ export const certificationFacts = {
     {
       label: 'Developer',
       value: 'BlueHive Health, LLC',
-      detail: 'Part of Medical Informatics Engineering, Inc., the team behind WebChart.',
+      detail:
+        'Part of Medical Informatics Engineering, Inc., the team behind [WebChart](https://webchartnow.com) and [Enterprise Health](https://enterprisehealth.com).',
     },
   ],
 }

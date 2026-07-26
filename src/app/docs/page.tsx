@@ -8,13 +8,19 @@ import CTASection from '@/components/sections/CTASection'
 import { allDocs, docsHub, docsSearchIndex, featuredDocsCategory } from '@/data/docs'
 
 const DESCRIPTION =
-  'Guides, FAQs, and API reference for Ozwell — creating an account, customizing your assistant, connecting WebChart and your EHR, and building on the completions API.'
+  'Guides, FAQs, and API reference for Ozwell — creating an account, customizing your assistant, connecting WebChart, Enterprise Health, and your EHR, and building on the completions API.'
 
 export const metadata = createMetadata({
   title: 'Ozwell Help Center — guides, setup, and API reference',
   description: DESCRIPTION,
   path: '/docs/',
-  keywords: ['Ozwell help', 'Ozwell documentation', 'Ozwell API', 'WebChart integration'],
+  keywords: [
+    'Ozwell help',
+    'Ozwell documentation',
+    'Ozwell API',
+    'WebChart integration',
+    'Enterprise Health integration',
+  ],
 })
 
 export default function Page() {

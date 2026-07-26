@@ -1,4 +1,5 @@
 import siteConfig from '@/data/site.json'
+import { linkedHtml } from '@/lib/inline'
 import { SITE_NAME, SITE_URL } from '@/lib/metadata'
 
 /**
@@ -203,7 +204,7 @@ export function faqSchema(items: Array<{ question: string; answer: string }>): J
     mainEntity: items.map((item) => ({
       '@type': 'Question',
       name: item.question,
-      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+      acceptedAnswer: { '@type': 'Answer', text: linkedHtml(item.answer) },
     })),
   }
 }
