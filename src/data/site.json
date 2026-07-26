@@ -23,7 +23,7 @@
   },
   "apps": {
     "appStore": "https://apps.apple.com/us/app/bluehive-ai/id6717586635",
-    "googlePlay": "https://play.google.com/store/apps/details?id=com.bluehive.mobile&hl=en_US"
+    "googlePlay": "https://play.google.com/store/apps/details?id=com.bluehive.ai&hl=en_US"
   },
   "social": [
     { "label": "Linkedin", "href": "https://www.linkedin.com/company/ozwellai" },
