@@ -3,52 +3,60 @@
  */
 
 export const aboutHero = {
-  title: 'About Us',
+  title: 'Technology should empower clinicians, not burden them',
+  eyebrow: 'About Ozwell',
+  /**
+   * The page's H1 was the literal words "About Us" with no supporting copy, which
+   * told a reader — and a crawler — nothing about who we are.
+   */
+  description:
+    'Ozwell is built by BlueHive Health for the clinicians we work alongside. We automate documentation, optimize workflows, and support better decisions so providers can spend their day on care.',
   image: {
-    src: '/images/Ozwell-Branding-Whiteboard-4.png',
-    alt: 'Ozwell team illustration',
+    src: '/images/Ozwell-Branding-Whiteboard-4.webp',
+    alt: 'Illustration of the Ozwell mascot alongside a healthcare team',
     width: 1200,
     height: 900,
   },
 }
 
 export const mission = {
-  title: 'Our Mission',
+  title: 'Our mission',
   description:
     'At Ozwell, we believe technology should empower—not burden—healthcare professionals. Our AI-driven solutions automate documentation, optimize workflows, and enhance decision-making, giving providers more time to focus on delivering exceptional care.',
 }
 
 export const pillars = [
   {
-    title: 'More Patients, Less Burnout',
+    title: 'More patients, less burnout',
     description:
       'The weight of administrative tasks contributes to provider burnout, pulling focus away from the calling that brought you to healthcare in the first place. With Ozwell, you can reclaim your time, your energy, and your passion for patient care.',
   },
   {
-    title: 'Reduce Errors, Increase Confidence',
+    title: 'Reduce errors, increase confidence',
     description:
       'Documentation should support, not slow down, patient care. Ozwell helps providers capture critical details efficiently, reducing administrative strain and improving workflow clarity—so you can focus on making informed decisions with confidence.',
   },
   {
-    title: 'Smart Integration, Effortless Workflow',
+    title: 'Smart integration, effortless workflow',
     description:
       'Too often, new systems disrupt your workflow instead of supporting it. Ozwell seamlessly integrates into your existing tools, ensuring a smooth experience that enhances—never hinders—your ability to provide care.',
   },
 ]
 
 export const supportingLogos = {
-  title: 'Supporting the Best in Healthcare',
+  title: 'Supporting the best in healthcare',
   logos: [
-    { src: '/images/company-display-logos-1.png', alt: 'Healthcare partner logo' },
-    { src: '/images/company-display-logos-3.png', alt: 'Healthcare partner logo' },
-    { src: '/images/company-display-logos-4.png', alt: 'Healthcare partner logo' },
-    { src: '/images/company-display-logos-6.png', alt: 'Michigan Healthcare Professionals logo' },
-    { src: '/images/company-display-logos-7.png', alt: 'Healthcare partner logo' },
+    { src: '/images/company-display-logos-1.webp', alt: 'Healthcare partner logo' },
+    { src: '/images/company-display-logos-3.webp', alt: 'Healthcare partner logo' },
+    { src: '/images/company-display-logos-4.webp', alt: 'Healthcare partner logo' },
+    { src: '/images/company-display-logos-6.webp', alt: 'Michigan Healthcare Professionals logo' },
+    { src: '/images/company-display-logos-7.webp', alt: 'Healthcare partner logo' },
   ],
 }
 
 export const values = {
   title: 'Our values',
+  description: 'Six commitments that decide what we build, and what we decline to build.',
   items: [
     {
       title: 'Compassion',
@@ -85,5 +93,6 @@ export const values = {
 
 export const aboutCta = {
   title: 'Ready to take your practice to the next level?',
-  cta: { label: 'Get Started', href: 'https://ai.bluehive.com/' },
+  description:
+    'Start free on the web, or talk to us about rolling Ozwell out across your practice.',
 }

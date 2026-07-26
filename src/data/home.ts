@@ -1,19 +1,38 @@
 /**
- * Homepage content — migrated from ozwell.ai (our own WordPress/Elementor site).
- * All copy sourced from the live homepage during the 2026-07 migration.
+ * Homepage content.
+ *
+ * Originally migrated verbatim from our own WordPress/Elementor site. Copy that
+ * described no particular product — "Communication Tools", "User-Centric Design",
+ * "Seamless Integration" — has been rewritten against things Ozwell actually
+ * does, each traceable to the Help Center, the FAQ, or the certification.
  */
 
 export const hero = {
+  /**
+   * Three lines of one heading, not three headings. The `{' '}` separators in
+   * `Hero.tsx` matter: without them the spans concatenate and the accessible name
+   * reads "Say hi toOzwell.Your AI medical assistant".
+   *
+   * The brand-voice opener stays, but the line that carries the search intent —
+   * "AI medical assistant" — is now inside the H1 rather than only in a <p>.
+   */
   eyebrowLines: ['Say hi to', 'Ozwell.'],
-  subheading: 'Your AI medical assistant',
+  subheading: 'Your AI medical assistant.',
   description:
-    '& say goodbye to endless charting—Ozwell automates documentation so you can focus on what truly matters.',
+    'Ozwell listens to the visit, writes the structured SOAP note, and queues the orders and referrals for your approval — so charting stops following you home.',
+  /** Verifiable claims only. Each one is backed elsewhere on the site. */
+  trustPoints: ['HIPAA compliant', 'Drummond pDSI-Risk certified', 'Works with your EHR'],
   image: {
-    src: '/images/Ozwell-Branding-Whiteboard-2.png',
-    alt: 'Ozwell AI assistant illustration with SOAP note workflow actions',
-    width: 1200,
-    height: 900,
+    src: '/images/Ozwell-Branding-Whiteboard-2.webp',
+    alt: 'A clinician reviewing a chart on a tablet with a patient, framed by the Ozwell mascot',
+    width: 1400,
+    height: 1205,
   },
+  /**
+   * Rendered as prompt suggestions rather than loose pills — they are examples of
+   * what you can ask Ozwell, and the illustration behind them already contains an
+   * empty input bar they now sit inside.
+   */
   chips: [
     { label: 'Create a SOAP Note' },
     { label: 'Attach to Patient Record' },
@@ -24,149 +43,188 @@ export const hero = {
 }
 
 export const logoCloud = {
-  title: 'Enhancing Workflows for Leading Healthcare Companies',
+  /** Was a 35px H2 — larger than some section titles — for what is a caption. */
+  title: 'Enhancing workflows for leading healthcare companies',
   logos: [
-    { src: '/images/company-logos-2.png', alt: 'Enterprise Health' },
-    { src: '/images/company-logos-4.png', alt: 'Michigan Healthcare Professionals' },
-    { src: '/images/company-logos-6.png', alt: 'BlueHive' },
-    { src: '/images/company-logos-3.png', alt: 'Maui Medical Group' },
-    { src: '/images/company-logos-1.png', alt: 'WebChart' },
+    { src: '/images/company-logos-2.webp', alt: 'Enterprise Health' },
+    { src: '/images/company-logos-4.webp', alt: 'Michigan Healthcare Professionals' },
+    { src: '/images/company-logos-6.webp', alt: 'BlueHive' },
+    { src: '/images/company-logos-3.webp', alt: 'Maui Medical Group' },
+    { src: '/images/company-logos-1.webp', alt: 'WebChart' },
   ],
 }
-export const featureVideo = {
-  youtubeId: 'eCj_7FXArmg',
-  title: 'Ozwell: Your AI-Powered Clinical Assistant Inside your EHR',
-}
 
-export const certification = {
-  eyebrow: 'Security',
-  title:
-    "Ozwell is the market's first and only Drummond pDSI-Risk certified AI-powered Health IT solution.",
+/**
+ * The problem, stated once with numbers.
+ *
+ * The homepage previously jumped from "say hi to Ozwell" straight to feature
+ * lists, so nothing established why any of it mattered. Every figure here is
+ * cited from the research already summarised in our own blog post, and `Stat`
+ * requires the attribution rather than leaving it optional.
+ */
+export const problem = {
+  eyebrow: 'The problem',
+  title: 'Documentation is eating clinical medicine',
   description:
-    "The certification confirms that Ozwell's AI platform meets key benchmarks related to intervention risk assessment and mitigation, which is a critical step in supporting the responsible use of AI in clinical care.",
-  badges: ['HIPAA Compliant', 'Mobile friendly', 'Drummond certified'],
-  image: {
-    src: '/images/thumb-Drummond-Certified-pDSI-RISK-2025.png',
-    alt: 'Drummond Certified pDSI-RISK 2025 certification badge',
-    width: 400,
-    height: 400,
+    'Clinicians did not train for data entry. The shift to electronic records moved the paperwork onto the screen without reducing any of it — and the cost shows up in hours, in burnout, and in dollars.',
+  stats: [
+    {
+      value: '2 hours',
+      label: 'of documentation and desk work for every hour spent with a patient',
+      source: 'Sinsky et al., 2016',
+    },
+    {
+      value: '63%',
+      label: 'of physicians report symptoms of burnout, with administrative burden a leading cause',
+      source: 'Shanafelt et al., 2022',
+    },
+    {
+      value: '52%',
+      label: 'of the primary-care workday goes to EHR tasks — 5.9 hours out of 11.4',
+      source: 'Arndt et al., 2017',
+    },
+    {
+      value: '$286B',
+      label: 'spent every year on administrative complexity instead of on patient care',
+      source: 'Shrank et al., 2019',
+    },
+  ],
+  cta: {
+    label: 'Read the research',
+    href: '/blog/the-healthcare-documentation-crisis-why-ai-isnt-a-luxury-its-a-necessity/',
   },
 }
 
+export const featureVideo = {
+  eyebrow: 'See it work',
+  youtubeId: 'eCj_7FXArmg',
+  title: 'Ozwell: your AI-powered clinical assistant, inside your EHR',
+  description:
+    'Two minutes, one clinic encounter: what Ozwell hears, what it writes, and what lands in the chart.',
+}
+
+/**
+ * Three differentiated capabilities. There were two, and they sat among three
+ * other overlapping feature sections; the EHR-native row is the one the FAQ and
+ * the WebChart integration guide describe but the homepage never mentioned.
+ */
 export const featureRows = [
   {
-    eyebrow: 'Smart Scribing & Accurate Charting',
-    title: 'Reclaim Your Time, Refocus on Patient Care',
+    eyebrow: 'Smart scribing & accurate charting',
+    title: 'Reclaim your time, refocus on patient care',
     description:
-      'Ozwell leverages AI to streamline documentation, transforming how healthcare providers manage patient records. With automated transcription of visits, seamless chart population, and accurate data capture, providers can now dedicate more time to patient care rather than paperwork. Enhance efficiency while deepening patient interactions.',
+      'Ozwell transcribes the encounter as it happens, pulls out the clinical detail, and populates the chart — handling specialised terminology rather than everyday speech. You review a finished note instead of writing one.',
     bullets: [
       { label: 'Transcribe patient visits', icon: 'mic' },
       { label: 'Automate chart population', icon: 'gear' },
     ],
-    cta: { label: 'Get Started', href: 'https://ai.bluehive.com/?utm_source=ozwell.ai' },
-    video: '/videos/ozwell-smart-scribing.mp4',
-    poster: '/videos/ozwell-smart-scribing.jpg',
+    cta: { label: 'Start free trial', href: 'https://ai.bluehive.com/?utm_source=ozwell.ai' },
+    media: {
+      kind: 'video' as const,
+      src: '/videos/ozwell-smart-scribing.mp4',
+      poster: '/videos/ozwell-smart-scribing.jpg',
+    },
     mediaSide: 'left' as const,
   },
   {
-    eyebrow: 'Smart Call Handling',
-    title: 'Optimize Your Lines, Elevate Your Service',
+    eyebrow: 'Smart call handling',
+    title: 'Optimize your lines, elevate your service',
     description:
-      'Ozwell leverages AI to transform call handling for healthcare providers and beyond. Organizations can configure personalized voice prompts, automate routine interactions, and optimize tasks such as prescription management and appointment reminders, enhancing both efficiency and user experience.',
+      'Configure your own voice prompts and let Ozwell answer. It handles refill requests, appointment reminders, and routine questions, routes what it should not answer, and gives your front desk back the phone.',
     bullets: [
       { label: 'Automate routine calls', icon: 'phone' },
       { label: 'Personalize caller experience', icon: 'user' },
     ],
-    cta: { label: 'Get Started', href: 'https://ai.bluehive.com/?utm_source=ozwell.ai' },
-    video: '/videos/ozwell-call-dashboard.mp4',
-    poster: '/videos/ozwell-call-dashboard.jpg',
+    cta: { label: 'Start free trial', href: 'https://ai.bluehive.com/?utm_source=ozwell.ai' },
+    media: {
+      kind: 'video' as const,
+      src: '/videos/ozwell-call-dashboard.mp4',
+      poster: '/videos/ozwell-call-dashboard.jpg',
+    },
     mediaSide: 'right' as const,
+  },
+  {
+    eyebrow: 'Works inside your stack',
+    title: 'No new system to learn',
+    description:
+      'Ozwell connects to WebChart and the EHR, HRIS, and CRM tools you already run, then writes results back where your team expects to find them. Orders, referrals, and follow-ups queue as reviewable actions — nothing files until you approve it.',
+    bullets: [
+      { label: 'Write back to the chart', icon: 'plug' },
+      { label: 'Approve before anything files', icon: 'shield' },
+    ],
+    cta: {
+      label: 'Read the integration guide',
+      href: '/docs/webchart-ozwell-integration-user-guide/',
+    },
+    media: {
+      kind: 'image' as const,
+      src: '/images/4-scaled.webp',
+      alt: 'The Ozwell mobile app showing a generated SOAP note — subjective, objective, assessment, and plan — ready for review',
+      // Portrait: every product shot in this set is a 900×1600 phone mockup.
+      width: 900,
+      height: 1600,
+    },
+    mediaSide: 'left' as const,
   },
 ]
 
+export const certification = {
+  eyebrow: 'Security & certification',
+  title: "The market's first and only Drummond pDSI-Risk certified AI-powered Health IT solution",
+  description:
+    "The certification confirms that Ozwell's AI platform meets key benchmarks for intervention risk assessment and mitigation — a critical step in supporting the responsible use of AI in clinical care.",
+  badges: ['HIPAA compliant', 'Mobile friendly', 'Drummond certified'],
+  image: {
+    src: '/images/thumb-Drummond-Certified-pDSI-RISK-2025.webp',
+    alt: 'Drummond Certified pDSI-RISK 2025 certification badge',
+    width: 600,
+    height: 600,
+  },
+  cta: {
+    label: 'How we disclose our AI',
+    href: '/blog/ozwell-pdsi-source-attributes/',
+  },
+}
+
 /**
- * Testimonials — transcribed from the legacy `testimonials-1024x576.png` composite, which
- * rendered these quotes as a flat image (illegible on mobile, invisible to search).
+ * Testimonials — transcribed from the legacy `testimonials-1024x576.png` composite,
+ * which rendered these quotes as a flat image (illegible on mobile, invisible to
+ * search).
  *
- * The quotes are verbatim. They predate the BlueHive AI → Ozwell rename, so the product name
- * is bracketed on the same convention the migrated blog posts already use
- * ("BlueHive AI [Ozwell]"). Replace with refreshed quotes when we can get them.
+ * The quotes are verbatim. They predate the BlueHive AI → Ozwell rename, so the
+ * product name is bracketed on the same convention the migrated blog posts
+ * already use ("BlueHive AI [Ozwell]"). Replace when refreshed quotes exist.
  */
 export const testimonials = {
-  title: "Don't just take our word for it.",
-  description: 'Discover what users have to say about their experiences with our platform.',
+  eyebrow: 'From the exam room',
+  title: "Don't just take our word for it",
+  description: 'Two physicians on what changed after a fortnight with Ozwell.',
   items: [
     {
+      /** Pull quote: the line a skimmer should take away from the full quote. */
+      highlight: 'Most of us in the practice have gained back an hour or two each day.',
       quote:
         'BlueHive AI [Ozwell] has been an absolute game changer for me. I’ve been using it for just two weeks, but it already feels like a major step forward compared to when we transitioned from paper charts to EMRs. With EMRs, I often found myself focusing more on the screen than on the patient, which really took away from the personal interaction. BlueHive [Ozwell] has given me the freedom to go back to being a doctor—looking my patients in the eye and focusing on them, while the AI handles the documentation. It’s liberating. Most of us in the practice have gained back an hour or two each day, and the improvement in patient care is remarkable.',
       name: 'Jeffrey Margolis, M.D.',
       title: 'President of Michigan Health Professionals',
-      avatar: '/images/testimonials/jeffrey-margolis.png',
+      avatar: '/images/testimonials/jeffrey-margolis.webp',
     },
     {
+      highlight:
+        'I saw 35 patients today, and all my notes and referrals were completed by the end of the clinic day.',
       quote:
         'One of the biggest challenges in medicine is time. We spend a lot of hours on administrative tasks like charting—up to one to two hours daily. This time is taking away from patient care and even our personal lives. BlueHive AI [Ozwell] has already helped cut down that time. It allows me to focus more on patient care without the stress of additional paperwork at the end of the day. For example, I saw 35 patients today, and all my notes and referrals were completed by the end of the clinic day.',
       name: 'Richard Zekman, D.O.',
       title: 'Division of Clinical Hematology & Medical Oncology',
-      avatar: '/images/testimonials/richard-zekman.png',
+      avatar: '/images/testimonials/richard-zekman.webp',
     },
   ],
-}
-
-export const workSmarter = {
-  title: 'Work Smarter, Not Harder',
-  description:
-    'Ozwell offers a range of features designed to boost your productivity and streamline your processes. Explore customizable workflows, real-time insights, and intuitive design that work together to make your workday more effective and your life easier.',
-}
-
-/** Six feature cards flanking the phone image (3 left, 3 right) — matches live layout. */
-export const featureCards = {
-  left: [
-    {
-      title: 'Customizable Workflows',
-      description:
-        'Utilize Ozwell to fit your specific processes and preferences, ensuring optimal efficiency and alignment with your organizational needs.',
-    },
-    {
-      title: 'Personalized Assistance',
-      description:
-        'Receive support and recommendations based on your unique requirements and preferences, enhancing user experience.',
-    },
-    {
-      title: 'Real-Time Data Analytics',
-      description:
-        'Access actionable insights with real-time analytics, empowering informed decision-making and improved operational efficiency.',
-    },
-  ],
-  right: [
-    {
-      title: 'Communication Tools',
-      description:
-        'Improve team collaboration with integrated communication features, including real-time messaging and notifications.',
-    },
-    {
-      title: 'User-Centric Design',
-      description:
-        'Benefit from a design that prioritizes user needs and preferences, offering an intuitive experience that enhances efficiency and reduces learning curves.',
-    },
-    {
-      title: 'Seamless Integration',
-      description:
-        'Integrate effortlessly with existing systems and tools, enhancing functionality without disrupting your current setup.',
-    },
-  ],
-  phoneImage: {
-    src: '/images/Ozwell-mobile-phones-for-website-608x1080.png',
-    alt: 'Ozwell mobile app on two phones',
-    width: 608,
-    height: 1080,
-  },
 }
 
 /**
- * How Ozwell works — replaces the legacy 22 MB autoplaying MP4 of a nine-box flowchart, whose
- * text was unreadable at every viewport and invisible to screen readers and search engines.
- * The nine original stages collapse into the four the reader actually needs.
+ * How Ozwell works — replaces the legacy 22 MB autoplaying MP4 of a nine-box
+ * flowchart, whose text was unreadable at every viewport and invisible to screen
+ * readers and search engines. The nine original stages collapse into four.
  */
 export const howItWorks = {
   eyebrow: 'How it works',
@@ -201,100 +259,131 @@ export const howItWorks = {
   ],
 }
 
-export const showcase = {
-  title: 'The multi-armed solution for effortless documentation',
+/**
+ * Capability grid. The heading is the former standalone "Work Smarter" band, which
+ * was a heading and a paragraph with no content of its own.
+ *
+ * Every card previously named a software category rather than a behaviour —
+ * "Communication Tools", "User-Centric Design" — and a competitor could have run
+ * the identical list. These six are specific, and each is documented elsewhere on
+ * this site: the custom-instructions and multi-device guides in the Help Center,
+ * the terminology and phone answers in the FAQ, the approval gate in step three
+ * above.
+ */
+export const featureCards = {
+  eyebrow: 'Built for clinicians',
+  title: 'Work smarter, not harder',
   description:
-    "Here's a closer look at how Ozwell simplifies patient encounters and streamlines daily operations for clinicians.",
-  screenshots: [
+    'Ozwell adapts to how your practice already runs, rather than asking your practice to adapt to it.',
+  cards: [
     {
-      src: '/images/1-scaled.png',
-      alt: 'Ozwell product screenshot — patient encounter view',
-      width: 2560,
-      height: 1440,
+      icon: 'graduation',
+      title: 'Learns your vocabulary',
+      description:
+        'Every correction you make feeds back in, so accuracy improves against your own terminology and note style instead of a generic model average.',
     },
     {
-      src: '/images/2-scaled.png',
-      alt: 'Ozwell product screenshot — documentation workflow',
-      width: 2560,
-      height: 1440,
+      icon: 'sliders',
+      title: 'Custom instructions per clinician',
+      description:
+        'Set your name, title, and standing instructions once. Notes come out in your voice and your format, not a house template.',
     },
     {
-      src: '/images/3-scaled.png',
-      alt: 'Ozwell product screenshot — SOAP note generation',
-      width: 2560,
-      height: 1440,
+      icon: 'stethoscope',
+      title: 'Specialty terminology, not just speech',
+      description:
+        'Built to interpret complex medical, legal, and technical language — the vocabulary general-purpose dictation reliably mangles.',
     },
     {
-      src: '/images/4-scaled.png',
-      alt: 'Ozwell product screenshot — chart summary',
-      width: 2560,
-      height: 1440,
+      icon: 'phone',
+      title: 'A phone line that answers itself',
+      description:
+        'Refill requests, appointment reminders, and routine questions handled with your own voice prompts, escalating the rest to a human.',
     },
     {
-      src: '/images/5-scaled.png',
-      alt: 'Ozwell product screenshot — clinical operations dashboard',
-      width: 2560,
-      height: 1440,
+      icon: 'smartphone',
+      title: 'Works on the phone in your pocket',
+      description:
+        'iOS and Android apps on the same account. Start a note between rooms on mobile and finish it at the desktop.',
+    },
+    {
+      icon: 'shield',
+      title: 'Nothing files without approval',
+      description:
+        'Orders, referrals, and follow-ups arrive as reviewable actions. You stay the last step before anything reaches the record.',
     },
   ],
+  phoneImage: {
+    src: '/images/Ozwell-mobile-phones-for-website-608x1080.webp',
+    alt: 'The Ozwell mobile app shown on two phones',
+    width: 800,
+    height: 1421,
+  },
 }
 
 export const faqs = {
   eyebrow: 'Get answers',
-  title: 'Frequently Asked Questions',
+  title: 'Frequently asked questions',
   description:
-    'Discover how Ozwell can simplify your healthcare management and elevate overall efficiency.',
+    'How Ozwell fits into a working practice. If your question is not here, the Help Center goes deeper.',
   items: [
     {
       question: 'What is Ozwell?',
       answer:
-        'Ozwell is an advanced assistant designed to streamline your work processes and enhance productivity. It offers features like customizable workflows, real-time data analytics, seamless integration with existing systems, and much more, all tailored to meet the unique needs of your organization.',
+        'Ozwell is an AI medical assistant for healthcare practices. It transcribes patient visits, writes structured clinical notes, answers inbound calls, and connects to the EHR and other systems you already use, so documentation and routine administration stop consuming clinical time.',
     },
     {
       question: 'How does the Ozwell phone assistant work when people call in?',
       answer:
-        "The Ozwell phone assistant is designed to handle incoming calls with advanced natural language processing. When a call comes in, the AI phone assistant can understand and respond to a wide range of inquiries, whether it's scheduling appointments, providing information, or routing the call to the appropriate department. The AI assistant is capable of interpreting complex industry-specific terminology, making it particularly useful in fields like healthcare and legal services. It ensures that callers receive prompt, accurate, and professional service every time, enhancing the overall customer experience.",
+        'The Ozwell phone assistant handles incoming calls with advanced natural language processing. When a call comes in, it can understand and respond to a wide range of inquiries — scheduling appointments, providing information, or routing the call to the appropriate department. It interprets complex industry-specific terminology, which makes it particularly useful in fields like healthcare and legal services, so callers receive prompt, accurate, and professional service every time.',
     },
     {
       question: 'How does Ozwell integrate with my existing systems?',
       answer:
-        'Ozwell integrates smoothly with a wide range of existing systems, including EHR, HRIS, CRM, and other essential tools. This ensures that you can enhance your workflows without any disruptions to your current setup.',
+        'Ozwell integrates with a wide range of existing systems, including EHR, HRIS, CRM, and other essential tools — WebChart included. Results are written back where your team already looks for them, so workflows improve without disrupting your current setup. The Help Center has a full WebChart integration guide.',
+    },
+    {
+      question: 'Is Ozwell HIPAA compliant, and how is the AI risk assessed?',
+      answer:
+        'Yes. Ozwell is HIPAA compliant and is the first and only AI-powered Health IT solution to hold Drummond pDSI-Risk certification, which confirms the platform meets benchmarks for predictive decision support intervention risk assessment and mitigation. Our source attribute disclosures are published on the blog.',
     },
     {
       question: 'Can Ozwell understand and process industry-specific terminology?',
       answer:
-        'Yes, Ozwell is equipped with advanced natural language processing capabilities that allow it to understand and process complex industry-specific terminology, including medical, legal, and technical jargon.',
-    },
-    {
-      question: 'What kind of support can I expect from Ozwell?',
-      answer:
-        'Ozwell includes integrated communication tools that facilitate real-time messaging and notifications, improving team collaboration. Whether your team is working in the office or remotely, Ozwell keeps everyone connected and informed.',
-    },
-    {
-      question: 'How does Ozwell help improve team collaboration?',
-      answer:
-        'Ozwell includes integrated communication tools that facilitate real-time messaging and notifications, improving team collaboration. Whether your team is working in the office or remotely, Ozwell keeps everyone connected and informed.',
+        'Yes. Ozwell is equipped with advanced natural language processing that allows it to understand and process complex industry-specific terminology, including medical, legal, and technical jargon, rather than only everyday speech.',
     },
     {
       question: 'Can I customize Ozwell to fit my specific workflow?',
       answer:
-        'Yes, Ozwell offers customizable workflows that allow you to tailor the system to your specific processes and preferences. This ensures optimal efficiency and alignment with your organizational needs.',
+        'Yes. Ozwell offers customizable workflows, and each user can set their own name, title, and custom instructions so that output matches their documentation style. This ensures alignment with how your organization already works rather than forcing a single house format.',
     },
     {
-      question: 'How does Ozwell stay up-to-date with my evolving needs?',
+      question: 'Does anything get filed to the patient record automatically?',
       answer:
-        'Ozwell continuously learns from your interactions and feedback. It adapts its algorithms and capabilities to better meet your evolving needs, ensuring that it remains a valuable tool as your organization grows and changes.',
+        'No. Ozwell drafts the note and queues orders, referrals, and follow-ups as reviewable actions. A clinician approves them before anything is written to the record, so you remain the final check on everything that reaches the chart.',
+    },
+    {
+      question: 'How does Ozwell stay up to date with my evolving needs?',
+      answer:
+        'Ozwell continuously learns from your interactions and corrections, adapting to better match your vocabulary and documentation style over time, so it remains useful as your organization grows and changes.',
+    },
+    {
+      question: 'What kind of support can I expect?',
+      answer:
+        'The Help Center covers setup, accounts, integrations, and the API, and our team answers questions directly at info@ozwell.ai. Ozwell also includes integrated communication tools with real-time messaging and notifications to keep your team coordinated, whether they work in the office or remotely.',
     },
     {
       question: 'Is Ozwell easy to use?',
       answer:
-        'Absolutely. Ozwell is designed with a user-centric approach, offering an intuitive interface that minimizes learning curves and makes it easy for anyone to use, regardless of technical expertise.',
+        'Yes. Ozwell is designed around an intuitive interface that minimizes learning curves, and it runs on the web plus iOS and Android, so most people are productive without training. You can start a note on mobile between rooms and finish it at a desktop on the same account.',
     },
   ],
 }
 
-export const appCta = {
-  title: 'Reimagine Your Workday with Ozwell',
-  subtitle: 'Get the app now and embrace a smarter work approach.',
-  banner: 'Freeing up time for what truly matters.',
+/** Closing conversion band, merging the old mid-page CTA and app-download sections. */
+export const closingCta = {
+  eyebrow: 'Freeing up time for what truly matters',
+  title: 'Reimagine your workday with Ozwell',
+  description:
+    'Start free on the web, or get the app and let Ozwell handle the documentation from your pocket.',
 }

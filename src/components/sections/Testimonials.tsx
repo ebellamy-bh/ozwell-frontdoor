@@ -1,9 +1,10 @@
 import Image from 'next/image'
-import { Quote } from 'lucide-react'
-import { Container } from '@/components/ui/Container'
-import ShapeDivider from '@/components/ui/ShapeDivider'
+import Section from '@/components/ui/Section'
+import SectionHeading from '@/components/ui/SectionHeading'
 
 interface Testimonial {
+  /** The one line a skimmer should take away, pulled out above the full quote. */
+  highlight: string
   quote: string
   name: string
   title: string
@@ -11,52 +12,52 @@ interface Testimonial {
 }
 
 interface TestimonialsProps {
+  eyebrow: string
   title: string
   description: string
   items: Testimonial[]
 }
 
-export default function Testimonials({ title, description, items }: TestimonialsProps) {
+/**
+ * Physician testimonials.
+ *
+ * These were a flat 1024×576 PNG of two cards: ~9px type on desktop, ~5px on a
+ * phone, unselectable and invisible to search. Now real markup — and each quote
+ * leads with its own strongest sentence, because these run 90 words and nobody
+ * reads a wall of italics on a marketing page.
+ */
+export default function Testimonials({ eyebrow, title, description, items }: TestimonialsProps) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-ozwell-sky to-ozwell-sky-deep pb-24 pt-28 text-white lg:pb-28 lg:pt-32">
-      {/* Live: waves-inverse top (69px, flipped) and bottom (45px) */}
-      <ShapeDivider shape="wavesInverse" position="top" flipped heightClass="h-10 lg:h-[69px]" />
-      <ShapeDivider shape="wavesInverse" position="bottom" heightClass="h-7 lg:h-[45px]" />
-      <Container className="relative">
-        <h2 className="text-center text-3xl font-bold sm:text-[38px]">{title}</h2>
-        <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-white/90">{description}</p>
+    <Section tone="brand" spacing="lg" dividers="both">
+      <SectionHeading eyebrow={eyebrow} title={title} description={description} onDark />
 
-        {/* Stacked, the gap has to clear the next card's overhanging avatar (h-20 pulled up 40px). */}
-        <ul className="mt-14 grid gap-16 lg:grid-cols-2 lg:gap-8">
-          {items.map((item) => (
-            <li key={item.name} className="flex">
-              <figure className="flex flex-1 flex-col rounded-3xl bg-white p-8 pt-0 shadow-lg sm:p-10 sm:pt-0">
-                {/* Avatar straddles the card's top edge, as on the legacy design. */}
+      <ul className="mt-14 grid gap-8 lg:grid-cols-2">
+        {items.map((item) => (
+          <li key={item.name} className="flex">
+            <figure className="flex flex-1 flex-col rounded-2xl bg-white p-7 shadow-card sm:p-9">
+              <blockquote className="flex-1">
+                <p className="font-display text-xl font-bold leading-snug text-ozwell-ink-strong sm:text-[1.375rem]">
+                  “{item.highlight}”
+                </p>
+                <p className="mt-5 text-[15px] leading-relaxed text-ozwell-slate">{item.quote}</p>
+              </blockquote>
+              <figcaption className="mt-7 flex items-center gap-4 border-t border-ozwell-border pt-6">
                 <Image
                   src={item.avatar}
                   alt=""
-                  width={128}
-                  height={128}
-                  className="-mt-10 mb-6 h-20 w-20 self-center rounded-full object-cover shadow-md"
+                  width={120}
+                  height={120}
+                  className="h-14 w-14 shrink-0 rounded-full object-cover"
                 />
-                <Quote
-                  size={28}
-                  strokeWidth={2}
-                  aria-hidden="true"
-                  className="mb-3 shrink-0 text-primary-200"
-                />
-                <blockquote className="flex-1 text-[15px] leading-relaxed text-ozwell-ink sm:text-base">
-                  {item.quote}
-                </blockquote>
-                <figcaption className="mt-6 border-t border-ozwell-border pt-5">
+                <div>
                   <p className="font-bold text-ozwell-ink-strong">{item.name}</p>
                   <p className="mt-0.5 text-sm text-ozwell-slate">{item.title}</p>
-                </figcaption>
-              </figure>
-            </li>
-          ))}
-        </ul>
-      </Container>
-    </section>
+                </div>
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </Section>
   )
 }

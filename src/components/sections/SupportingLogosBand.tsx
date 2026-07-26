@@ -1,35 +1,38 @@
 import Image from 'next/image'
-import { Container } from '@/components/ui/Container'
-import ShapeDivider from '@/components/ui/ShapeDivider'
+import Section from '@/components/ui/Section'
 
 interface SupportingLogosBandProps {
   title: string
   logos: Array<{ src: string; alt: string }>
 }
 
-/** Blue gradient band with wavy edges, uppercase eyebrow, and white partner logos — matches live About page. */
+/**
+ * Partner logos, white knockout on the brand gradient.
+ *
+ * The band previously stacked a `waves` divider on top of a `wavesInverse` divider
+ * on the bottom, back to back with the About hero's own divider — three wave edges
+ * within ~200px. It's now a flat band, and the logos share one height so the row
+ * reads as a set rather than five differently scaled files.
+ */
 export default function SupportingLogosBand({ title, logos }: SupportingLogosBandProps) {
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(170deg,#24c1fc_0%,#0890ed_100%)] py-28 text-white lg:py-32">
-      <ShapeDivider shape="waves" position="top" flipped heightClass="h-8 lg:h-12" />
-      <ShapeDivider shape="wavesInverse" position="bottom" heightClass="h-8 lg:h-12" />
-      <Container className="relative">
-        <h2 className="text-center text-lg font-semibold uppercase tracking-[0.2em] sm:text-[22px]">
-          {title}
-        </h2>
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-x-20 gap-y-10">
-          {logos.map((logo) => (
+    <Section tone="brand" spacing="sm">
+      <h2 className="text-center text-sm font-bold uppercase tracking-[0.16em] text-white/80">
+        {title}
+      </h2>
+      <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-9 sm:gap-x-16">
+        {logos.map((logo) => (
+          <li key={logo.src}>
             <Image
-              key={logo.src}
               src={logo.src}
               alt={logo.alt}
-              width={360}
-              height={90}
-              className="h-14 w-auto object-contain lg:h-16"
+              width={280}
+              height={80}
+              className="h-10 w-auto object-contain lg:h-12"
             />
-          ))}
-        </div>
-      </Container>
-    </section>
+          </li>
+        ))}
+      </ul>
+    </Section>
   )
 }

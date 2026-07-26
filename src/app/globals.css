@@ -1,8 +1,5 @@
 @import 'tailwindcss' source(none);
 
-/* Class-based dark mode only — this is a light-mode site */
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* Typography plugin for migrated article/doc HTML content */
 @plugin '@tailwindcss/typography';
 
@@ -14,46 +11,68 @@
    emitted verbatim and break the build). */
 @source not '../data/generated';
 
-/* Ozwell Brand Colors — extracted from ozwell.ai (Elementor / WordPress build)
-   Primary blue is shared with BlueHive (#27aae1); dark authority blue #045089;
-   accent green #00b682 used for stat/highlight bands. */
+/* ---------------------------------------------------------------------------
+   Ozwell design tokens
+
+   The brand is the logo: a gold octopus inside an iridescent bubble, navy
+   linework, geometric wordmark. That gives four colour families, and each one
+   has exactly one job here:
+
+     blue   — primary. Every interactive element and gradient band.
+     navy   — authority. Deep headings, dark surfaces.
+     gold   — accent, on dark surfaces only (#fada00 is ~1.3:1 on white).
+     iris   — the bubble's pink/violet sheen. Decorative gradients only, never
+              text or icons. `text-fuchsia-400` on the values icons came from
+              here; it read as an unrelated third icon style, so it's gone.
+   --------------------------------------------------------------------------- */
 @theme {
-  /* Primary Blue */
-  --color-primary: #27aae1;
-  --color-primary-50: #e6f7fc;
-  --color-primary-100: #b3e6f7;
-  --color-primary-200: #80d4f1;
-  --color-primary-300: #4dc3ec;
-  --color-primary-400: #27aae1;
+  /* Primary blue ramp */
+  --color-primary-50: #eff9fe;
+  --color-primary-100: #d8f0fc;
+  --color-primary-200: #b3e4f9;
+  --color-primary-300: #7ed2f4;
+  --color-primary-400: #45bcec;
   --color-primary-500: #27aae1;
-  --color-primary-600: #0b9de7;
-  --color-primary-700: #0675b0;
-  --color-primary-800: #045a88;
-  --color-primary-900: #045089;
+  --color-primary-600: #0f8bc4;
+  --color-primary-700: #0d6f9f;
+  --color-primary-800: #105c83;
+  --color-primary-900: #124d6d;
+  --color-primary-950: #0b3149;
 
-  /* Ozwell brand tokens */
+  /* Brand shorthands */
   --color-ozwell-blue: #27aae1;
-  --color-ozwell-blue-dark: #045089;
+  --color-ozwell-navy: #045089;
+  --color-ozwell-navy-deep: #06304f;
+  /* Two greens, because one can't do both jobs. The brand green is 2.5:1 on white
+     — under the 3:1 floor for meaningful graphics, let alone 4.5:1 for text — so
+     anything on a light surface uses the darker one (4.95:1 on white, 4.74:1 on
+     mist). The bright value is kept for dark surfaces. */
   --color-ozwell-green: #00b682;
+  --color-ozwell-green-dark: #00805d;
   --color-ozwell-gold: #fada00;
-  --color-ozwell-mist: #fcfeff;
+  --color-ozwell-iris: #c084fc;
+  --color-ozwell-mist: #f5fbfe;
 
-  /* Brand gradient stops — the single blue ramp used by every gradient band
-     (Testimonials, Showcase, CertificationBand, CTABand). */
+  /* Gradient stops — one blue ramp shared by every gradient band, so the bands
+     read as the same material rather than five different blues. */
   --color-ozwell-sky: #24c1fc;
   --color-ozwell-sky-deep: #0b78de;
 
-  /* Neutral text ramp — strong (footer headings) → ink (body) → muted
-     (section headings) → slate (secondary copy). */
-  --color-ozwell-ink-strong: #1a1a1a;
-  --color-ozwell-ink: #333333;
-  --color-ozwell-ink-muted: #515151;
-  --color-ozwell-slate: #545f5f;
-  --color-ozwell-border: #d5d8dc;
+  /* Neutral ramp: strong (headings) → ink (body) → slate (secondary) */
+  --color-ozwell-ink-strong: #0f1e2b;
+  --color-ozwell-ink: #2c3b46;
+  --color-ozwell-ink-muted: #4a5a66;
+  --color-ozwell-slate: #5c6b76;
+  --color-ozwell-border: #dbe3e9;
 
-  /* Typography — Lato body, Roboto secondary (matches live site) */
-  --font-sans: var(--font-lato), 'Lato', ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-lato), 'Lato', ui-sans-serif, system-ui, sans-serif;
+  /* Type: Plus Jakarta Sans for display (geometric, matching the wordmark's
+     circular O), Lato for body text. */
+  --font-sans: var(--font-lato), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-lato), ui-sans-serif, sans-serif;
+
+  /* One elevation scale for the single card style */
+  --shadow-card: 0 1px 2px rgb(15 30 43 / 0.04), 0 8px 24px -12px rgb(15 30 43 / 0.12);
+  --shadow-card-hover: 0 2px 4px rgb(15 30 43 / 0.06), 0 16px 40px -16px rgb(15 30 43 / 0.18);
 }
 
 body {
@@ -61,11 +80,47 @@ body {
   color: var(--color-ozwell-ink);
   background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Smooth scrolling for in-page anchors (FAQ, etc.) */
+/* The display face carries every heading, so components don't each opt in. */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Long-form paragraphs read better without orphans. */
+p {
+  text-wrap: pretty;
+}
+
 html {
   scroll-behavior: smooth;
+  /* Anchor targets clear the sticky header instead of hiding underneath it. */
+  scroll-padding-top: 6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* One visible focus treatment site-wide. Browser defaults vary and several
+   components had removed outlines without replacing them. */
+:focus-visible {
+  outline: 2px solid var(--color-primary-600);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* On the gradient bands a blue ring is invisible — switch to white there. */
+.on-dark :focus-visible {
+  outline-color: #ffffff;
 }
 
 /* The typography plugin generates open-quote/close-quote around blockquote paragraphs, but the
@@ -76,8 +131,38 @@ html {
   content: none;
 }
 
-/* Auto-scrolling screenshot marquee (Showcase section) — mirrors the live
-   Elementor loop carousel. The strip is rendered twice, so -50% = one full set. */
+/* ---------------------------------------------------------------------------
+   Migrated content: containment.
+
+   The WordPress bodies were authored for a fixed-width desktop theme and carry
+   hardcoded dimensions. Three of them pushed the whole page sideways on a phone,
+   which is the one layout bug a reader cannot work around.
+   --------------------------------------------------------------------------- */
+
+/* Wide tables and preformatted blocks scroll inside their own box. */
+.prose :is(table, pre) {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Embeds ship explicit pixel dimensions — the release-notes post has a YouTube
+   iframe at `width="1140"`, which set a 1,156px minimum width for the page.
+   Every embed in this corpus is a 16:9 video, so the ratio is safe to assume. */
+.prose :is(iframe, embed, object, video) {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+/* Bare URLs used as link text (the WebChart guide has a 91-character one, and the
+   bibliographies are full of them) otherwise set the page's minimum width. */
+.prose :is(p, li, a, code, h1, h2, h3, h4, td, th) {
+  overflow-wrap: break-word;
+}
+
+/* Auto-scrolling screenshot marquee (Showcase section). The strip is rendered
+   twice, so -50% = one full set. */
 @keyframes marquee-scroll {
   from {
     transform: translateX(0);
@@ -88,10 +173,11 @@ html {
 }
 
 .marquee {
-  animation: marquee-scroll 40s linear infinite;
+  animation: marquee-scroll 60s linear infinite;
 }
 
-.marquee:hover {
+.marquee:hover,
+.marquee:focus-within {
   animation-play-state: paused;
 }
 
@@ -100,3 +186,15 @@ html {
     animation: none;
   }
 }
+
+/* No scroll-reveal animation here, deliberately.
+ *
+ * A CSS-only fade-up via `animation-timeline: view()` was tried and removed. The
+ * `entry` range only completes once the subject has *fully* entered the viewport,
+ * which for a section taller than the viewport — most of them — never happens, so
+ * whole bands sat at `opacity: 0` in browsers that support it. The in-page anchors
+ * made it worse: following #faq or #security from the footer landed the reader on
+ * content that was still transparent.
+ *
+ * Motion on the site is attached to interaction instead (hover lift on cards,
+ * image scale, icon nudges), where there's no way for it to strand content. */

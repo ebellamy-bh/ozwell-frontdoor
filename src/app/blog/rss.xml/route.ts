@@ -45,7 +45,7 @@ export async function GET() {
     <lastBuildDate>${posts.length > 0 ? new Date(posts[0].date).toUTCString() : new Date().toUTCString()}</lastBuildDate>
     <ttl>60</ttl>
     <image>
-      <url>${SITE_URL}/images/Ozwell-logo.png</url>
+      <url>${SITE_URL}/icon.png</url>
       <title>${SITE_NAME} Blog</title>
       <link>${SITE_URL}/blog</link>
     </image>

@@ -1,6 +1,9 @@
 import Link from 'next/link'
-import { FolderOpen, FileText } from 'lucide-react'
-import { Container } from '@/components/ui/Container'
+import { FolderOpen, ArrowRight } from 'lucide-react'
+import Section from '@/components/ui/Section'
+import Card from '@/components/ui/Card'
+import IconBadge from '@/components/ui/IconBadge'
+import DocList from '@/components/sections/DocList'
 
 interface DocsHubProps {
   featured: {
@@ -15,86 +18,71 @@ interface DocsHubProps {
   }>
 }
 
-/** Help Center hub — featured category list plus topic cards with folder icons and count badges. */
+/**
+ * Help Center hub: a shortlist of popular articles, then the topic grid.
+ *
+ * The two used to sit under a single "Browse by Topic" H2, which made the
+ * shortlist look like a topic — and it listed the same articles as the "Getting
+ * Started" card directly beneath it, so the page appeared to repeat itself. They
+ * are two different things and are now two labelled sections.
+ */
 export default function DocsHub({ featured, categories }: DocsHubProps) {
   return (
-    <section className="bg-white py-14">
-      <Container>
-        {/* The old "Browse by Topic" H2 wrapped both the shortlist and the topic grid, which made
-            the shortlist look like a topic. They're two different things, so they're two sections. */}
-        <h2 className="text-2xl font-bold text-ozwell-ink">{featured.name}</h2>
-        <ul className="mt-5 space-y-4">
-          {featured.docs.map((doc) => (
-            <li key={doc.slug}>
-              <Link
-                href={`/docs/${doc.slug}/`}
-                className="inline-flex items-center gap-2 text-primary-700 underline-offset-2 hover:underline"
-              >
-                <FileText size={16} strokeWidth={1.75} aria-hidden="true" />
-                {doc.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
+    <Section tone="mist" spacing="md">
+      <h2 className="text-2xl font-bold text-ozwell-ink-strong">{featured.name}</h2>
+      <DocList
+        className="mt-6"
+        docs={featured.docs.map((doc) => ({ slug: doc.slug, title: doc.title }))}
+      />
 
-        {/* All topics as cards */}
-        {categories.length > 0 ? (
-          <>
-            <h2 className="mt-14 text-2xl font-bold text-ozwell-ink">Browse by topic</h2>
-            <div className="mt-6 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {categories.map((cat) => (
-                <div
-                  key={cat.slug}
-                  className="bg-white p-7 shadow-[0_0_40px_10px_rgba(0,0,0,0.05)]"
-                >
-                  <div className="flex items-center justify-between border-b-2 border-primary-500 pb-4">
-                    <h3>
+      {categories.length > 0 ? (
+        <>
+          <h2 className="mt-16 text-2xl font-bold text-ozwell-ink-strong">Browse by topic</h2>
+          <ul className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {categories.map((cat) => (
+              <Card key={cat.slug} as="li" tone="plain" padding="md" interactive>
+                <div className="flex items-start justify-between gap-3">
+                  <IconBadge icon={FolderOpen} size="sm" />
+                  <span className="rounded-full bg-primary-50 px-2.5 py-1 text-xs font-bold text-primary-700">
+                    {cat.docs.length} article{cat.docs.length === 1 ? '' : 's'}
+                  </span>
+                </div>
+                <h3 className="mt-4 text-lg font-bold">
+                  <Link
+                    href={`/docs-category/${cat.slug}/`}
+                    className="text-ozwell-ink-strong transition-colors hover:text-primary-700"
+                  >
+                    {cat.name}
+                  </Link>
+                </h3>
+                {cat.description ? (
+                  <p className="mt-2 text-[15px] leading-relaxed text-ozwell-slate">
+                    {cat.description}
+                  </p>
+                ) : null}
+                <ul className="mt-4 space-y-2 border-t border-ozwell-border pt-4">
+                  {cat.docs.map((doc) => (
+                    <li key={doc.slug}>
                       <Link
-                        href={`/docs-category/${cat.slug}/`}
-                        className="flex items-center gap-3 text-xl font-medium text-ozwell-ink transition-colors hover:text-primary-600"
+                        href={`/docs/${doc.slug}/`}
+                        className="flex items-start gap-1.5 text-[15px] leading-snug text-primary-700 underline-offset-2 hover:underline"
                       >
-                        <FolderOpen
-                          size={26}
-                          strokeWidth={1.5}
-                          className="text-ozwell-ink"
+                        <ArrowRight
+                          size={15}
+                          strokeWidth={2.5}
+                          className="mt-1 shrink-0"
                           aria-hidden="true"
                         />
-                        {cat.name}
+                        {doc.title}
                       </Link>
-                    </h3>
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-500/10 text-sm font-semibold text-primary-700">
-                      {cat.docs.length}
-                    </span>
-                  </div>
-                  {cat.description ? (
-                    <p className="mt-4 text-[15px] leading-relaxed text-ozwell-slate">
-                      {cat.description}
-                    </p>
-                  ) : null}
-                  <ul className="mt-4 space-y-3">
-                    {cat.docs.map((doc) => (
-                      <li key={doc.slug}>
-                        <Link
-                          href={`/docs/${doc.slug}/`}
-                          className="flex items-start gap-2 text-[15px] text-primary-700 underline-offset-2 hover:underline"
-                        >
-                          <FileText
-                            size={16}
-                            strokeWidth={1.75}
-                            className="mt-0.5 shrink-0"
-                            aria-hidden="true"
-                          />
-                          {doc.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </>
-        ) : null}
-      </Container>
-    </section>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            ))}
+          </ul>
+        </>
+      ) : null}
+    </Section>
   )
 }

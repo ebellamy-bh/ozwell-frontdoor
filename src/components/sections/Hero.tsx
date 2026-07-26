@@ -1,12 +1,13 @@
 import Image from 'next/image'
-import { Play, PenSquare } from 'lucide-react'
-import { Container } from '@/components/ui/Container'
-import ShapeDivider from '@/components/ui/ShapeDivider'
+import { Play, PenSquare, Check, Sparkles, ArrowRight } from 'lucide-react'
+import Section from '@/components/ui/Section'
+import Button from '@/components/ui/Button'
 
 interface HeroProps {
   eyebrowLines: string[]
   subheading: string
   description: string
+  trustPoints: string[]
   image: { src: string; alt: string; width: number; height: number }
   chips: Array<{ label: string }>
   chipHref: string
@@ -14,10 +15,23 @@ interface HeroProps {
   secondaryCta: { label: string; href: string }
 }
 
+/**
+ * Homepage hero.
+ *
+ * Changes from the legacy build, each addressing something visible:
+ * - Copy leads and the illustration follows, so DOM order matches reading order.
+ *   Previously the image came first in the source and was pulled left with
+ *   `order-*`, which put the artwork ahead of the H1 for screen readers.
+ * - The two CTAs were ~500px stacked pills of identical weight, with no
+ *   primary/secondary hierarchy. Now filled + outlined, side by side above `sm`.
+ * - Mobile was 1,187px tall with ~400px of empty blue and the mockup cropped off
+ *   the left edge.
+ */
 export default function Hero({
   eyebrowLines,
   subheading,
   description,
+  trustPoints,
   image,
   chips,
   chipHref,
@@ -25,80 +39,87 @@ export default function Hero({
   secondaryCta,
 }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(150deg,#24c1fc_0%,#0890ed_100%)] text-white">
-      {/* Network / bubble pattern overlay (same asset as the live site) */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-60"
-        style={{ backgroundImage: "url('/images/bluehive-site-headers-25.png')" }}
-        aria-hidden="true"
-      />
+    <Section tone="brand" spacing="none" dividers="bottom" pattern className="pt-12 lg:pt-16">
+      <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
+        <div>
+          <p className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-white ring-1 ring-white/25 backdrop-blur-sm">
+            <Sparkles size={14} strokeWidth={2.5} aria-hidden="true" />
+            AI medical scribe
+          </p>
 
-      <Container className="relative pb-40 pt-16 lg:pt-20">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          {/* Image + workflow chips — LEFT column (matches live layout) */}
-          <div className="order-2 flex flex-col items-center lg:order-1">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={image.width}
-              height={image.height}
-              priority
-              className="w-full max-w-md"
-            />
-            {/* Chips stacked and centered under the image (matches live) */}
-            <div className="mt-6 flex w-full max-w-xs flex-col items-stretch gap-3">
-              {chips.map((chip) => (
-                <a
-                  key={chip.label}
-                  href={chipHref}
-                  className="rounded-full border-2 border-white px-8 py-2.5 text-center text-sm font-medium text-white transition hover:bg-white/10"
-                >
-                  {chip.label}
-                </a>
-              ))}
-            </div>
+          {/* One H1 in three parts. The {' '} separators are load-bearing: block
+              children don't render whitespace between them, so without these the
+              indexed and announced text is
+              "Say hi toOzwell.Your AI medical assistant." */}
+          <h1 className="mt-6 font-extrabold leading-[0.95] text-white">
+            <span className="block text-4xl sm:text-5xl lg:text-6xl">{eyebrowLines[0]}</span>{' '}
+            <span className="block text-6xl sm:text-7xl lg:text-8xl">{eyebrowLines[1]}</span>{' '}
+            <span className="mt-3 block text-2xl font-semibold text-white/90 sm:text-3xl lg:text-[2.125rem]">
+              {subheading}
+            </span>
+          </h1>
+
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/90">{description}</p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button href={primaryCta.href} variant="inverse" size="lg" icon={PenSquare}>
+              {primaryCta.label}
+            </Button>
+            <Button href={secondaryCta.href} variant="inverse-outline" size="lg" icon={Play}>
+              {secondaryCta.label}
+            </Button>
           </div>
 
-          {/* Copy + CTAs — RIGHT column (matches live layout) */}
-          <div className="order-1 lg:order-2">
-            {/* The {' '} separators matter: without them the block spans concatenate and the
-                accessible name / indexed text reads "Say hi toOzwell.Your AI medical assistant".
-                Whitespace between block-level children doesn't render, so this is text-only. */}
-            <h1 className="leading-none">
-              <span className="block text-5xl font-medium sm:text-6xl lg:text-[81px]">
-                {eyebrowLines[0]}
-              </span>{' '}
-              <span className="block text-7xl font-medium sm:text-8xl lg:text-[144px]">
-                {eyebrowLines[1]}
-              </span>{' '}
-              <span className="mt-2 block text-2xl font-light sm:text-3xl lg:text-[40px]">
-                {subheading}
-              </span>
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/95">{description}</p>
-            {/* CTAs span the full text column width (matches live) */}
-            <div className="mt-8 flex w-full flex-col gap-4">
-              <a
-                href={primaryCta.href}
-                className="flex items-center justify-center gap-2 rounded-full bg-ozwell-mist px-9 py-[18px] text-base font-semibold text-primary-500 shadow transition hover:bg-white"
-              >
-                <PenSquare size={18} strokeWidth={2} aria-hidden="true" />
-                {primaryCta.label}
-              </a>
-              <a
-                href={secondaryCta.href}
-                className="flex items-center justify-center gap-2 rounded-full border-[3px] border-white px-9 py-[15px] text-base font-semibold text-white transition hover:bg-white/10"
-              >
-                <Play size={18} strokeWidth={2} fill="currentColor" aria-hidden="true" />
-                {secondaryCta.label}
-              </a>
-            </div>
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2.5">
+            {trustPoints.map((point) => (
+              <li key={point} className="flex items-center gap-2 text-sm font-medium text-white/85">
+                <Check size={16} strokeWidth={3} aria-hidden="true" className="text-ozwell-gold" />
+                {point}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="lg:pb-8">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            priority
+            sizes="(max-width: 1024px) 90vw, 480px"
+            className="mx-auto w-full max-w-md lg:max-w-none"
+          />
+
+          {/* Example prompts. The illustration above ends in an empty rounded input
+              bar, which is what these were drawn to sit beneath; as loose outlined
+              pills they read as three unlabelled navigation buttons. */}
+          <div className="mx-auto mt-6 w-full max-w-md rounded-2xl bg-white/10 p-4 ring-1 ring-white/20 backdrop-blur-sm">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-white/70">
+              Try asking Ozwell
+            </p>
+            <ul className="mt-3 space-y-2">
+              {chips.map((chip) => (
+                <li key={chip.label}>
+                  <a
+                    href={chipHref}
+                    rel="noopener"
+                    className="group flex items-center justify-between gap-3 rounded-xl bg-white/90 px-4 py-3 text-[15px] font-medium text-ozwell-ink-strong transition hover:bg-white"
+                  >
+                    <span>“{chip.label}”</span>
+                    <ArrowRight
+                      size={16}
+                      strokeWidth={2.5}
+                      aria-hidden="true"
+                      className="shrink-0 text-primary-600 transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none"
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </Container>
-
-      {/* Live: waves bottom divider, 160px, flipped */}
-      <ShapeDivider shape="waves" position="bottom" flipped heightClass="h-24 lg:h-40" />
-    </section>
+      </div>
+    </Section>
   )
 }

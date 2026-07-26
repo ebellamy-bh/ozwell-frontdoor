@@ -1,136 +1,157 @@
-import { createMetadata, SITE_NAME, SITE_URL } from '@/lib/metadata'
+import { createMetadata } from '@/lib/metadata'
+import { faqSchema, softwareApplicationSchema } from '@/lib/schema'
 import JsonLd from '@/components/sections/JsonLd'
 import Hero from '@/components/sections/Hero'
 import LogoCloud from '@/components/sections/LogoCloud'
+import ProblemBand from '@/components/sections/ProblemBand'
 import FeatureVideo from '@/components/sections/FeatureVideo'
-import CertificationBand from '@/components/sections/CertificationBand'
 import FeatureRows from '@/components/sections/FeatureRows'
+import CertificationBand from '@/components/sections/CertificationBand'
 import Testimonials from '@/components/sections/Testimonials'
-import WorkSmarter from '@/components/sections/WorkSmarter'
-import FeatureCardsPhone from '@/components/sections/FeatureCardsPhone'
 import HowItWorks from '@/components/sections/HowItWorks'
-import Showcase from '@/components/sections/Showcase'
+import FeatureGrid from '@/components/sections/FeatureGrid'
 import FAQSection from '@/components/sections/FAQSection'
-import AppDownloadCTA from '@/components/sections/AppDownloadCTA'
-import CTABand from '@/components/sections/CTABand'
+import CTASection from '@/components/sections/CTASection'
 import siteConfig from '@/data/site.json'
 import {
   hero,
   logoCloud,
+  problem,
   featureVideo,
-  certification,
   featureRows,
+  certification,
   testimonials,
-  workSmarter,
-  featureCards,
   howItWorks,
-  showcase,
+  featureCards,
   faqs,
-  appCta,
+  closingCta,
 } from '@/data/home'
 
 export const metadata = createMetadata({
-  title: "Meet Ozwell – The Extra Set of Hands You've Always Needed",
+  title: 'Ozwell — the AI medical assistant that writes your notes',
   description:
-    'Ozwell automates medical documentation so you can focus on what truly matters. Your AI medical assistant — designed for physicians, by BlueHive Health.',
+    'Ozwell transcribes patient visits, writes structured SOAP notes, and answers your phone lines — HIPAA compliant and the only Drummond pDSI-Risk certified AI health IT solution. Built for physicians by BlueHive Health.',
   path: '/',
+  keywords: [
+    'AI medical scribe',
+    'ambient clinical documentation',
+    'AI medical assistant',
+    'automated SOAP notes',
+    'EHR documentation automation',
+    'physician burnout',
+    'medical transcription AI',
+    'AI phone assistant for medical practices',
+  ],
 })
 
-/** Structured data — the site previously emitted JSON-LD on blog posts only. */
-const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: SITE_NAME,
-  url: SITE_URL,
-  logo: `${SITE_URL}/images/Ozwell-logo.png`,
-  email: siteConfig.email,
-  description: siteConfig.aboutBlurb,
-  parentOrganization: { '@type': 'Organization', name: 'BlueHive Health, LLC' },
-  sameAs: siteConfig.social.map((s) => s.href),
-}
-
-const softwareSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'Ozwell',
-  applicationCategory: 'HealthApplication',
-  operatingSystem: 'iOS, Android, Web',
-  url: SITE_URL,
-  description:
-    'AI medical assistant that transcribes patient visits, writes structured clinical notes, and handles inbound calls for healthcare practices.',
-  publisher: { '@type': 'Organization', name: 'BlueHive Health, LLC' },
-  offers: { '@type': 'Offer', category: 'free trial', url: siteConfig.ctas.trial.href },
-}
-
-/** Mirrors the on-page accordion, so the Q&As are eligible as rich results. */
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.items.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: { '@type': 'Answer', text: item.answer },
-  })),
-}
-
+/**
+ * Homepage.
+ *
+ * The narrative was rebuilt. The legacy page ran 12 sections and ~9,700px on
+ * desktop (~12,300px on mobile) across three overlapping feature sections, and
+ * never stated the problem it solves.
+ *
+ * The arc now: hook → who trusts it → why it matters → see it → what it does →
+ * why trust it → who says so → how it works → what else → objections → act.
+ *
+ * Two sections were cut rather than restyled. "Work Smarter" was a heading and a
+ * paragraph with no content of its own, so it became the `FeatureGrid` heading;
+ * the screenshot marquee slid the same five product shots past too fast to read,
+ * inside ~1,400px of gradient and 275px shape dividers, and those shots now
+ * appear at legible size in `FeatureRows` and `FeatureGrid` instead.
+ */
 export default function Page() {
   return (
     <>
-      <JsonLd data={organizationSchema} />
-      <JsonLd data={softwareSchema} />
-      <JsonLd data={faqSchema} />
+      <JsonLd
+        data={softwareApplicationSchema({
+          description:
+            'AI medical assistant that transcribes patient visits, writes structured clinical notes, and handles inbound calls for healthcare practices.',
+          audience: 'Physicians, clinicians, and healthcare practices',
+        })}
+      />
+      {/* Mirrors the on-page accordion, so the Q&As are eligible as rich results
+          and answer engines can quote them directly. */}
+      <JsonLd data={faqSchema(faqs.items)} />
+
       <Hero
         eyebrowLines={hero.eyebrowLines}
         subheading={hero.subheading}
         description={hero.description}
+        trustPoints={hero.trustPoints}
         image={hero.image}
         chips={hero.chips}
         chipHref={hero.chipHref}
         primaryCta={siteConfig.ctas.trial}
         secondaryCta={siteConfig.ctas.watchDemo}
       />
+
       <LogoCloud title={logoCloud.title} logos={logoCloud.logos} />
-      <FeatureVideo youtubeId={featureVideo.youtubeId} title={featureVideo.title} />
+
+      <ProblemBand
+        eyebrow={problem.eyebrow}
+        title={problem.title}
+        description={problem.description}
+        stats={problem.stats}
+        cta={problem.cta}
+      />
+
+      <FeatureVideo
+        eyebrow={featureVideo.eyebrow}
+        youtubeId={featureVideo.youtubeId}
+        title={featureVideo.title}
+        description={featureVideo.description}
+      />
+
+      <FeatureRows items={featureRows} />
+
       <CertificationBand
         eyebrow={certification.eyebrow}
         title={certification.title}
         description={certification.description}
         badges={certification.badges}
         image={certification.image}
+        cta={certification.cta}
       />
-      <FeatureRows items={featureRows} />
+
       <Testimonials
+        eyebrow={testimonials.eyebrow}
         title={testimonials.title}
         description={testimonials.description}
         items={testimonials.items}
       />
-      <WorkSmarter title={workSmarter.title} description={workSmarter.description} />
-      <FeatureCardsPhone
-        left={featureCards.left}
-        right={featureCards.right}
-        phoneImage={featureCards.phoneImage}
-      />
+
       <HowItWorks
         eyebrow={howItWorks.eyebrow}
         title={howItWorks.title}
         description={howItWorks.description}
         steps={howItWorks.steps}
       />
-      <Showcase
-        title={showcase.title}
-        description={showcase.description}
-        screenshots={showcase.screenshots}
+
+      <FeatureGrid
+        eyebrow={featureCards.eyebrow}
+        title={featureCards.title}
+        description={featureCards.description}
+        cards={featureCards.cards}
+        phoneImage={featureCards.phoneImage}
       />
-      {/* Mid-page conversion point: /about-us had one, the homepage didn't — the only CTAs were
-          the hero and the app-store band 9,000px down. */}
-      <CTABand title="Ready to get your evenings back?" cta={siteConfig.ctas.trial} />
+
       <FAQSection
         eyebrow={faqs.eyebrow}
         title={faqs.title}
         description={faqs.description}
         items={faqs.items}
       />
-      <AppDownloadCTA title={appCta.title} subtitle={appCta.subtitle} banner={appCta.banner} />
+
+      <CTASection
+        eyebrow={closingCta.eyebrow}
+        title={closingCta.title}
+        description={closingCta.description}
+        secondary={siteConfig.ctas.demo}
+        showApps
+        spacing="md"
+        dividers="top"
+      />
     </>
   )
 }

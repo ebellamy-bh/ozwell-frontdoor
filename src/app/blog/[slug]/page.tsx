@@ -2,15 +2,18 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
-import { ArrowLeft, ArrowRight, Calendar, Clock, RefreshCw, Rss } from 'lucide-react'
-import { createMetadata, SITE_URL, SITE_NAME } from '@/lib/metadata'
+import { ArrowLeft, ArrowRight, Calendar, Clock, RefreshCw } from 'lucide-react'
+import { createMetadata } from '@/lib/metadata'
+import { articleSchema } from '@/lib/schema'
+import { withHeadingIds } from '@/lib/toc'
 import { Container } from '@/components/ui/Container'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import ShareLinks from '@/components/ui/ShareLinks'
+import TableOfContents from '@/components/ui/TableOfContents'
 import JsonLd from '@/components/sections/JsonLd'
 import ArticleBody from '@/components/sections/ArticleBody'
 import BlogGrid from '@/components/sections/BlogGrid'
-import CTABand from '@/components/sections/CTABand'
-import siteConfig from '@/data/site.json'
+import CTASection from '@/components/sections/CTASection'
 import {
   posts,
   getPost,
@@ -35,10 +38,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = getPost(slug)
   if (!post) return {}
+
   const base = createMetadata({
     title: post.title,
     description: post.excerpt || metaDescription(post.content),
     path: `/blog/${post.slug}/`,
+    keywords: post.tags.length ? post.tags.map((t) => t.replace(/-/g, ' ')) : undefined,
     openGraph: {
       type: 'article',
       images: post.featuredImage
@@ -53,6 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         : undefined,
     },
   })
+
   return {
     ...base,
     openGraph: {
@@ -76,84 +82,57 @@ export default async function Page({ params }: Props) {
   const minutes = readingTime(post.content)
   const wasUpdated = post.modified && post.modified.slice(0, 10) !== post.date.slice(0, 10)
 
+  // Anchors and an outline for bodies that run to 20 headings.
+  const { html, headings } = withHeadingIds(post.content)
+
   const related = getRelatedPosts(slug).map((p) => ({
     slug: p.slug,
     title: p.title,
     excerpt: p.excerpt,
     date: p.date,
     dateFormatted: formatDate(p.date),
+    readingMinutes: readingTime(p.content),
     authorName: p.authorName,
     featuredImage: p.featuredImage,
     featuredImageAlt: p.featuredImageAlt,
+    categories: p.categories.filter((c) => c !== 'uncategorized'),
   }))
-
-  const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.excerpt,
-    image: post.featuredImage ? `${SITE_URL}${post.featuredImage}` : undefined,
-    datePublished: post.date,
-    dateModified: post.modified || post.date,
-    author: {
-      '@type': 'Person',
-      name: post.authorName ?? SITE_NAME,
-      ...(author?.avatar && { image: author.avatar }),
-      ...(author?.description && { description: author.description }),
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: SITE_NAME,
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/Ozwell-logo.png` },
-    },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${post.slug}/` },
-    wordCount: wordCount(post.content),
-    ...(post.categories.length > 0 && { articleSection: post.categories[0] }),
-    ...(post.tags.length > 0 && { keywords: post.tags.join(', ') }),
-  }
-
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog/` },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: post.title,
-        item: `${SITE_URL}/blog/${post.slug}/`,
-      },
-    ],
-  }
 
   return (
     <article>
-      <JsonLd data={articleSchema} />
-      <JsonLd data={breadcrumbSchema} />
+      <JsonLd
+        data={articleSchema({
+          type: 'BlogPosting',
+          title: post.title,
+          description: post.excerpt || metaDescription(post.content),
+          path: `/blog/${post.slug}/`,
+          datePublished: post.date,
+          dateModified: post.modified,
+          image: post.featuredImage,
+          authorName: post.authorName,
+          authorDescription: author?.description,
+          authorImage: author?.avatar,
+          wordCount: wordCount(post.content),
+          section: post.categories.find((c) => c !== 'uncategorized'),
+          keywords: post.tags,
+        })}
+      />
 
-      <section className="bg-ozwell-mist pb-8 pt-14">
+      <section className="bg-ozwell-mist pb-10 pt-10">
         <Container width="prose">
-          {/* Breadcrumb / back link */}
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <Link
-              href="/blog/"
-              className="inline-flex items-center gap-2 text-sm font-medium text-primary-600 underline-offset-2 hover:underline"
-            >
-              <ArrowLeft size={16} strokeWidth={2} aria-hidden="true" />
-              Back to Blog
-            </Link>
-          </nav>
+          <Breadcrumbs
+            items={[{ name: 'Blog', href: '/blog/' }, { name: post.title }]}
+            className="mb-7"
+          />
 
-          {/* Category badges */}
-          {post.categories.length > 0 ? (
+          {post.categories.filter((c) => c !== 'uncategorized').length > 0 ? (
             <div className="mb-4 flex flex-wrap gap-2">
               {post.categories
                 .filter((c) => c !== 'uncategorized')
                 .map((cat) => (
                   <span
                     key={cat}
-                    className="rounded-full bg-primary-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary-700"
+                    className="rounded-full bg-primary-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary-800"
                   >
                     {cat.replace(/-/g, ' ')}
                   </span>
@@ -161,12 +140,15 @@ export default async function Page({ params }: Props) {
             </div>
           ) : null}
 
-          <h1 className="text-3xl font-bold leading-tight text-ozwell-ink sm:text-4xl">
+          <h1 className="text-3xl font-extrabold leading-tight text-ozwell-ink-strong sm:text-[2.5rem]">
             {post.title}
           </h1>
 
-          {/* Byline: author avatar, dates, reading time */}
-          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-ozwell-slate">
+          {post.excerpt ? (
+            <p className="mt-5 text-lg leading-relaxed text-ozwell-slate">{post.excerpt}</p>
+          ) : null}
+
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-ozwell-slate">
             {post.authorName ? (
               <span className="flex items-center gap-2">
                 {author?.avatar ? (
@@ -178,17 +160,17 @@ export default async function Page({ params }: Props) {
                     className="h-8 w-8 rounded-full object-cover"
                   />
                 ) : null}
-                <span className="font-medium text-ozwell-ink">{post.authorName}</span>
+                <span className="font-semibold text-ozwell-ink">{post.authorName}</span>
               </span>
             ) : null}
             <span className="flex items-center gap-1.5">
               <Calendar size={15} strokeWidth={2} aria-hidden="true" />
-              {formatDate(post.date)}
+              <time dateTime={post.date}>{formatDate(post.date)}</time>
             </span>
             {wasUpdated ? (
               <span className="flex items-center gap-1.5">
                 <RefreshCw size={15} strokeWidth={2} aria-hidden="true" />
-                Updated {formatDate(post.modified)}
+                Updated <time dateTime={post.modified}>{formatDate(post.modified)}</time>
               </span>
             ) : null}
             <span className="flex items-center gap-1.5">
@@ -197,40 +179,47 @@ export default async function Page({ params }: Props) {
             </span>
           </div>
 
-          <div className="mt-5">
+          <div className="mt-6 border-t border-ozwell-border pt-5">
             <ShareLinks title={post.title} slug={post.slug} />
           </div>
 
-          {/* The featured image is intentionally not rendered here. Our header art has the post
-              title, category label, and a decorative "learn more" button baked into the artwork, so
-              inlining it directly under the real H1 and category chip stuttered all three — and cost
-              ~600 KB to do it. The image is still used for Open Graph cards and the index grid,
-              where it's the only place the title appears. Restore this once we have header art
-              without type burned in. */}
+          {/* The featured image is intentionally not rendered here. Our header art
+              has the post title, the category label, and a decorative "learn more"
+              button baked into the artwork, so inlining it directly under the real
+              H1 and category chip stuttered all three. It is still used for Open
+              Graph cards and the index grid, where it's the only place the title
+              appears. Restore this once we have header art without type burned in. */}
         </Container>
       </section>
 
-      <ArticleBody html={post.content} />
+      <section className="bg-white py-12">
+        <Container width="prose">
+          <TableOfContents headings={headings} className="mb-10" />
+          <ArticleBody html={html} bare />
+        </Container>
+      </section>
 
-      {/* Readers who finish a 9-minute article had nowhere to go — no conversion point existed
-          between the header and the footer. */}
-      <CTABand title="See what Ozwell can do for your practice" cta={siteConfig.ctas.trial} />
+      {/* Readers who finish a 9-minute article had nowhere to go — there was no
+          conversion point between the header and the footer. */}
+      <CTASection
+        title="See what Ozwell can do for your practice"
+        description="Start free on the web, no install required."
+      />
 
-      {/* Prev / next navigation */}
-      <section className="border-t border-gray-100 bg-white py-10">
+      <section className="border-t border-ozwell-border bg-white py-10">
         <Container width="prose">
           <h2 className="sr-only">More posts</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {previous ? (
               <Link
                 href={`/blog/${previous.slug}/`}
-                className="group rounded-xl border border-gray-100 p-5 transition-colors hover:border-primary-200 hover:bg-ozwell-mist"
+                className="group rounded-xl border border-ozwell-border p-5 transition-colors hover:border-primary-300 hover:bg-ozwell-mist"
               >
-                <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-ozwell-slate">
-                  <ArrowLeft size={14} strokeWidth={2} aria-hidden="true" />
+                <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-ozwell-slate">
+                  <ArrowLeft size={14} strokeWidth={2.5} aria-hidden="true" />
                   Previous
                 </span>
-                <span className="mt-2 block font-semibold text-ozwell-ink group-hover:text-primary-600">
+                <span className="mt-2 block font-semibold text-ozwell-ink-strong group-hover:text-primary-700">
                   {previous.title}
                 </span>
               </Link>
@@ -240,13 +229,13 @@ export default async function Page({ params }: Props) {
             {next ? (
               <Link
                 href={`/blog/${next.slug}/`}
-                className="group rounded-xl border border-gray-100 p-5 text-right transition-colors hover:border-primary-200 hover:bg-ozwell-mist"
+                className="group rounded-xl border border-ozwell-border p-5 text-right transition-colors hover:border-primary-300 hover:bg-ozwell-mist"
               >
-                <span className="flex items-center justify-end gap-1.5 text-xs font-semibold uppercase tracking-wide text-ozwell-slate">
+                <span className="flex items-center justify-end gap-1.5 text-xs font-bold uppercase tracking-wide text-ozwell-slate">
                   Next
-                  <ArrowRight size={14} strokeWidth={2} aria-hidden="true" />
+                  <ArrowRight size={14} strokeWidth={2.5} aria-hidden="true" />
                 </span>
-                <span className="mt-2 block font-semibold text-ozwell-ink group-hover:text-primary-600">
+                <span className="mt-2 block font-semibold text-ozwell-ink-strong group-hover:text-primary-700">
                   {next.title}
                 </span>
               </Link>
@@ -255,21 +244,7 @@ export default async function Page({ params }: Props) {
         </Container>
       </section>
 
-      <section className="bg-ozwell-mist py-4">
-        <Container>
-          <div className="flex items-center justify-between pt-8">
-            <h2 className="text-center text-2xl font-bold text-ozwell-ink">Related Posts</h2>
-            <a
-              href="/blog/rss.xml"
-              className="flex items-center gap-1.5 text-sm font-medium text-primary-600 underline-offset-2 hover:underline"
-            >
-              <Rss size={16} strokeWidth={2} aria-hidden="true" />
-              RSS feed
-            </a>
-          </div>
-        </Container>
-      </section>
-      <BlogGrid title="Related posts" posts={related} />
+      <BlogGrid title="Related posts" posts={related} tone="mist" showTitle />
     </article>
   )
 }
