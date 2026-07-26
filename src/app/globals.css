@@ -113,17 +113,19 @@ html {
 
 /* Reveal-on-scroll.
 
-   The hidden state is scoped to `.reveal-ready`, which only RevealObserver sets — so without
-   JavaScript (or before hydration) every [data-reveal] element renders at its natural opacity and
-   nothing can end up permanently invisible. RevealObserver bails out entirely under reduced
-   motion, so the class is never added and this block never applies; the media query below is a
-   second guard for anyone toggling the preference mid-session. */
-.reveal-ready [data-reveal] {
+   The hidden state keys off `.reveal-armed`, which RevealObserver adds to an element at the moment
+   it starts observing it — never to `[data-reveal]` on its own. So an element only becomes hidden
+   once something is definitely responsible for revealing it again. No JavaScript, a missed mutation,
+   a stale route: all of them leave content at its natural opacity rather than invisible.
+
+   RevealObserver bails out entirely under reduced motion, so nothing is ever armed and this block
+   never applies; the media query below is a second guard for a preference toggled mid-session. */
+[data-reveal].reveal-armed {
   opacity: 0;
   transform: translateY(20px);
 }
 
-.reveal-ready [data-reveal].is-revealed {
+[data-reveal].reveal-armed.is-revealed {
   opacity: 1;
   transform: none;
   transition:
@@ -132,8 +134,8 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal-ready [data-reveal],
-  .reveal-ready [data-reveal].is-revealed {
+  [data-reveal].reveal-armed,
+  [data-reveal].reveal-armed.is-revealed {
     opacity: 1;
     transform: none;
     transition: none;
