@@ -60,12 +60,16 @@ export default function FeatureRows({ items }: FeatureRowsProps) {
         {items.map((item) => (
           <div key={item.title} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <div className={clsx(item.mediaSide === 'right' && 'lg:order-2')}>
+              {/* No card shadow on these: the assets are illustrations already
+                  composited on white, so `shadow-card` didn't outline a card, it
+                  drew a grey halo around a rectangle with no visible edge. They
+                  float on the section background instead. */}
               {item.media.kind === 'video' ? (
                 <AutoPlayVideo
                   src={item.media.src}
                   poster={item.media.poster}
                   label={item.title}
-                  className="rounded-2xl shadow-card"
+                  className="rounded-2xl"
                 />
               ) : (
                 /* Height-capped, not width-filled: the product shots are 900×1600
@@ -77,7 +81,7 @@ export default function FeatureRows({ items }: FeatureRowsProps) {
                   width={item.media.width}
                   height={item.media.height}
                   sizes="(max-width: 1024px) 60vw, 320px"
-                  className="mx-auto max-h-[560px] w-auto rounded-2xl shadow-card"
+                  className="mx-auto max-h-[560px] w-auto rounded-2xl"
                 />
               )}
             </div>
