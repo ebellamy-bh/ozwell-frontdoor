@@ -83,9 +83,15 @@ function localizeImages(html) {
 /** Modernize internal links: date-based post URLs → /blog/slug/, strip domain. */
 function modernizeLinks(html) {
   if (!html) return html
-  return html
-    .replace(/https:\/\/ozwell\.ai\/20\d{2}\/\d{2}\/\d{2}\/([^/"']+)\/?/g, '/blog/$1/')
-    .replace(/https:\/\/ozwell\.ai\/(docs|docs-category|about-us|blog)\/?/g, '/$1/')
+  return (
+    html
+      .replace(/https:\/\/ozwell\.ai\/20\d{2}\/\d{2}\/\d{2}\/([^/"']+)\/?/g, '/blog/$1/')
+      .replace(/https:\/\/ozwell\.ai\/(docs|docs-category|about-us|blog)\/?/g, '/$1/')
+      // The app moved off the legacy BlueHive host. Rewrite anchors only (href and
+      // the visible label, including redirect params) — API endpoints in code
+      // samples are left exactly as authored.
+      .replace(/<a\b[^>]*>.*?<\/a>/gs, (a) => a.replace(/ai\.bluehive\.com/g, 'app.ozwell.ai'))
+  )
 }
 
 function clean(html) {

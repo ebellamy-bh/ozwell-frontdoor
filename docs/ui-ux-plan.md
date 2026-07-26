@@ -92,8 +92,9 @@ And two are **product facts, not copy bugs** — the fix is a product decision, 
   listing is still named that (`apps.apple.com/us/app/bluehive-ai`, bundle `com.bluehive.mobile`).
   The instructions are accurate; renaming them would send users looking for an app that
   doesn't exist under that name. Rename the store listing first.
-- The hero's **Start Free Trial** points at `ai.bluehive.com` — the primary conversion path leaves
-  the brand. Needs a redirect or a real `ozwell.ai` entry point.
+- ~~The hero's **Start Free Trial** points at `ai.bluehive.com` — the primary conversion path leaves
+  the brand. Needs a redirect or a real `ozwell.ai` entry point.~~ Resolved: all app entry points
+  now target `app.ozwell.ai`.
 
 Also cosmetic: the release-notes post's header art reads "2021.01 – 2021.05" for a 2025.01–2025.05
 post.

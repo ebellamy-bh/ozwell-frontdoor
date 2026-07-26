@@ -20,7 +20,7 @@ export const hero = {
     { label: 'Send Summary to Patient Chart' },
   ],
   chipHref:
-    'https://ai.bluehive.com/session/Rdj3NsYnmoygWWRpG?utm_source=ozwell.ai#Gr6YRbpceMotpSdIDBZweqRENzTWM-i6HWm0WLhUk26',
+    'https://app.ozwell.ai/session/Rdj3NsYnmoygWWRpG?utm_source=ozwell.ai#Gr6YRbpceMotpSdIDBZweqRENzTWM-i6HWm0WLhUk26',
 }
 
 export const logoCloud = {
@@ -63,7 +63,7 @@ export const featureRows = [
       { label: 'Transcribe patient visits', icon: 'mic' },
       { label: 'Automate chart population', icon: 'gear' },
     ],
-    cta: { label: 'Get Started', href: 'https://ai.bluehive.com/?utm_source=ozwell.ai' },
+    cta: { label: 'Get Started', href: 'https://app.ozwell.ai/?utm_source=ozwell.ai' },
     video: '/videos/ozwell-smart-scribing.mp4',
     poster: '/videos/ozwell-smart-scribing.jpg',
     mediaSide: 'left' as const,
@@ -77,7 +77,7 @@ export const featureRows = [
       { label: 'Automate routine calls', icon: 'phone' },
       { label: 'Personalize caller experience', icon: 'user' },
     ],
-    cta: { label: 'Get Started', href: 'https://ai.bluehive.com/?utm_source=ozwell.ai' },
+    cta: { label: 'Get Started', href: 'https://app.ozwell.ai/?utm_source=ozwell.ai' },
     video: '/videos/ozwell-call-dashboard.mp4',
     poster: '/videos/ozwell-call-dashboard.jpg',
     mediaSide: 'right' as const,
