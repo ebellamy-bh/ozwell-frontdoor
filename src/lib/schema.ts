@@ -167,7 +167,7 @@ export function articleSchema({
       ? {
           '@type': 'Person',
           name: authorName,
-          ...(authorImage && { image: authorImage }),
+          ...(authorImage && { image: abs(authorImage) }),
           ...(authorDescription && { description: authorDescription }),
         }
       : { '@id': ORG_ID },

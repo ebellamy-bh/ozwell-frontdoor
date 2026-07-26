@@ -178,12 +178,21 @@ const catsOut = cats.map((c) => ({
   count: c.count,
 }))
 const tagsOut = tags.map((t) => ({ id: t.id, slug: t.slug, name: t.name, count: t.count }))
+/**
+ * Author headshots we host ourselves. WordPress only knows the Gravatar, so
+ * without this a re-run would quietly put the old avatar back. Sources live in
+ * `assets/images/authors/` and are encoded by `pnpm optimize:images`.
+ */
+const AVATAR_OVERRIDES = {
+  ebellamy: '/images/authors/evelyna-bellamy.webp',
+}
+
 const usersOut = users.map((u) => ({
   id: u.id,
   slug: u.slug,
   name: u.name,
   description: u.description,
-  avatar: u.avatar_urls?.['96'] ?? null,
+  avatar: AVATAR_OVERRIDES[u.slug] ?? u.avatar_urls?.['96'] ?? null,
 }))
 
 writeFileSync(join(OUT_DATA, 'posts.json'), JSON.stringify(postsOut, null, 2))
