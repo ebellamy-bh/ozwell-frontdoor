@@ -170,7 +170,7 @@ export const featureRows = [
     eyebrow: 'Works inside your stack',
     title: 'No new system to learn',
     description:
-      'Ozwell connects to WebChart and the EHR, HRIS, and CRM tools you already run, then writes results back where your team expects to find them. Orders, referrals, and follow-ups queue as reviewable actions — nothing files until you approve it.',
+      'Ozwell connects to WebChart, Enterprise Health, and the EHR, HRIS, and CRM tools you already run, then writes results back where your team expects to find them. Orders, referrals, and follow-ups queue as reviewable actions — nothing files until you approve it.',
     bullets: [
       { label: 'Write back to the chart', icon: 'plug' },
       { label: 'Approve before anything files', icon: 'shield' },
@@ -228,7 +228,8 @@ export const comparison = {
     {
       capability: 'Your existing systems',
       generic: 'Copy and paste between windows',
-      ozwell: 'Writes back into WebChart and the EHR, HRIS, and CRM tools you run',
+      ozwell:
+        'Writes back into WebChart, Enterprise Health, and the EHR, HRIS, and CRM tools you run',
     },
     {
       capability: 'Reaching the record',
@@ -457,7 +458,7 @@ export const faqs = {
     {
       question: 'How does Ozwell integrate with my existing systems?',
       answer:
-        'Ozwell integrates with a wide range of existing systems, including EHR, HRIS, CRM, and other essential tools — WebChart included. Results are written back where your team already looks for them, so workflows improve without disrupting your current setup. The Help Center has a full WebChart integration guide.',
+        'Ozwell integrates with a wide range of existing systems, including EHR, HRIS, CRM, and other essential tools — [WebChart](https://webchartnow.com) and [Enterprise Health](https://enterprisehealth.com) included. Results are written back where your team already looks for them, so workflows improve without disrupting your current setup. The Help Center has a full WebChart integration guide.',
     },
     {
       question: 'Is Ozwell HIPAA compliant, and how is the AI risk assessed?',
@@ -494,7 +495,7 @@ export const faqs = {
     {
       question: 'Who builds Ozwell?',
       answer:
-        'Ozwell is built by BlueHive Health, LLC, part of Medical Informatics Engineering, Inc. — the team behind the WebChart EHR, with a long history in health IT rather than a general AI company entering healthcare. BlueHive Health is the named developer on our ONC source attribute disclosure.',
+        'Ozwell is built by BlueHive Health, LLC, part of Medical Informatics Engineering, Inc. — the team behind the [WebChart](https://webchartnow.com) and [Enterprise Health](https://enterprisehealth.com) EHRs, with a long history in health IT rather than a general AI company entering healthcare. BlueHive Health is the named developer on our ONC source attribute disclosure.',
     },
     {
       question: 'Can Ozwell understand and process industry-specific terminology?',

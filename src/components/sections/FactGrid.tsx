@@ -1,5 +1,6 @@
 import Section from '@/components/ui/Section'
 import SectionHeading from '@/components/ui/SectionHeading'
+import { richText } from '@/lib/inline'
 
 export interface Fact {
   label: string
@@ -39,7 +40,9 @@ export default function FactGrid({ eyebrow, title, description, facts }: FactGri
               <p className="mt-3 text-xl font-bold leading-snug text-ozwell-ink-strong">
                 {fact.value}
               </p>
-              <p className="mt-2.5 text-[15px] leading-relaxed text-ozwell-slate">{fact.detail}</p>
+              <p className="mt-2.5 text-[15px] leading-relaxed text-ozwell-slate">
+                {richText(fact.detail)}
+              </p>
             </dd>
           </div>
         ))}

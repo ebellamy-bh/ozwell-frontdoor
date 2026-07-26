@@ -35,7 +35,7 @@ anything reaches the patient record.
 - Product: web app plus native iOS and Android apps
 - Audience: physicians, clinicians, and healthcare practices
 - Pricing: free trial available at ${siteConfig.ctas.trial.href}
-- Parent company: BlueHive Health, LLC (https://bluehive.com/)
+- Parent company: BlueHive Health, LLC (https://bluehive.com/), part of Medical Informatics Engineering, Inc. — the team behind the WebChart (https://webchartnow.com) and Enterprise Health (https://enterprisehealth.com) EHRs
 - Contact: ${siteConfig.email}
 - Full text of every page: ${SITE_URL}/llms-full.txt
 
@@ -43,7 +43,7 @@ anything reaches the patient record.
 
 - Smart scribing: transcribes the encounter in real time, handles specialised clinical terminology, and populates the chart with discrete clinical facts (conditions, medications, allergies, vitals, referrals).
 - Smart call handling: answers inbound calls with configurable voice prompts, handles refill requests and appointment reminders, and routes anything it should not answer.
-- Works inside your stack: integrates with WebChart and with EHR, HRIS, and CRM tools, writing results back where staff already look for them.
+- Works inside your stack: integrates with WebChart (https://webchartnow.com), Enterprise Health (https://enterprisehealth.com), and EHR, HRIS, and CRM tools, writing results back where staff already look for them.
 - Learns your vocabulary: corrections feed back so accuracy improves against a clinician's own terminology and documentation style.
 - Approval gate: nothing is written to the record without clinician sign-off.
 

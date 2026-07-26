@@ -20,7 +20,8 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   'getting-started': 'Install the app, create an account, and meet Ozwell.',
   'setup-process': 'Tailor Ozwell to how you work — name, title, and custom instructions.',
   accounts: 'Sign-in, passwords, and using your account across devices.',
-  integrations: 'Connect Ozwell to WebChart and the rest of your clinical stack.',
+  integrations:
+    'Connect Ozwell to WebChart, Enterprise Health, and the rest of your clinical stack.',
   experiments: 'Opt into features we are still building, and what they do.',
   api: 'Endpoints, payloads, and examples for building on Ozwell.',
   developers: 'Reference material for engineers integrating with Ozwell.',

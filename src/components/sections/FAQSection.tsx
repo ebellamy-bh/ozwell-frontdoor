@@ -2,6 +2,7 @@ import { Plus, ArrowRight } from 'lucide-react'
 import Section from '@/components/ui/Section'
 import SectionHeading from '@/components/ui/SectionHeading'
 import Button from '@/components/ui/Button'
+import { richText } from '@/lib/inline'
 
 interface FAQSectionProps {
   eyebrow: string
@@ -38,7 +39,7 @@ export default function FAQSection({ eyebrow, title, description, items }: FAQSe
                 <Plus size={15} strokeWidth={3} />
               </span>
             </summary>
-            <p className="px-5 pb-5 leading-relaxed text-ozwell-slate">{item.answer}</p>
+            <p className="px-5 pb-5 leading-relaxed text-ozwell-slate">{richText(item.answer)}</p>
           </details>
         ))}
       </div>
