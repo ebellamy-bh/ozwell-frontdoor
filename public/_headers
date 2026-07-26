@@ -1,0 +1,41 @@
+# Cloudflare Pages response headers.
+
+# Next's `opengraph-image.tsx` emits the rendered card at an extensionless path
+# (`/opengraph-image`, plus `/blog/<slug>/opengraph-image`). Cloudflare Pages
+# derives Content-Type from the file extension, so without this they are served as
+# application/octet-stream and every social scraper and link unfurler rejects them.
+/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=86400
+
+/*/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=86400
+
+# Immutable, content-hashed build assets.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images and fonts are content-addressed by filename in practice; a day of
+# browser cache with a long stale window keeps repeat visits cheap.
+/images/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/videos/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# Plain-text machine-readable surfaces.
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+
+# Baseline security headers. No CSP: the site embeds YouTube and the migrated
+# article HTML carries inline styles, so a policy strict enough to be worth having
+# needs to be authored and tested against those deliberately.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Strict-Transport-Security: max-age=31536000; includeSubDomains

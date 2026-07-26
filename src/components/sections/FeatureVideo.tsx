@@ -1,27 +1,36 @@
-import { Container } from '@/components/ui/Container'
-import { Section } from '@/components/ui/Section'
+import Section from '@/components/ui/Section'
+import SectionHeading from '@/components/ui/SectionHeading'
+import YouTubeEmbed from '@/components/ui/YouTubeEmbed'
 
 interface FeatureVideoProps {
+  eyebrow: string
   youtubeId: string
   title: string
+  description: string
 }
 
-export default function FeatureVideo({ youtubeId, title }: FeatureVideoProps) {
+/**
+ * Product video.
+ *
+ * Previously an `<h2 class="sr-only">` above a bare autoloading iframe: the
+ * section had no visible heading, so the video arrived unannounced, and the
+ * player's JavaScript loaded on every visit whether or not anyone pressed play.
+ * `YouTubeEmbed` defers all of that behind a thumbnail.
+ */
+export default function FeatureVideo({
+  eyebrow,
+  youtubeId,
+  title,
+  description,
+}: FeatureVideoProps) {
   return (
-    <Section spacing="tight">
-      <Container>
-        <h2 className="sr-only">{title}</h2>
-        <div className="aspect-video w-full overflow-hidden rounded-2xl shadow-lg">
-          <iframe
-            className="h-full w-full"
-            src={`https://www.youtube.com/embed/${youtubeId}?rel=0`}
-            title={title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            loading="lazy"
-          />
-        </div>
-      </Container>
+    <Section spacing="md">
+      <SectionHeading eyebrow={eyebrow} title={title} description={description} />
+      {/* Capped: at the full 1,152px container a 16:9 embed is 648px tall, which
+          made this the second-tallest band on the page for a two-minute video. */}
+      <div className="mx-auto mt-10 max-w-4xl">
+        <YouTubeEmbed id={youtubeId} title={title} />
+      </div>
     </Section>
   )
 }

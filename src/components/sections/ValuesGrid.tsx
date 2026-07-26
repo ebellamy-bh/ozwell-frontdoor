@@ -7,35 +7,45 @@ import {
   LifeBuoy,
   type LucideIcon,
 } from 'lucide-react'
-import { Container } from '@/components/ui/Container'
-import { Section } from '@/components/ui/Section'
-import { Card } from '@/components/ui/Card'
-import { FeatureIcon } from '@/components/ui/FeatureIcon'
+import Section from '@/components/ui/Section'
+import SectionHeading from '@/components/ui/SectionHeading'
+import Card from '@/components/ui/Card'
+import IconBadge from '@/components/ui/IconBadge'
 
 const VALUE_ICONS: LucideIcon[] = [HeartHandshake, Lightbulb, Eye, ShieldCheck, Users, LifeBuoy]
 
 interface ValuesGridProps {
   title: string
+  description?: string
   items: Array<{ title: string; description: string }>
 }
 
-export default function ValuesGrid({ title, items }: ValuesGridProps) {
+/**
+ * Company values.
+ *
+ * Was square flat panels with a 40px `shadow-[0_0_40px_10px_rgba(0,0,0,0.05)]`
+ * glow and `text-fuchsia-400` icons — a third card style and a third icon style,
+ * neither in the palette. The fuchsia came from the iridescent bubble in the logo,
+ * but read as an unrelated accent colour on white.
+ */
+export default function ValuesGrid({ title, description, items }: ValuesGridProps) {
   return (
-    <Section>
-      <Container reveal>
-        <h2 className="font-heading text-4xl font-bold text-ozwell-ink-strong sm:text-[44px]">
-          {title}
-        </h2>
-        <ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item, i) => (
-            <Card as="li" key={item.title} padding="roomy">
-              <FeatureIcon icon={VALUE_ICONS[i % VALUE_ICONS.length]} size="lg" />
+    <Section tone="mist" spacing="md">
+      <SectionHeading title={title} description={description} />
+      <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((item, i) => {
+          const Icon = VALUE_ICONS[i % VALUE_ICONS.length]
+          return (
+            <Card key={item.title} as="li" tone="plain" padding="md">
+              <IconBadge icon={Icon} />
               <h3 className="mt-5 text-xl font-bold text-ozwell-ink-strong">{item.title}</h3>
-              <p className="mt-3 leading-relaxed text-ozwell-slate">{item.description}</p>
+              <p className="mt-2.5 text-[15px] leading-relaxed text-ozwell-slate">
+                {item.description}
+              </p>
             </Card>
-          ))}
-        </ul>
-      </Container>
+          )
+        })}
+      </ul>
     </Section>
   )
 }

@@ -1,9 +1,10 @@
 'use client' // Client: controlled search input filtering the docs index
 
 import { useMemo, useState, type ReactNode } from 'react'
-import Link from 'next/link'
-import { FileText, Search, X } from 'lucide-react'
+import { Search, X } from 'lucide-react'
+import Section from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
+import DocList from '@/components/sections/DocList'
 import type { DocSearchEntry } from '@/data/docs'
 
 interface DocsSearchProps {
@@ -13,9 +14,12 @@ interface DocsSearchProps {
 }
 
 /**
- * Search across every Help Center article. Every term in the query has to appear somewhere in the
- * title or body, so "reset password" and "password reset" behave the same; title matches sort above
- * body-only matches.
+ * Search across every Help Center article.
+ *
+ * Every term in the query has to appear somewhere in the title or body, so "reset
+ * password" and "password reset" behave the same; title matches sort above
+ * body-only matches. The whole corpus is a few KB of text, so this filters
+ * instantly on the client with no search service involved.
  */
 export default function DocsSearch({ index, children }: DocsSearchProps) {
   const [query, setQuery] = useState('')
@@ -36,7 +40,7 @@ export default function DocsSearch({ index, children }: DocsSearchProps) {
 
   return (
     <>
-      <div className="bg-white pt-10">
+      <div className="bg-ozwell-mist pb-2 pt-10">
         <Container>
           <div className="mx-auto max-w-2xl">
             <label htmlFor="docs-search" className="sr-only">
@@ -58,24 +62,26 @@ export default function DocsSearch({ index, children }: DocsSearchProps) {
                 autoComplete="off"
                 className="w-full rounded-full border border-ozwell-border bg-white py-4 pl-12 pr-12 text-base text-ozwell-ink shadow-sm outline-none transition placeholder:text-ozwell-slate focus:border-primary-500 focus:ring-4 focus:ring-primary-500/15"
               />
-              {query && (
+              {query ? (
                 <button
                   type="button"
                   onClick={() => setQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-ozwell-slate transition hover:bg-gray-50 hover:text-ozwell-ink"
+                  className="absolute right-2.5 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-ozwell-slate transition hover:bg-primary-50 hover:text-ozwell-ink"
                 >
                   <X size={18} strokeWidth={2} aria-hidden="true" />
                   <span className="sr-only">Clear search</span>
                 </button>
-              )}
+              ) : null}
             </div>
           </div>
         </Container>
       </div>
 
       {trimmed ? (
-        <section className="bg-white py-12" aria-live="polite">
-          <Container>
+        <Section tone="mist" spacing="sm">
+          {/* The region announces its own result count, so a screen-reader user
+              hears how many articles matched without leaving the input. */}
+          <div aria-live="polite">
             <p className="text-sm text-ozwell-slate">
               {results.length === 0
                 ? 'No articles matched'
@@ -88,46 +94,25 @@ export default function DocsSearch({ index, children }: DocsSearchProps) {
                 Try a broader term, or{' '}
                 <a
                   href="mailto:info@ozwell.ai"
-                  className="text-primary-700 underline underline-offset-2"
+                  className="font-semibold text-primary-700 underline underline-offset-2"
                 >
                   email us
                 </a>{' '}
                 and we&apos;ll help directly.
               </p>
             ) : (
-              <ul className="mt-6 space-y-3">
-                {results.map((entry) => (
-                  <li key={entry.slug}>
-                    <Link
-                      href={`/docs/${entry.slug}/`}
-                      className="group block rounded-2xl border border-ozwell-border p-5 transition hover:border-primary-500 hover:shadow-md"
-                    >
-                      <div className="flex items-start gap-3">
-                        <FileText
-                          size={18}
-                          strokeWidth={1.75}
-                          aria-hidden="true"
-                          className="mt-1 shrink-0 text-primary-600"
-                        />
-                        <div className="min-w-0">
-                          <p className="font-bold text-ozwell-ink group-hover:text-primary-700">
-                            {entry.title}
-                          </p>
-                          <p className="mt-1 line-clamp-2 text-[15px] leading-relaxed text-ozwell-slate">
-                            {entry.excerpt}
-                          </p>
-                          <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-ozwell-slate">
-                            {entry.category}
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <DocList
+                className="mt-6"
+                docs={results.map((entry) => ({
+                  slug: entry.slug,
+                  title: entry.title,
+                  excerpt: entry.excerpt,
+                  meta: entry.category,
+                }))}
+              />
             )}
-          </Container>
-        </section>
+          </div>
+        </Section>
       ) : (
         children
       )}
