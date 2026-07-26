@@ -23,6 +23,9 @@ interface ContainerProps {
  * `className` looks like it works but doesn't: it collides with the base `max-w-6xl` at equal
  * specificity, and Tailwind emits the larger utility later, so the override silently lost. Every
  * article and doc body on the site was rendering at a ~130-character measure because of it.
+ *
+ * (A `reveal` prop lived here briefly, driving a scroll-reveal observer. Both are gone — see the
+ * note in `globals.css` for why reveal-on-scroll was removed rather than fixed.)
  */
 export function Container({ children, className, width = 'default' }: ContainerProps) {
   return (

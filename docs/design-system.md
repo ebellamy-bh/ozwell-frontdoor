@@ -82,11 +82,23 @@ without solving that.
 
 ## Assets
 
-Sources live in `assets/images/` (repo only, never deployed). `pnpm` →
-`node scripts/optimize-images.mjs` writes WebP into `public/images/`. Marketing
-images went 7.4 MB → 716 KB this way; the hero PNG alone was 3.6 MB with `priority`.
+`pnpm optimize:images` runs two passes, because the two kinds of image have
+different constraints:
 
-`public/images/wp/` belongs to `scripts/migrate-wp-content.mjs`. Don't touch it here.
+1. **Curated marketing assets.** Sources in `assets/images/` (repo only, never
+   deployed) → WebP in `public/images/`, each with a hand-set max width. Components
+   reference the `.webp` directly. 7.4 MB → 716 KB; the hero PNG alone was 3.6 MB
+   with `priority`, so it was the LCP element.
+2. **Migrated WordPress content.** Converted in place, with the mapping recorded in
+   `src/data/generated/image-map.json` and applied by `lib/content.ts` when it reads
+   posts and docs — which is what keeps `pnpm migrate:wp` re-runnable.
+
+**`image-map.json` is merged into, never regenerated.** Converted sources are pruned
+once a `.webp` exists, so the map is the only record that `foo-1024x536.png` resolves
+to `foo-1024x536.webp`. Rebuilding it by walking the directory drops those entries,
+`lib/content.ts` then passes the original path through unchanged, and every article
+image 404s against a file that no longer exists. The script guards this; don't remove
+the guard.
 
 ## Migrated WordPress content
 
@@ -103,24 +115,19 @@ it at untrusted input.
 
 ## Known follow-ups
 
-1. **`public/images/wp/` is 46 MB — 79% of the deploy.** 248 PNG srcset variants for
-   four blog posts. The fix is to teach `migrate-wp-content.mjs` to emit WebP and
-   rewrite the `srcset`/`src` attributes it generates, then re-run the migration.
-   Not done here because this pass doesn't own that script, and a partial change
-   would break article images.
-2. **Dark mode is not implemented.** Scoped out rather than half-shipped: the brand
+1. **Dark mode is not implemented.** Scoped out rather than half-shipped: the brand
    raster assets (logo lockup, the white-knockout partner logos, the illustrations)
    have light backgrounds baked in, so it needs new assets before it needs CSS. The
    footer's white-wordmark variant shows the pattern to follow.
-3. **Author bios.** Every `description` in `authors.json` is empty, so the byline is
+2. **Author bios.** Every `description` in `authors.json` is empty, so the byline is
    a name only. Fill them in WordPress and re-run `pnpm migrate:wp`.
-4. **`wreiske` display name** is patched in `lib/content.ts`. The durable fix is
+3. **`wreiske` display name** is patched in `lib/content.ts`. The durable fix is
    setting the display name in WordPress.
-5. **Blog category filter.** Deliberately absent: with four posts, filtering to
+4. **Blog category filter.** Deliberately absent: with four posts, filtering to
    "Release Notes" shows one. Add it when the archive justifies it.
-6. **Partner logo assets** are vendor PNGs at inconsistent weights; the homepage
+5. **Partner logo assets** are vendor PNGs at inconsistent weights; the homepage
    cloud desaturates them to compensate. Proper single-colour marks would be better.
-7. **Product decisions, not copy bugs** (carried over from the original audit): the
+6. **Product decisions, not copy bugs** (carried over from the original audit): the
    iOS listing is still named "BlueHive AI", so the install guide correctly says so;
    and `Start Free Trial` points at `ai.bluehive.com`, so the primary conversion path
    leaves the brand.

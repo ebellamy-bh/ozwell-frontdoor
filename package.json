@@ -14,6 +14,7 @@
     "preview": "next build && wrangler dev",
     "deploy": "next build && wrangler deploy",
     "migrate:wp": "node scripts/migrate-wp-content.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs",
     "lint": "eslint src/",
     "lint:fix": "eslint --fix src/",
     "format": "prettier --write .",
