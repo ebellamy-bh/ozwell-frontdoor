@@ -1,11 +1,12 @@
 import { createMetadata } from '@/lib/metadata'
-import { faqSchema, softwareApplicationSchema } from '@/lib/schema'
+import { faqSchema, howToSchema, softwareApplicationSchema, videoObjectSchema } from '@/lib/schema'
 import JsonLd from '@/components/sections/JsonLd'
 import Hero from '@/components/sections/Hero'
 import LogoCloud from '@/components/sections/LogoCloud'
 import ProblemBand from '@/components/sections/ProblemBand'
 import FeatureVideo from '@/components/sections/FeatureVideo'
 import FeatureRows from '@/components/sections/FeatureRows'
+import ComparisonTable from '@/components/sections/ComparisonTable'
 import CertificationBand from '@/components/sections/CertificationBand'
 import Testimonials from '@/components/sections/Testimonials'
 import HowItWorks from '@/components/sections/HowItWorks'
@@ -19,6 +20,7 @@ import {
   problem,
   featureVideo,
   featureRows,
+  comparison,
   certification,
   testimonials,
   howItWorks,
@@ -74,6 +76,42 @@ export default function Page() {
           and answer engines can quote them directly. */}
       <JsonLd data={faqSchema(faqs.items)} />
 
+      {/* The four-step flow below is a HowTo in all but markup. */}
+      <JsonLd
+        data={howToSchema({
+          name: howItWorks.title,
+          description: howItWorks.description,
+          steps: howItWorks.steps,
+        })}
+      />
+
+      {/* Three videos on this page described none of themselves to a crawler. */}
+      <JsonLd
+        data={videoObjectSchema({
+          name: featureVideo.title,
+          description: featureVideo.description,
+          uploadDate: featureVideo.uploadDate,
+          duration: featureVideo.duration,
+          thumbnailUrl: featureVideo.thumbnailUrl,
+          embedUrl: `https://www.youtube.com/embed/${featureVideo.youtubeId}`,
+        })}
+      />
+      {featureRows.map((row) =>
+        row.media.kind === 'video' ? (
+          <JsonLd
+            key={row.media.src}
+            data={videoObjectSchema({
+              name: row.media.name,
+              description: row.media.description,
+              uploadDate: row.media.uploadDate,
+              duration: row.media.duration,
+              thumbnailUrl: row.media.poster,
+              contentUrl: row.media.src,
+            })}
+          />
+        ) : null
+      )}
+
       <Hero
         eyebrowLines={hero.eyebrowLines}
         subheading={hero.subheading}
@@ -112,6 +150,14 @@ export default function Page() {
         badges={certification.badges}
         image={certification.image}
         cta={certification.cta}
+      />
+
+      <ComparisonTable
+        eyebrow={comparison.eyebrow}
+        title={comparison.title}
+        description={comparison.description}
+        columns={comparison.columns}
+        rows={comparison.rows}
       />
 
       <Testimonials

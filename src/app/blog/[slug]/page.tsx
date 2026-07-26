@@ -16,15 +16,19 @@ import BlogGrid from '@/components/sections/BlogGrid'
 import CTASection from '@/components/sections/CTASection'
 import {
   posts,
+  tags,
   getPost,
   getRelatedPosts,
   getAuthor,
   getAdjacentPosts,
+  displayCategories,
+  termName,
   formatDate,
   metaDescription,
   wordCount,
   readingTime,
 } from '@/lib/content'
+import { toPostCards } from '@/data/blog'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -85,18 +89,10 @@ export default async function Page({ params }: Props) {
   // Anchors and an outline for bodies that run to 20 headings.
   const { html, headings } = withHeadingIds(post.content)
 
-  const related = getRelatedPosts(slug).map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    excerpt: p.excerpt,
-    date: p.date,
-    dateFormatted: formatDate(p.date),
-    readingMinutes: readingTime(p.content),
-    authorName: p.authorName,
-    featuredImage: p.featuredImage,
-    featuredImageAlt: p.featuredImageAlt,
-    categories: p.categories.filter((c) => c !== 'uncategorized'),
-  }))
+  const related = toPostCards(getRelatedPosts(slug))
+
+  // Only the tags that resolve to a real archive, in the order the term list holds.
+  const postTags = tags.filter((t) => post.tags.includes(t.slug))
 
   return (
     <article>
@@ -125,18 +121,19 @@ export default async function Page({ params }: Props) {
             className="mb-7"
           />
 
-          {post.categories.filter((c) => c !== 'uncategorized').length > 0 ? (
+          {/* Chips are links now: they were the one place a post named its own
+              topic, and they went nowhere. */}
+          {displayCategories(post).length > 0 ? (
             <div className="mb-4 flex flex-wrap gap-2">
-              {post.categories
-                .filter((c) => c !== 'uncategorized')
-                .map((cat) => (
-                  <span
-                    key={cat}
-                    className="rounded-full bg-primary-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary-800"
-                  >
-                    {cat.replace(/-/g, ' ')}
-                  </span>
-                ))}
+              {displayCategories(post).map((cat) => (
+                <Link
+                  key={cat}
+                  href={`/blog/category/${cat}/`}
+                  className="rounded-full bg-primary-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary-800 transition-colors hover:bg-primary-200"
+                >
+                  {termName(cat)}
+                </Link>
+              ))}
             </div>
           ) : null}
 
@@ -160,7 +157,17 @@ export default async function Page({ params }: Props) {
                     className="h-8 w-8 rounded-full object-cover"
                   />
                 ) : null}
-                <span className="font-semibold text-ozwell-ink">{post.authorName}</span>
+                {/* Only linked when the author has an archive to land on. */}
+                {author ? (
+                  <Link
+                    href={`/blog/author/${author.slug}/`}
+                    className="font-semibold text-ozwell-ink hover:text-primary-700"
+                  >
+                    {post.authorName}
+                  </Link>
+                ) : (
+                  <span className="font-semibold text-ozwell-ink">{post.authorName}</span>
+                )}
               </span>
             ) : null}
             <span className="flex items-center gap-1.5">
@@ -196,6 +203,30 @@ export default async function Page({ params }: Props) {
         <Container width="prose">
           <TableOfContents headings={headings} className="mb-10" />
           <ArticleBody html={html} bare />
+
+          {/* Tags were carried through the migration, used for `keywords` and the
+              `BlogPosting` graph, and then never shown — so a reader had no way to
+              find the other posts on the same subject. Only tags with an archive
+              behind them are linked; the WordPress theme's demo tags have none. */}
+          {postTags.length > 0 ? (
+            <div className="mt-12 border-t border-ozwell-border pt-7">
+              <h2 className="text-sm font-bold uppercase tracking-[0.12em] text-ozwell-slate">
+                Filed under
+              </h2>
+              <ul className="mt-4 flex flex-wrap gap-2.5">
+                {postTags.map((tag) => (
+                  <li key={tag.slug}>
+                    <Link
+                      href={`/blog/tag/${tag.slug}/`}
+                      className="inline-block rounded-full border border-ozwell-border px-3.5 py-1.5 text-sm font-medium text-ozwell-ink transition-colors hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700"
+                    >
+                      {tag.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </Container>
       </section>
 

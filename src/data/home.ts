@@ -101,6 +101,14 @@ export const featureVideo = {
   title: 'Ozwell: your AI-powered clinical assistant, inside your EHR',
   description:
     'Two minutes, one clinic encounter: what Ozwell hears, what it writes, and what lands in the chart.',
+  /**
+   * Video metadata for `VideoObject`. Taken from the YouTube upload itself rather
+   * than estimated: an `uploadDate` that disagrees with the platform's own is worse
+   * than none, since it's the field a crawler can trivially check.
+   */
+  uploadDate: '2025-03-27',
+  duration: 'PT2M27S',
+  thumbnailUrl: 'https://i.ytimg.com/vi/eCj_7FXArmg/maxresdefault.jpg',
 }
 
 /**
@@ -123,6 +131,16 @@ export const featureRows = [
       kind: 'video' as const,
       src: '/videos/ozwell-smart-scribing.mp4',
       poster: '/videos/ozwell-smart-scribing.jpg',
+      /**
+       * Describes the clip for `VideoObject`. `uploadDate` is the date the file was
+       * first published to this site, which is the only upload event these
+       * self-hosted clips have. Duration is the real measured length.
+       */
+      name: 'Ozwell smart scribing: a visit becomes a structured SOAP note',
+      description:
+        'Screen capture of Ozwell transcribing a patient encounter and populating a structured SOAP note for clinician review.',
+      uploadDate: '2026-07-25',
+      duration: 'PT30S',
     },
     mediaSide: 'left' as const,
   },
@@ -140,6 +158,11 @@ export const featureRows = [
       kind: 'video' as const,
       src: '/videos/ozwell-call-dashboard.mp4',
       poster: '/videos/ozwell-call-dashboard.jpg',
+      name: 'Ozwell call handling: the phone dashboard',
+      description:
+        'Screen capture of the Ozwell call dashboard handling an inbound call, showing how routine requests are answered and the rest routed to staff.',
+      uploadDate: '2026-07-25',
+      duration: 'PT9S',
     },
     mediaSide: 'right' as const,
   },
@@ -168,6 +191,73 @@ export const featureRows = [
   },
 ]
 
+/**
+ * Purpose-built vs. general-purpose.
+ *
+ * The comparison is against the category of general assistants, not against a
+ * named vendor: claims about a competitor's current behaviour go stale silently
+ * and can't be substantiated from anything on this site. Every cell in the Ozwell
+ * column is backed elsewhere here — the feature rows, the FAQ, the Help Center
+ * integration guide, or the certification page.
+ */
+export const comparison = {
+  eyebrow: 'Why purpose-built',
+  title: 'Built for the clinical encounter, not adapted to it',
+  description:
+    'A general assistant can summarise a transcript. Getting from a spoken visit to something that belongs in a patient record is a different job.',
+  columns: {
+    generic: 'General-purpose AI assistant',
+    ozwell: 'Ozwell',
+  },
+  rows: [
+    {
+      capability: 'Designed for',
+      generic: 'General knowledge work, adapted to healthcare afterwards',
+      ozwell: 'Clinical encounters and healthcare workflows from the start',
+    },
+    {
+      capability: 'Clinical vocabulary',
+      generic: 'Tuned for everyday speech; specialty terminology gets mangled',
+      ozwell: 'Interprets medical, legal, and technical terminology as a first concern',
+    },
+    {
+      capability: 'What you get back',
+      generic: 'Freeform prose you still have to restructure yourself',
+      ozwell: 'A structured SOAP note, with orders, referrals, and follow-ups queued',
+    },
+    {
+      capability: 'Your existing systems',
+      generic: 'Copy and paste between windows',
+      ozwell: 'Writes back into WebChart and the EHR, HRIS, and CRM tools you run',
+    },
+    {
+      capability: 'Reaching the record',
+      generic: 'Not applicable — nothing connects to the chart',
+      ozwell: 'Nothing files until a clinician reviews and approves it',
+    },
+    {
+      capability: 'Inbound calls',
+      generic: 'No telephony',
+      ozwell: 'Answers your lines with your own voice prompts, escalating the rest',
+    },
+    {
+      capability: 'Adapting to you',
+      generic: 'One generic model average for every user',
+      ozwell: 'Learns your vocabulary and note style from the corrections you make',
+    },
+    {
+      capability: 'Risk certification',
+      generic: 'Rarely certified for predictive decision support',
+      ozwell: 'First to hold Drummond pDSI-Risk certification, under ASTP/ONC § 170.315(b)(11)',
+    },
+    {
+      capability: 'Scope disclosure',
+      generic: 'Intended use and limitations usually unstated',
+      ozwell: 'Intended uses, cautioned uses, and known limits published in full',
+    },
+  ],
+}
+
 export const certification = {
   eyebrow: 'Security & certification',
   title: "The market's first and only Drummond pDSI-Risk certified AI-powered Health IT solution",
@@ -180,9 +270,15 @@ export const certification = {
     width: 600,
     height: 600,
   },
+  /**
+   * Points at `/certification/` rather than straight into the disclosure post. The
+   * post is 34,000 characters of regulatory answers — the right destination for
+   * someone already convinced, and a wall for everyone else. The certification page
+   * explains what was certified and links onward to it.
+   */
   cta: {
-    label: 'How we disclose our AI',
-    href: '/blog/ozwell-pdsi-source-attributes/',
+    label: 'What was certified, and by whom',
+    href: '/certification/',
   },
 }
 
@@ -321,6 +417,27 @@ export const featureCards = {
   },
 }
 
+/**
+ * TODO — the highest-value FAQ we cannot yet publish.
+ *
+ * "Is my data used to train AI models?" is the first question every clinical-AI
+ * buyer asks and the one answer engines are most often asked to retrieve, and we
+ * have no answer to it anywhere on this site. It is deliberately left out rather
+ * than answered vaguely: the source attribute disclosure confirms Ozwell calls
+ * third-party foundation models, and an unsourced reassurance about what those
+ * providers do with a prompt is the worst possible thing to guess at.
+ *
+ * To ship it, confirm with the team and then add both the FAQ entry and the
+ * matching section on `/security/`:
+ *   1. Do we hold a Zero Data Retention agreement with the model provider(s)?
+ *   2. Is there a BAA in place with each provider that can see PHI?
+ *   3. Are prompts or outputs retained, and for how long?
+ *   4. Encryption specifics at rest and in transit.
+ *   5. Which providers are subprocessors, and is that list published?
+ * Enterprise Health states an OpenAI Zero Data Retention BAA for their own
+ * deployment, but that is their infrastructure claim and does not transfer to
+ * ozwell.ai without confirmation.
+ */
 export const faqs = {
   eyebrow: 'Get answers',
   title: 'Frequently asked questions',
@@ -345,7 +462,39 @@ export const faqs = {
     {
       question: 'Is Ozwell HIPAA compliant, and how is the AI risk assessed?',
       answer:
-        'Yes. Ozwell is HIPAA compliant and is the first and only AI-powered Health IT solution to hold Drummond pDSI-Risk certification, which confirms the platform meets benchmarks for predictive decision support intervention risk assessment and mitigation. Our source attribute disclosures are published on the blog.',
+        'Yes. Ozwell is HIPAA compliant and is the first AI-powered Health IT solution to hold Drummond pDSI-Risk certification, which confirms the platform meets benchmarks for predictive decision support intervention risk assessment and mitigation. Our full source attribute disclosures are published on the certification page.',
+    },
+    /**
+     * The questions below answer objections the old FAQ left standing. They are
+     * sourced from the published ONC source-attribute disclosure and the Drummond
+     * announcement, so every claim is traceable — which matters more here than
+     * anywhere else on the site, since these are the answers an answer engine
+     * quotes when someone asks whether clinical AI can be trusted.
+     */
+    {
+      question: 'What is Drummond pDSI-Risk certification?',
+      answer:
+        'It is an independent certification, issued by Drummond Group, that a predictive decision support intervention meets the intervention risk management and source attribute disclosure requirements of ASTP/ONC § 170.315(b)(11). Ozwell was the first AI-powered health IT product to achieve it, announced on July 15, 2025. In practice it means an impartial third party has reviewed how the risks of the AI are assessed, mitigated, and disclosed — not merely that the vendor says they are.',
+    },
+    {
+      question: 'Does Ozwell make clinical decisions on its own?',
+      answer:
+        'No. Ozwell is designed to inform and augment clinical decision-making, not to replace clinical management — that is the intended decision-making role published in our source attribute disclosure. It drafts documentation and queues actions; a clinician reviews and approves them, and nothing reaches the patient record until they do.',
+    },
+    {
+      question: 'When should Ozwell not be used?',
+      answer:
+        'Ozwell is not intended for emergency or critical care settings where real-time clinical decision-making is required, nor as a substitute for professional medical judgment. We also caution against relying on it for highly specialized or nuanced care, such as advanced pain management or rare disease treatment. These limits are published in full in our source attribute disclosure rather than left for you to discover.',
+    },
+    {
+      question: 'Which clinicians and care settings is Ozwell built for?',
+      answer:
+        'Ozwell is intended for outpatient clinics, hospitals, and administrative offices, and is built for primary care physicians, specialists, nurses and nurse practitioners, physician assistants, and the administrative staff involved in documentation and care coordination. It supports clinicians working with a broad range of patient populations, including routine, preventive, and chronic condition care.',
+    },
+    {
+      question: 'Who builds Ozwell?',
+      answer:
+        'Ozwell is built by BlueHive Health, LLC, part of Medical Informatics Engineering, Inc. — the team behind the WebChart EHR, with a long history in health IT rather than a general AI company entering healthcare. BlueHive Health is the named developer on our ONC source attribute disclosure.',
     },
     {
       question: 'Can Ozwell understand and process industry-specific terminology?',

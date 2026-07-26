@@ -4,7 +4,9 @@ import { collectionSchema } from '@/lib/schema'
 import JsonLd from '@/components/sections/JsonLd'
 import PageHero from '@/components/sections/PageHero'
 import BlogGrid from '@/components/sections/BlogGrid'
+import TermCloud from '@/components/sections/TermCloud'
 import Button from '@/components/ui/Button'
+import { categories, tags } from '@/lib/content'
 import { blogIndexPosts } from '@/data/blog'
 
 const DESCRIPTION =
@@ -45,10 +47,14 @@ export default function Page() {
         </Button>
       </PageHero>
 
-      {/* No category filter: with four posts, filtering to "Release Notes" would
-          show exactly one, which is worse than showing everything. Add one when
-          the archive is deep enough to need it. */}
+      {/* No category filter above the grid: with four posts, filtering to "Release
+          Notes" would show exactly one, which is worse than showing everything. The
+          archives are linked below instead — they exist mainly so the taxonomy is
+          crawlable and every term has one canonical URL. */}
       <BlogGrid title="All posts" posts={blogIndexPosts} featureFirst />
+
+      <TermCloud title="Browse by category" basePath="/blog/category" terms={categories} />
+      <TermCloud title="Browse by tag" basePath="/blog/tag" terms={tags} tone="white" />
     </>
   )
 }
