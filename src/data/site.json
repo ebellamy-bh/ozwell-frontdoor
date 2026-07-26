@@ -17,7 +17,7 @@
     "login": { "label": "Login", "href": "https://app.ozwell.ai/" },
     "trial": {
       "label": "Start Free Trial",
-      "href": "https://ai.bluehive.com/?utm_source=ozwell.ai"
+      "href": "https://app.ozwell.ai/?utm_source=ozwell.ai"
     },
     "watchDemo": { "label": "Watch the Demo", "href": "https://www.youtube.com/shorts/gQl1yRLzWGw" }
   },

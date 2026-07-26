@@ -87,5 +87,5 @@ export const values = {
 
 export const aboutCta = {
   title: 'Ready to take your practice to the next level?',
-  cta: { label: 'Get Started', href: 'https://ai.bluehive.com/' },
+  cta: { label: 'Get Started', href: 'https://app.ozwell.ai/' },
 }
