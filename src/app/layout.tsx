@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Lato, Plus_Jakarta_Sans } from 'next/font/google'
+import Analytics from '@/components/analytics'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import JsonLd from '@/components/sections/JsonLd'
@@ -84,6 +85,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
+
+        {/* Third-party tags load after the page is interactive, so they never
+            block first paint on the marketing pages. */}
+        <Analytics />
       </body>
     </html>
   )
